@@ -25,11 +25,6 @@ indexes:
 
 - kind: Article
   properties:
-  - name: published
-    direction: desc
-
-- kind: Article
-  properties:
   - name: tags
   - name: published
     direction: desc
