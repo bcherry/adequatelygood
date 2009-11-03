@@ -66,6 +66,7 @@ YAHOO.bloog.initAdmin = function() {
 			document.getElementById("postTags").value = article.tags.join(', ');
 		}
 //		YAHOO.bloog.editor.setEditorHTML(article.body);
+		YAHOO.util.Dom.get('postBody').value = article.body;
 		YAHOO.bloog.postDialog.render();
 		YAHOO.bloog.postDialog.show();
 	}
