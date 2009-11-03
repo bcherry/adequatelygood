@@ -26,6 +26,7 @@ import os
 import re
 import string
 import time
+import datetime
 import urlparse
 
 from google.appengine.api import users
@@ -180,7 +181,8 @@ class ViewPage(object):
             "login_url": users.create_login_url(handler.request.uri),
             "logout_url": users.create_logout_url(handler.request.uri),
             "blog": config.BLOG,
-            "blog_tags": tags
+            "blog_tags": tags,
+			"archive_years": range(2009, datetime.date.today().year + 1), #TODO: This could be neater, but it works
         }
         template_params.update(config.PAGE)
         template_params.update(more_params)
