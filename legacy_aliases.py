@@ -6,4 +6,5 @@
 # Place below a "redirects" dictionary with aliases as the key 
 # (without host uri stem) and the permalink as the value.
 
-redirects = {}
+redirects = {
+}
