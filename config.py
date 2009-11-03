@@ -15,12 +15,12 @@ BLOG = {
     "bloog_version": "0.8",
     "html_type": "text/html",
     "charset": "utf-8",
-    "title": "bcherry's bloog",
+    "title": "Ben Cherry's Blog",
     "author": "Ben Cherry",
     # This must be the email address of a registered administrator for the 
     # application due to mail api restrictions.
     "email": "bcherry@gmail.com",
-    "description": "bcherry's bloog",
+    "description": "Adequately good programming advice.",
     "root_url": "http://bcherry-blog.appspot.com",
     "master_atom_url": "/feeds/atom.xml",
     # By default, visitors can comment on article for this many days.
@@ -59,18 +59,30 @@ PAGE = {
     "title": BLOG["title"],
     "articles_per_page": 5,
     "navlinks": [
-        { "title": "Articles", "description": "Bits of Info", 
-          "url": "/articles"},
+        { "title": "About", "description": "About this blog", 
+          "url": "/About-Ben"},
         { "title": "Contact", "description": "Send me a note", 
           "url": "/contact"},
     ],
     "featuredMyPages": {
-        "title": "My Stuff",
-        "description": "Nothing here",
+        "title": "The Author",
+        "description": "Ben is a 22 year-old software engineer and geek living in the San Francisco Bay Area.  He splits his time between work, hobby programming, video games, and the interwebs.",
         "entries": [
             { "title": "Git Hub", 
               "url": "http://github.com/bcherry", 
-              "description": "My Profile at GitHub" },
+              "description": "My Hobby Code" },
+            { "title": "Facebook", 
+              "url": "http://www.facebook.com/bcherry", 
+              "description": "That Social Thing" },
+            { "title": "Twitter", 
+              "url": "http://twitter.com/bcherry", 
+              "description": "Rambling Tweets" },
+            { "title": "LinkedIn", 
+              "url": "http://www.linkedin.com/in/bcherryprogrammer", 
+              "description": "Serious Professional Stuff" },
+            { "title": "Google Profile", 
+              "url": "http://www.google.com/profiles/bcherry", 
+              "description": "Google Owns My Soul" },
         ]
     },
     #"featuredOthersPages": {
