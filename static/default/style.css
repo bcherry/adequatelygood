@@ -200,3 +200,5 @@ ol.pingslist{margin:1.5em 2em;font-size:12px;}
 .fix{display:inline-block;} 
 * html .fix{height:1%;}
 .fix{display:block;}
+
+.preloader { text-align: center; }
