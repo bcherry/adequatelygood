@@ -68,7 +68,7 @@ li.top a{width:100px;}
 #poweredby {float:right;width:120px;height:30px;}
 
 /* main - middle content and columns */
-#mid{}#mainCol{float:left;margin:26px 0 0 0;width:435px;}
+#mid{}#mainCol{float:left;margin:26px 0 0 0;width:682px;}
 #mid{}#twoCol{float:left;margin:26px 0 0 0;width:649px;}
 
 /* style individual sidebars */
@@ -91,7 +91,7 @@ ul#imgLinks{list-style:none;margin:7px 0;}
 #imgLinks li a img{border:3px solid #EEE;width:208px;color:#333;font-weight:bold;}
 #imgLinks li a img.anyheight{border:none;width:214px;color:#333;font-weight:bold;}
 #imgLinks li a:hover img{border-color:#DDD;}
-#amazon{margin:0 0 0 30px;}
+#ShelfariWidget114860 .pbs {display:none;}
 
 /* wordpress entries styling - main content column */
 .postMeta{background:url(images/dot.gif) repeat-x left center;text-transform:uppercase;font-size:11px;text-align:right;margin-bottom:5px;}

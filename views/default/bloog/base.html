@@ -1,257 +1,267 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="{{ blog.html_type }}; charset={{ blog.charset }}" />
-        <title> {{ title }}</title>
-        <meta name="generator" content="Bloog {{ bloog_version }}" />
-        <link rel="stylesheet" href="/static/default/style.css" type="text/css" media="screen" />
-        <link rel="alternate" type="application/rss+xml" title="{{ blog.title }} RSS Feed" 
-              href="{{ blog.root_url }}{{ blog.master_atom_url }}" />
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/assets/skins/sam/skin.css" />
-        <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/container/assets/skins/sam/container.css" />
-        {% block head %}
-        {% endblock %}
-    </head>
-    <body class="yui-skin-sam">
-        <div id="wrapper">
-            <a name="top"></a>
-            <div id="masthead" class="fix">
-                <h1><a href="/">{{ blog.title }}</a></h1>
-                <div id="authorBlurb">
-                    <img src="/static/default/images/avatar.png" alt="Avatar" />
-                    <p id="authorIntro">
-                        {{ blog.description }}
-                    </p>
-                </div>
-            </div>
-            <ul class="nav fix">
-                <li>
-                    <a href="/" title="Return to the the frontpage">Home
-                        <br/>
-                        <span>Frontpage</span>
-                    </a>
-                </li>
-                <li>
-                    <a id="archiveLink" href="#" title="View the archives">Archives
-                        <br/>
-                        <span>Browse freely</span>
-                    </a>
-                </li>
-                {% for link in navlinks %}
-                <li>
-                    <a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}
-                        <br/>
-                        <span>{{ link.description }}</span>
-                    </a>
-                </li>
-                {% endfor %}
-                <li>
-                    <a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
-                        <br/>
-                        <span>Syndication</span>
-                    </a>
-                </li>
-                <li class="skip">
-                    <a href="#main" title="Skip to content">Main
-                        <br/>
-                        <span>Skip to content</span>
-                    </a>
-                </li>
-            </ul>
-            <div id="archives" class="fix" style="display: none;">
-                <ul class="fix">
-                    <li><a href="/2008">2008</a></li>
-                    <li><a href="/2007">2007</a></li>
-                    <li><a href="/2006">2006</a></li>
-                    <li><a href="/2005">2005</a></li>
-                    <li><a href="/2004">2004</a></li>
-                </ul>
-            </div>
+	<head>
+		<meta http-equiv="Content-Type" content="{{ blog.html_type }}; charset={{ blog.charset }}" />
+		<title> {{ title }}</title>
+		<meta name="generator" content="Bloog {{ bloog_version }}" />
+		<link rel="stylesheet" href="/static/default/style.css" type="text/css" media="screen" />
+		<link rel="alternate" type="application/rss+xml" title="{{ blog.title }} RSS Feed" href="{{ blog.root_url }}{{ blog.master_atom_url }}" />
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/assets/skins/sam/skin.css" />
+		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/container/assets/skins/sam/container.css" />
+		{% block head %}
+		{% endblock %}
+	</head>
+	<body class="yui-skin-sam">
+		<div id="wrapper">
+			<a name="top"></a>
+			<div id="masthead" class="fix">
+				<h1><a href="/">{{ blog.title }}</a></h1>
+				<div id="authorBlurb">
+					<img src="/static/default/images/avatar.png" alt="Avatar" />
+					<p id="authorIntro">
+						{{ blog.description }}
+					</p>
+				</div>
+			</div>
+			<ul class="nav fix">
+				<li>
+					<a href="/" title="Return to the the frontpage">Home
+						<br/>
+						<span>Frontpage</span>
+					</a>
+				</li>
+				<li>
+					<a id="archiveLink" href="#" title="View the archives">Archives
+						<br/>
+						<span>Browse freely</span>
+					</a>
+				</li>
+				{% for link in navlinks %}
+				<li>
+					<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}
+						<br/>
+						<span>{{ link.description }}</span>
+					</a>
+				</li>
+				{% endfor %}
+				<li>
+					<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
+						<br/>
+						<span>Syndication</span>
+					</a>
+				</li>
+				<li class="skip">
+					<a href="#main" title="Skip to content">Main
+						<br/>
+						<span>Skip to content</span>
+					</a>
+				</li>
+			</ul>
+			<div id="archives" class="fix" style="display: none;">
+				<ul class="fix">
+					<li><a href="/2008">2008</a></li>
+					<li><a href="/2007">2007</a></li>
+					<li><a href="/2006">2006</a></li>
+					<li><a href="/2005">2005</a></li>
+					<li><a href="/2004">2004</a></li>
+				</ul>
+			</div>
 
-            <div id="mid" class="fix">
-                <!-- First column: Main content -->
-                {% block first_column %}
-                <div id="mainCol" class="fix"><a name="main"></a>
-                {% for article in articles %}
-                    {% include 'article_excerpt.html' %}
-                {% endfor %}
-                {% if not articles %}
-                    {% include 'bloog_intro.html' %}
-                {% endif %}
-                {% include 'pager.html' %}
-                </div>
-                {% endblock %}
+			<div id="mid" class="fix">
+				<!-- First column: Main content -->
+				{% block first_column %}
+				<div id="mainCol" class="fix"><a name="main"></a>
+				{% for article in articles %}
+					{% include 'article_excerpt.html' %}
+				{% endfor %}
+				{% if not articles %}
+					{% include 'bloog_intro.html' %}
+				{% endif %}
+				{% include 'pager.html' %}
+				</div>
+				{% endblock %}
 
-                <!-- Second column: Show search, selected internal links, etc. -->
-                {% block second_column %}
-                <div id="midCol">
-                    {% block search %}
-                    <div id="searchWrap">
-                        <form method="get" id="searchForm" action="/search">
-                            <input type="text" value="{{ searchterm }}" name="s" id="s" />
-                            <input id="searchsubmit" type="image" src="/static/default/images/btn_search.gif" alt="Search" />
-                        </form>
-                    </div>
-                    {% endblock %}
+				<!-- Second column: Show search, selected internal links, etc. -->
+				{% block second_column %}
+				<div id="midCol">
+					{% block search %}
+					<div id="searchWrap">
+						<form method="get" id="searchForm" action="/search">
+							<input type="text" value="{{ searchterm }}" name="s" id="s" />
+							<input id="searchsubmit" type="image" src="/static/default/images/btn_search.gif" alt="Search" />
+						</form>
+					</div>
+					{% endblock %}
 
-                    {% block tags %}
-                    <div class="middle_links">
-                        <h3>Categories</h3>
-                        <p class="tags">
-                        {% if blog_tags %}
-                            {% for tag in blog_tags %}
-                                {% ifnotequal tag.count 0 %}
-                                <a href="/tag/{{ tag.name|urlencode }}">{{ tag.name }}</a>
-                                ({{ tag.count }})<br />
-                                {% endifnotequal %}
-                            {% endfor %}
-                        {% else %}
-                            No posts have been tagged yet.
-                        {% endif %}
-                        </p>
-                    </div>
-                    {% endblock %}
+					{% block tags %}
+					<div class="middle_links">
+						<h3>Categories</h3>
+						<p class="tags">
+						{% if blog_tags %}
+							{% for tag in blog_tags %}
+								{% ifnotequal tag.count 0 %}
+								<a href="/tag/{{ tag.name|urlencode }}">{{ tag.name }}</a>
+								({{ tag.count }})<br />
+								{% endifnotequal %}
+							{% endfor %}
+						{% else %}
+							No posts have been tagged yet.
+						{% endif %}
+						</p>
+					</div>
+					{% endblock %}
 
-                    {% block extra_panel %}
-                    {% endblock %}
+					{% block extra_panel %}
+					{% endblock %}
 
-                    {% if user_is_admin %}
-                        <!-- Administrative Console -->
-                        <div class="middle_links">
-                            <h3>Administrative Panel</h3>
-                            <ul>
-                                <li><a id="newblog" href="#">New Blog Entry</a></li>
-                                <li><a id="newarticle" href="#">New Article</a>
-                                    - unsyndicated<br />(e.g., about page)</li>
-                                <li><a id="openshell" href="/admin/shell">Open Shell</a></li>
-                                <li><a href="/admin/cache_stats">Memcached Stats</a></li>
-                                <li><a href="/admin/timings">Timing Stats</a></li>
-                            </ul>
-                        </div>
-                    {% endif %}
+					{% if user_is_admin %}
+						<!-- Administrative Console -->
+						<div class="middle_links">
+							<h3>Administrative Panel</h3>
+							<ul>
+								<li><a id="newblog" href="#">New Blog Entry</a></li>
+								<li><a id="newarticle" href="#">New Article</a>
+									- unsyndicated<br />(e.g., about page)</li>
+								<li><a id="openshell" href="/admin/shell">Open Shell</a></li>
+								<li><a href="/admin/cache_stats">Memcached Stats</a></li>
+								<li><a href="/admin/timings">Timing Stats</a></li>
+							</ul>
+						</div>
+					{% endif %}
 
-                    {% block featuredPages1 %}
-                    <div class="middle_links">
-                        <h3>{{ featuredMyPages.title }}</h3>
-                        <p>
-                            {{ featuredMyPages.description }}
-                        </p>
-                        <ul>
-                            {% for entry in featuredMyPages.entries %}
-                            <li>
-                                <a href="{{ entry.url }}">{{ entry.title }}</a>
-                                - {{ entry.description }}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endblock %}
+					{% block featuredPages1 %}
+					<div class="middle_links">
+						<h3>{{ featuredMyPages.title }}</h3>
+						<p>
+							{{ featuredMyPages.description }}
+						</p>
+						<ul>
+							{% for entry in featuredMyPages.entries %}
+							<li>
+								<a href="{{ entry.url }}">{{ entry.title }}</a>
+								- {{ entry.description }}
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endblock %}
 
-                    {% block featuredPages2 %}
-                    <div class="middle_links">
-                        <h3>{{ featuredOthersPages.title }}</h3>
-                        <p>
-                            {{ featuredOthersPages.description }}
-                        </p>
-                        <ul>
-                            {% for entry in featuredOthersPages.entries %}
-                            <li>
-                                <a href="{{ entry.url }}">{{ entry.title }}</a>
-                                - {{ entry.description }}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endblock %}
+					{% block featuredPages2 %}
+					<div class="middle_links">
+						<h3>{{ featuredOthersPages.title }}</h3>
+						<p>
+							{{ featuredOthersPages.description }}
+						</p>
+						<ul>
+							{% for entry in featuredOthersPages.entries %}
+							<li>
+								<a href="{{ entry.url }}">{{ entry.title }}</a>
+								- {{ entry.description }}
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% endblock %}
 
-                    {% block subscribe %}
-                    <div class="middle_links">
-                        <h3>Subscribe</h3>
-                        <p>
-                            Stay updated on my meandering thoughts &amp; activities via Atom syndication.
-                        </p>
-                        <ul>
-                            <li>
-                                <a href="{{ blog.master_atom_url }}" title="Full content Atom feed">Atom feed</a>
-                                - Full content
-                            </li>
-                        </ul>
-                    </div>
-                    {% endblock %}
-                </div>
-                {% endblock %}
+					{% block subscribe %}
+					<div class="middle_links">
+						<h3>Subscribe</h3>
+						<p>
+							Stay updated on my meandering thoughts &amp; activities via Atom syndication.
+						</p>
+						<ul>
+							<li>
+								<a href="{{ blog.master_atom_url }}" title="Full content Atom feed">Atom feed</a>
+								- Full content
+							</li>
+						</ul>
+					</div>
+					{% endblock %}
+					{% block books %}
+					<div class="middle_links">
+						<div id="ShelfariWidget114860">
+							<a href='http://www.shelfari.com/'>Shelfari: Book reviews on your book blog</a>
+							<script src="http://www.shelfari.com/ws/114860/widget.js" type="text/javascript" language="javascript"></script>
+							<noscript>
+								<p>Find new 
+									<a href="http://www.shelfari.com/books">books</a> 
+									and literate friends with Shelfari, the online 
+									<a href="http://www.shelfari.com/">book club</a>
+									.
+								</p>
+							</noscript>
+						</div>
+					</div>
+				 	{% endblock %}
+				</div>
+				{% endblock %}
+			</div>
 
-                <!-- Third column: Show selected external links, ads, etc. -->
-                {% block third_column %}
-                {% include 'ads.html' %}
-                {% endblock %}
-            </div>
-
-            <div id="footer">
-                <ul class="nav fix">
-                    <li>
-                        <a href="/" title="Return to the the frontpage">Home
-                            <br/>
-                            <span>Frontpage</span>
-                        </a>
-                    </li>
-                    {% if user %}
-                    <li>
-                        <a href="{{ logout_url }}" title="Logout">Logout
-                            <br/>
-                            <span>goodbye</span>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li>
-                        <a href="{{ login_url }}" title="Login">Login
-                            <br/>
-                            <span>Google id</span>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% for link in navlinks %}
-                    <li>
-                        <a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}
-                            <br/>
-                            <span>{{ link.description }}</span>
-                        </a>
-                    </li>
-                    {% endfor %}
-                    <li>
-                        <a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
-                            <br/>
-                            <span>Syndication</span>
-                        </a>
-                    </li>
-                    <li class="top">
-                        <a href="#top" title="Return to the top">Top
-                            <br/>
-                            <span>Return to top</span>
-                        </a>
-                    </li>
-                </ul>
-                <div id="attribution">
-                    <div id="downloadlinks">
-                        <p><a href="http://bloog.billkatz.com">Bloog</a> for 
-                            <a href="http://code.google.com/appengine/">Google App Engine</a> is available at
-                            <a href="http://github.com/DocSavage/bloog">GitHub</a> under an MIT license.</p>
-                        <p>This template is an adapted version of 
-                            <a href="http://5thirtyone.com/grid-focus" title="Grid Focus by: Derek Punsalan">Grid Focus</a>
-                            for <a href="http://www.djangoproject.com/documentation/templates/">Django templates</a>.</p>
-                        <p>Cache debugging: Page was rendered {% now "M j, H:i:s" %}.
-                        {% if user %}
-                          ({{ user.nickname }})
-                        {% endif %}
-                        {% if user_is_admin %}
-                          User is administrator.
-                        {% endif %}
-                        </p>
-                    </div>
-                    <img id="poweredby" src="/static/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine" />
-                </div>
-            </div>
-        </div>
+			<div id="footer">
+				<ul class="nav fix">
+					<li>
+						<a href="/" title="Return to the the frontpage">Home
+							<br/>
+							<span>Frontpage</span>
+						</a>
+					</li>
+					{% if user %}
+					<li>
+						<a href="{{ logout_url }}" title="Logout">Logout
+							<br/>
+							<span>goodbye</span>
+						</a>
+					</li>
+					{% else %}
+					<li>
+						<a href="{{ login_url }}" title="Login">Login
+							<br/>
+							<span>Google id</span>
+						</a>
+					</li>
+					{% endif %}
+					{% for link in navlinks %}
+					<li>
+						<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}
+							<br/>
+							<span>{{ link.description }}</span>
+						</a>
+					</li>
+					{% endfor %}
+					<li>
+						<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
+							<br/>
+							<span>Syndication</span>
+						</a>
+					</li>
+					<li class="top">
+						<a href="#top" title="Return to the top">Top
+							<br/>
+							<span>Return to top</span>
+						</a>
+					</li>
+				</ul>
+				<div id="attribution">
+					<div id="downloadlinks">
+						<p><a href="http://bloog.billkatz.com">Bloog</a> for 
+							<a href="http://code.google.com/appengine/">Google App Engine</a> is available at
+							<a href="http://github.com/DocSavage/bloog">GitHub</a> under an MIT license.</p>
+						<p>This template is an adapted version of 
+							<a href="http://5thirtyone.com/grid-focus" title="Grid Focus by: Derek Punsalan">Grid Focus</a>
+							for <a href="http://www.djangoproject.com/documentation/templates/">Django templates</a>.</p>
+						<p>Cache debugging: Page was rendered {% now "M j, H:i:s" %}.
+						{% if user %}
+							({{ user.nickname }})
+						{% endif %}
+						{% if user_is_admin %}
+							User is administrator.
+						{% endif %}
+						</p>
+					</div>
+					<img id="poweredby" src="/static/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine" />
+				</div>
+			</div>
+		</div>
 
 		<script type="text/javascript" src="/static/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="/static/chili/jquery.chili-2.2.js"></script>
@@ -259,14 +269,14 @@
 			ChiliBook.recipeFolder = "/static/chili/";
 		</script>
 
-        <script type="text/javascript" src="http://yui.yahooapis.com/2.5.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-        <script type="text/javascript" src="/static/default/js/bloog_base.js"></script>
+		<script type="text/javascript" src="http://yui.yahooapis.com/2.5.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+		<script type="text/javascript" src="/static/default/js/bloog_base.js"></script>
 
-        {% if user_is_admin %}
-        {% include "form_editor.html" %}
-        {% endif %}
+		{% if user_is_admin %}
+		{% include "form_editor.html" %}
+		{% endif %}
 
-        {% block end_body %}
-        {% endblock %}
-    </body>
+		{% block end_body %}
+		{% endblock %}
+	</body>
 </html>
