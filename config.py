@@ -21,7 +21,7 @@ BLOG = {
     # application due to mail api restrictions.
     "email": "bcherry@gmail.com",
     "description": "Adequately good programming advice.",
-    "root_url": "http://bcherry-blog.appspot.com",
+    "root_url": "http://www.adequatelygood.com",
     "master_atom_url": "/feeds/atom.xml",
     # By default, visitors can comment on article for this many days.
     # This can be overridden by setting article.allow_comments
