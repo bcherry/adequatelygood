@@ -15,7 +15,7 @@ BLOG = {
     "bloog_version": "0.8",
     "html_type": "text/html",
     "charset": "utf-8",
-    "title": "Ben Cherry's Blog",
+    "title": "Adequately Good",
     "author": "Ben Cherry",
     # This must be the email address of a registered administrator for the 
     # application due to mail api restrictions.
