@@ -29,6 +29,7 @@ BLOG = {
     # You can override this default for each page through a handler's call to 
     #  view.ViewPage(cache_time=...)
     "cache_time": 0 if DEBUG else 3600,
+	"js_debug": "true" if DEBUG else "false",
 
     # Use the default YUI-based theme.
     # If another string is used besides 'default', calls to static files and

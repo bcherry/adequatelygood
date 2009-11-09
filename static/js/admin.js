@@ -1,5 +1,5 @@
 ;(function($){
-	var debug = true;
+	var agd = AGD.extend("Admin");
 	var dialogConfig;
 	var dialog;
 	var editor;
@@ -12,7 +12,7 @@
 		editor = CKEDITOR.replace("postBody");
 		titleInput = dialog.find("#postTitle");
 		tagsInput = dialog.find("#postTags");
-		log("dialog initialized");
+		agd.log("dialog initialized");
 	};
 
 	var openDialog = function() {
@@ -63,9 +63,9 @@
 		var title = titleInput.val();
 		var tags = tagsInput.val();
 
-		log("beginning submission");
+		agd.log("beginning submission");
 		$.post(submitUrl, {body:body, title:title, tags:tags}, function(data) {
-			log("submission complete, response: " + data);
+			agd.log("submission complete, response: " + data);
 			window.location.href = data;
 		});
 	};
@@ -75,11 +75,11 @@
 	};
 
 	var dialogOnClose = function(event, ui) {
-		log("dialog closed");
+		agd.log("dialog closed");
 	};
 
 	var dialogOnOpen = function(event, ui) {
-		log("dialog opened");
+		agd.log("dialog opened");
 	};
 
 	dialogConfig = {
@@ -123,20 +123,5 @@
 		$("#newblog, #newarticle, #editbtn").live("click", openDialog);
 		$("#deletebtn").live("click", openDeleteDialog);
 	});
-
-	var log = function(msg) {
-		if (debug && window.console) {
-			console.log("AG::Admin $ ", msg);
-		}
-	};
-	var dir = function(obj, msg) {
-		if (debug && window.console) {
-			if (msg !== undefined) {
-				console.log("AG::Admin $ ", msg);
-			}
-			console.dir(obj);
-		}
-	};
-	log("admin.js parsed");
 })(jQuery);
 
