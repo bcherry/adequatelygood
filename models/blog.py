@@ -27,7 +27,8 @@ from google.appengine.ext import db
 
 import config
 import models
-from google.appengine.ext import search
+from models import search
+#from google.appengine.ext import search
 
 # Handle generation of thread strings
 def get_thread_string(article, cur_thread_string):

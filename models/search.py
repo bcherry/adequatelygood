@@ -239,37 +239,37 @@ class SearchableQuery(datastore.Query):
     self._search_query = search_query
     return self
 
-  def _ToPb(self, limit=None, offset=None):
-    """Adds filters for the search query, then delegates to the superclass.
-
-    Raises BadFilterError if a filter on the index property already exists.
-
-    Args:
-      # an upper bound on the number of results returned by the query.
-      limit: int
-      # number of results that match the query to skip.  limit is applied
-      # after the offset is fulfilled.
-      offset: int
-
-    Returns:
-      datastore_pb.Query
-    """
-    if SearchableEntity._FULL_TEXT_INDEX_PROPERTY in self:
-      raise datastore_errors.BadFilterError(
-        '%s is a reserved name.' % SearchableEntity._FULL_TEXT_INDEX_PROPERTY)
-
-    pb = super(SearchableQuery, self)._ToPb(limit=limit, offset=offset)
-
-    if hasattr(self, '_search_query'):
-      keywords = SearchableEntity._FullTextIndex(self._search_query)
-      for keyword in keywords:
-        filter = pb.add_filter()
-        filter.set_op(datastore_pb.Query_Filter.EQUAL)
-        prop = filter.add_property()
-        prop.set_name(SearchableEntity._FULL_TEXT_INDEX_PROPERTY)
-        prop.mutable_value().set_stringvalue(keyword)
-
-    return pb
+#  def _ToPb(self, *args, **kwargs):
+#    """Adds filters for the search query, then delegates to the superclass.
+#
+#    Raises BadFilterError if a filter on the index property already exists.
+#
+#    Args:
+#      # an upper bound on the number of results returned by the query.
+#      limit: int
+#      # number of results that match the query to skip.  limit is applied
+#      # after the offset is fulfilled.
+#      offset: int
+#
+#    Returns:
+#      datastore_pb.Query
+#    """
+#    if SearchableEntity._FULL_TEXT_INDEX_PROPERTY in self:
+#      raise datastore_errors.BadFilterError(
+#        '%s is a reserved name.' % SearchableEntity._FULL_TEXT_INDEX_PROPERTY)
+#
+#    pb = super(SearchableQuery, self)._ToPb(*args, **kwargs)
+#
+#    if hasattr(self, '_search_query'):
+#      keywords = SearchableEntity._FullTextIndex(self._search_query)
+#      for keyword in keywords:
+#        filter = pb.add_filter()
+#        filter.set_op(datastore_pb.Query_Filter.EQUAL)
+#        prop = filter.add_property()
+#        prop.set_name(SearchableEntity._FULL_TEXT_INDEX_PROPERTY)
+#        prop.mutable_value().set_stringvalue(keyword)
+#
+#    return pb
 
 class FullTextQuery(db.Query):
   """A subclass of db.Query that supports full text search."""

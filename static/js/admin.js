@@ -32,8 +32,8 @@
 				fillEditor("","","");
 				break;
 			case "editbtn":
-				submitUrl = "?_method=PUT";
-				$.getJSON("?", {}, function(data) {
+				submitUrl = "#?_method=PUT";
+				$.getJSON("#", {}, function(data) {
 					fillEditor(data.body, data.title, data.tags);
 					doOpen();
 				});
