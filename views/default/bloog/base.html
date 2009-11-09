@@ -6,13 +6,11 @@
 		<meta name="generator" content="Bloog {{ bloog_version }}" />
 		<link rel="stylesheet" href="/static/css/style.css" type="text/css" media="screen" />
 		<link rel="alternate" type="application/rss+xml" title="{{ blog.title }} RSS Feed" href="{{ blog.root_url }}{{ blog.master_atom_url }}" />
-		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/assets/skins/sam/skin.css" />
-		<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.5.2/build/container/assets/skins/sam/container.css" />
 		<link rel="stylesheet" type="text/css" href="/static/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.css" />
 		{% block head %}
 		{% endblock %}
 	</head>
-	<body class="yui-skin-sam">
+	<body>
 		<div id="wrapper">
 			<a name="top"></a>
 			<div id="masthead" class="fix">
@@ -279,7 +277,6 @@
 		</script>
 		<script type="text/javascript" src="/static/js/ckeditor/ckeditor.js"></script>
 
-		<script type="text/javascript" src="http://yui.yahooapis.com/2.5.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
 		<script type="text/javascript" src="/static/default/js/bloog_base.js"></script>
 
 		{% if user_is_admin %}
