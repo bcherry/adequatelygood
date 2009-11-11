@@ -74,6 +74,9 @@
 	};
 
 	var initComments = function() {
+		if (!$("#commentDialog").length) {
+			return;
+		}
 		dialog = $("#commentDialog").dialog(dialogConfig);
 		editor = CKEDITOR.replace(dialog.find("#commentBody").get(0), editorConfig);
 
