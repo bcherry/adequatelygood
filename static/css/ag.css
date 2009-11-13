@@ -1,0 +1,15 @@
+/* Header links should display like normal header text */ 
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+	text-decoration: inherit;
+	color: inherit;
+}
+
+.nav > * {
+	background-color: #B2B2B2;
+}
+
+/* Text is put into either <a> or <span>, at the second level */
+.nav > * > * {
+	color: inherit;
+	text-decoration: inherit;
+}

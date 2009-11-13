@@ -23,7 +23,7 @@
 		
 		<!-- Extra <head> Links -->
 		<link rel="alternate" type="application/rss+xml" title="{{ blog.title }} RSS Feed" href="{{ blog.root_url }}{{ blog.master_atom_url }}" />
-		<!-- TODO: favicon-->
+		<!-- TODO: favicon -->
 		
 		{% block head %}
 		{% endblock %}
@@ -43,13 +43,13 @@
 				<hr />
 			
 				<!-- Witty Phrase -->
-				<div id="witty" class="span-24 last" />
+				<div class="span-24 last" />
 					<h3 class="alt">{{ blog.description }}</h3>
 				</div>
 				<hr />
 				
 				<!-- Navigation Bar -->
-				<div id="nav_top" class="span-24 last">
+				<div class="span-16 append-8 last nav">
 					<div class="span-3">
 						<a href="/" title="Return to the the frontpage">Home
 							<br/>
@@ -57,7 +57,7 @@
 						</a>
 					</div>
 					<div class="span-3">
-						<a id="archiveLink" href="#" title="View the archives">Archives
+						<a id="archiveLink" title="View the archives">Archives
 							<br/>
 							<span>Browse freely</span>
 						</a>
@@ -70,7 +70,7 @@
 						</a>
 					</div>
 					{% endfor %}
-					<div class="span-3 append-9 last">
+					<div class="span-3">
 						<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
 							<br/>
 							<span>Syndication</span>
@@ -88,7 +88,7 @@
 			</div>
 
 			<!-- First Column: Posts, etc. -->
-			<div id="content" class="span-18">
+			<div id="content" class="span-17 colborder">
 				<a name="main"></a>
 				{% block first_column %}
 				{% for article in articles %}
@@ -206,7 +206,7 @@
 
 			<!-- Footer -->
 			<div id="footer" class="span-24 last">
-				<div id="nav_bottom" class="span-24 last">
+				<div class="span-19 append-5 last nav">
 					<div class="span-3">
 						<a href="/" title="Return to the the frontpage">Home
 							<br/>
@@ -242,7 +242,7 @@
 							<span>Syndication</span>
 						</a>
 					</div>
-					<div class="span-3 append-6 last">
+					<div class="span-3 last">
 						<a href="#top" title="Return to the top">Top
 							<br/>
 							<span>Return to top</span>
