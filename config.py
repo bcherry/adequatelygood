@@ -20,7 +20,7 @@ BLOG = {
 	# This must be the email address of a registered administrator for the
 	# application due to mail api restrictions.
 	"email": "bcherry@gmail.com",
-	"description": "Adequately good programming advice.",
+	"description": "decent programming advice",
 	"root_url": "http://www.adequatelygood.com",
 	"master_atom_url": "/feeds/atom.xml",
 	# By default, visitors can comment on article for this many days.
