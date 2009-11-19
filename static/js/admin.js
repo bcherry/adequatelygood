@@ -1,5 +1,4 @@
 ;(function($){
-	var agd = AGD.extend("Admin");
 	var dialogConfig;
 	var dialog;
 	var editor;
@@ -12,7 +11,7 @@
 		editor = CKEDITOR.replace("postBody");
 		titleInput = dialog.find("#postTitle");
 		tagsInput = dialog.find("#postTags");
-		agd.log("dialog initialized");
+		consul.log("dialog initialized");
 	};
 
 	var openDialog = function() {
@@ -63,9 +62,9 @@
 		var title = titleInput.val();
 		var tags = tagsInput.val();
 
-		agd.log("beginning submission");
+		consul.log("beginning submission");
 		$.post(submitUrl, {body:body, title:title, tags:tags}, function(data) {
-			agd.log("submission complete, response: " + data);
+			consul.log("submission complete, response: " + data);
 			window.location.href = data;
 		});
 	};
@@ -75,11 +74,11 @@
 	};
 
 	var dialogOnClose = function(event, ui) {
-		agd.log("dialog closed");
+		consul.log("dialog closed");
 	};
 
 	var dialogOnOpen = function(event, ui) {
-		agd.log("dialog opened");
+		consul.log("dialog opened");
 	};
 
 	dialogConfig = {
