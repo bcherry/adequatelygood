@@ -17,9 +17,13 @@ h1 {
 #title h2 {
 	text-align: right;
 	line-height: 77px;
-	font-size: 21pt;
+	font-size: 17pt;
 	letter-spacing: -1px;
 	color: #7F7F7F;
+}
+
+#title h2 a {
+	font-size: 21pt;
 }
 
 #title h2 a:hover {
@@ -31,9 +35,19 @@ h1 {
 	line-height: 21pt;
 }
 
-/* Links in the nav bars should not use the link color */
-.nav .links a {
-	color: inherit;
+.nav {
+	text-align: center;
+	font-size: 12pt;
+}
+
+.nav a {
+	color: #424242;
+	text-decoration: none;
+}
+
+.nav a:hover {
+	color: #191919;
+	text-decoration: underline;
 }
 
 #searchsubmit {

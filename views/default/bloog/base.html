@@ -36,52 +36,53 @@
 			<div id="header" class="span-24 last">
 				<!-- Title -->
 				<div id="title" class="span-24 last">
-					<div class="span-19 border prepend-top append-bottom">
+					<div class="span-17 colborder prepend-top append-bottom">
 						<h1>
 							<a href="/">{{ blog.title|lower }}</a>
 						</h1>
 						<h3 class="prepend-2 alt">{{ blog.description }}</h3>
 					</div>
-					<div class="span-5 last prepend-top append-bottom">
+					<div class="span-6 last prepend-top append-bottom">
 						<h2>
-							by
+							written by
 							<!-- TODO: fix bcherry.net and change this link back -->
-							<a href="http://bcherry.appspot.com">Ben Cherry</a>
+							<a href="http://bcherry.appspot.com">ben cherry</a>
 						</h2>
 					</div>
 				</div>
+				
 				<hr />
 				
 				<!-- Navigation Bar -->
-				<div class="span-15 append-9 last nav">
-					<div class="span-15 last links">
-						<div class="span-3">
-							<a href="/" title="Return to the the frontpage">Home</a>
-							<br />
-							<span>Frontpage</span>
-						</div>
-						<div class="span-3">
-							<a href="#" id="archiveLink" title="View the archives">Archives</a>
-							<br />
-							<span>Browse freely</span>
-						</div>
-						{% for link in navlinks %}
-						<div class="span-3">
-							<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}</a>
-							<br/>
-							<span>{{ link.description }}</span>
-						</div>
-						{% endfor %}
-						<div class="span-3 last">
-							<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom</a>
-							<br/>
-							<span>Syndication</span>
-						</div>
+				<div class="prepend-2 span-20 append-2 last append-bottom nav">
+					<div class="span-4">
+						<a href="/" title="Return to the the frontpage">Home</a>
+						<br />
+						<span style="display:none;">Frontpage</span>
+					</div>
+					<div class="span-4">
+						<a href="#" id="archiveLink" title="View the archives">Archives</a>
+						<br />
+						<span style="display:none;">Browse freely</span>
+					</div>
+					{% for link in navlinks %}
+					<div class="span-4">
+						<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}</a>
+						<br/>
+						<span style="display:none;">{{ link.description }}</span>
+					</div>
+					{% endfor %}
+					<div class="span-4 last">
+						<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom</a>
+						<br/>
+						<span style="display:none;">Syndication</span>
 					</div>
 				</div>
 				
+				<hr />
+				
 				<!-- Archives Links -->
-				<div id="archives" class="span-24">
+				<div id="archives" class="span-24" style="display:none;">
 					{% for year in archive_years %}
 						<div class="span-2"><a href="/{{ year }}">{{ year }}</a></div>
 					{% endfor %}
@@ -206,53 +207,49 @@
 			</div>
 			{% endblock %}
 
-			<!-- Footer -->
-			<div id="footer" class="span-24 last">
-				<div class="span-18 append-6 last nav">
-					<div class="span-18 last links">
-						<div class="span-3">
-							<a href="/" title="Return to the the frontpage">Home
-								<br/>
-								<span>Frontpage</span>
-							</a>
-						</div>
-						{% if user %}
-						<div class="span-3">
-							<a href="{{ logout_url }}" title="Logout">Logout
-								<br/>
-								<span>goodbye</span>
-							</a>
-						</div>
-						{% else %}
-						<div class="span-3">
-							<a href="{{ login_url }}" title="Login">Login
-								<br/>
-								<span>Google id</span>
-							</a>
-						</div>
-						{% endif %}
-						{% for link in navlinks %}
-						<div class="span-3">
-							<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}
-								<br/>
-								<span>{{ link.description }}</span>
-							</a>
-						</div>
-						{% endfor %}
-						<div class="span-3">
-							<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
-								<br/>
-								<span>Syndication</span>
-							</a>
-						</div>
-						<div class="span-3 last">
-							<a href="#top" title="Return to the top">Top
-								<br/>
-								<span>Return to top</span>
-							</a>
-						</div>
-					</div>
+			<hr />
+			
+			<div class="prepend-2 span-20 append-2 last append-bottom nav">
+				<div class="span-4">
+					<a href="/" title="Return to the the frontpage">Home
+						<br/>
+						<span style="display:none;">Frontpage</span>
+					</a>
 				</div>
+				{% if user %}
+				<div class="span-4">
+					<a href="{{ logout_url }}" title="Logout">Logout
+						<br/>
+						<span style="display:none;">goodbye</span>
+					</a>
+				</div>
+				{% else %}
+				<div class="span-4">
+					<a href="{{ login_url }}" title="Login">Login
+						<br/>
+						<span style="display:none;">Google id</span>
+					</a>
+				</div>
+				{% endif %}
+				{% for link in navlinks %}
+				<div class="span-4">
+					<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}
+						<br/>
+						<span style="display:none;">{{ link.description }}</span>
+					</a>
+				</div>
+				{% endfor %}
+				<div class="span-4 last">
+					<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
+						<br/>
+						<span style="display:none;">Syndication</span>
+					</a>
+				</div>
+			</div>
+			
+			<hr />
+			
+			<div class="span-24 last">
 				<div id="attribution" class="span-12">
 					<div>Adequately Good is modified from <a href="http://bloog.billkatz.com">Bloog</a>, available at
 						<a href="http://github.com/DocSavage/bloog">GitHub</a> under an MIT license.</div>
