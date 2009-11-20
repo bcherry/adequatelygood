@@ -4,6 +4,32 @@ h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
 	color: inherit;
 }
 
+h1 {
+	font-size: 42pt;
+	letter-spacing: -.08em;
+	color: #424242;
+	margin-bottom: 0px;
+}
+
+#title h2 {
+	text-align: right;
+	line-height: 77px;
+	font-size: 21pt;
+	color: #7F7F7F;
+}
+
+#title h2 a {
+}
+
+#title h2 a:hover {
+	color: #191919;
+}
+
+#title h3 {
+	font-size: 21pt;
+	line-height: 21pt;
+}
+
 /* Links in the nav bars should not use the link color */
 .nav .links a {
 	color: inherit;

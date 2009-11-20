@@ -36,15 +36,19 @@
 			<div id="header" class="span-24 last">
 				<!-- Title -->
 				<div id="title" class="span-24 last">
-					<h1>
-						<a href="/">{{ blog.title }}</a>
-					</h1>
-				</div>
-				<hr />
-			
-				<!-- Witty Phrase -->
-				<div class="span-24 last" />
-					<h3 class="alt">{{ blog.description }}</h3>
+					<div class="span-12">
+						<h1>
+							<a href="/">{{ blog.title|lower }}</a>
+						</h1>
+						<h3 class="prepend-2 alt">{{ blog.description }}</h3>
+					</div>
+					<div class="prepend-5 span-7 last">
+						<h2 class="blockquote">
+							by
+							<!-- TODO: fix bcherry.net and change this link back -->
+							<a href="http://bcherry.appspot.com">Ben Cherry</a>
+						</h2>
+					</div>
 				</div>
 				<hr />
 				
