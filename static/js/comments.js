@@ -1,20 +1,19 @@
 ;(function($){
-	var agd = AGD.extend("Comments");
 	var dialog;
 	var editor;
 	var href;
 	var inputs = {};
 
 	var dialogOnClose = function() {
-		agd.log("dialog closed");
+		consul.log("dialog closed");
 	};
 
 	var dialogOnOpen = function() {
-		agd.log("dialog opened");
+		consul.log("dialog opened");
 	};
 
 	var submitComment = function() {
-		agd.log("comment submission begun, submitting to %s", href);
+		consul.log("comment submission begun, submitting to %s", href);
 		$.post(href, {
 			key		: href,
 			captcha	: inputs.captcha.val(),
