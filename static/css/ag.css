@@ -17,13 +17,14 @@ h1 {
 #title h2 {
 	text-align: right;
 	line-height: 77px;
-	font-size: 17pt;
-	letter-spacing: -1px;
+	font-size: 15pt;
 	color: #7F7F7F;
 }
 
 #title h2 a {
 	font-size: 21pt;
+	margin-left: 0.2em;
+	letter-spacing: -1px;
 }
 
 #title h2 a:hover {
@@ -40,6 +41,10 @@ h1 {
 	font-size: 12pt;
 }
 
+.nav div {
+	position: relative;
+}
+
 .nav a {
 	color: #424242;
 	text-decoration: none;
@@ -47,10 +52,22 @@ h1 {
 
 .nav a:hover {
 	color: #191919;
-	text-decoration: underline;
+}
+
+.nav span {
+	color: #B3B3B3;
+	font-size: 12pt;
+	position: absolute;
+	display: block;
+	width: 100%;
 }
 
 #searchsubmit {
 	margin: .5em 0;
 	vertical-align: middle;
+}
+
+/* tweaks to blueprint -- TODO: rebuild blueprint with these rolled in */
+div.colborder {
+	border-color: #CCCCCC;
 }

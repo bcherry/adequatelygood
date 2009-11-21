@@ -58,24 +58,24 @@
 					<div class="span-4">
 						<a href="/" title="Return to the the frontpage">Home</a>
 						<br />
-						<span style="display:none;">Frontpage</span>
+						<span class="alt" style="display:none;">go back home</span>
 					</div>
 					<div class="span-4">
 						<a href="#" id="archiveLink" title="View the archives">Archives</a>
 						<br />
-						<span style="display:none;">Browse freely</span>
+						<span class="alt" style="display:none;">browse randomly</span>
 					</div>
 					{% for link in navlinks %}
 					<div class="span-4">
 						<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}</a>
 						<br/>
-						<span style="display:none;">{{ link.description }}</span>
+						<span class="alt" style="display:none;">{{ link.description|lower }}</span>
 					</div>
 					{% endfor %}
 					<div class="span-4 last">
 						<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom</a>
 						<br/>
-						<span style="display:none;">Syndication</span>
+						<span class="alt" style="display:none;">get my feed</span>
 					</div>
 				</div>
 				
@@ -213,21 +213,21 @@
 				<div class="span-4">
 					<a href="/" title="Return to the the frontpage">Home
 						<br/>
-						<span style="display:none;">Frontpage</span>
+						<span style="display:none;"></span>
 					</a>
 				</div>
 				{% if user %}
 				<div class="span-4">
 					<a href="{{ logout_url }}" title="Logout">Logout
 						<br/>
-						<span style="display:none;">goodbye</span>
+						<span style="display:none;"></span>
 					</a>
 				</div>
 				{% else %}
 				<div class="span-4">
 					<a href="{{ login_url }}" title="Login">Login
 						<br/>
-						<span style="display:none;">Google id</span>
+						<span style="display:none;"></span>
 					</a>
 				</div>
 				{% endif %}
@@ -235,14 +235,14 @@
 				<div class="span-4">
 					<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}
 						<br/>
-						<span style="display:none;">{{ link.description }}</span>
+						<span style="display:none;"></span>
 					</a>
 				</div>
 				{% endfor %}
 				<div class="span-4 last">
 					<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
 						<br/>
-						<span style="display:none;">Syndication</span>
+						<span style="display:none;"></span>
 					</a>
 				</div>
 			</div>
@@ -298,6 +298,7 @@
 		<script type="text/javascript" src="/static/js/jquery.templates.js"></script>
 		<script type="text/javascript" src="/static/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="/static/js/base.js"></script>
+		<script type="text/javascript" src="/static/js/ag.js"></script>
 		<script type="text/javascript" src="http://www.shelfari.com/ws/114860/widget.js"></script>
 		<script type="text/javascript" src="/static/js/comments.js"></script>
 		{% if user_is_admin %}<script type="text/javascript" src="/static/js/admin.js"></script>{% endif %}
