@@ -110,8 +110,7 @@
 				{% block search %}
 				<div id="search" class="span-6 last">
 					<form method="get" id="searchForm" class="span-6 last" action="/search">
-						<input type="text" class="span-4" value="{{ searchterm }}" name="s" id="s" />
-						<input id="searchsubmit" type="image" src="/static/default/images/btn_search.gif" alt="Search" />
+						<input type="text" class="span-6 blurred" value="Search..." title="Search..." name="s" id="s" />
 					</form>
 				</div>
 				{% endblock %}
@@ -282,8 +281,8 @@
 
 		
 		<!-- Include LABjs and request the rest of the script files-->
-		<!--<script type="text/javascript" src="/static/js/LAB.min.js"></script>
-		<script type="text/javascript">
+		<script type="text/javascript" src="/static/js/LAB.min.js"></script>
+		<!--<script type="text/javascript">
 			$LAB
 			.script("/static/js/jquery-ui-1.7.2.custom.min.js")
 			.script("/static/js/jquery.templates.js")
@@ -300,9 +299,12 @@
 		<script type="text/javascript" src="/static/js/ckeditor/ckeditor.js"></script>
 		<script type="text/javascript" src="/static/js/base.js"></script>
 		<script type="text/javascript" src="/static/js/ag.js"></script>
-		<script type="text/javascript" src="http://www.shelfari.com/ws/114860/widget.js"></script>
 		<script type="text/javascript" src="/static/js/comments.js"></script>
 		{% if user_is_admin %}<script type="text/javascript" src="/static/js/admin.js"></script>{% endif %}
+		<script type="text/javascript">
+			$LAB
+			.script("http://www.shelfari.com/ws/114860/widget.js")
+		</script>
 
 		{% if user_is_admin %}
 		{% include "form_editor.html" %}

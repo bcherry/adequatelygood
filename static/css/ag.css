@@ -97,6 +97,14 @@ h1 {
 	float: right;
 }
 
+#search input {
+	font-size: 12pt;
+}
+
+#search input.blurred {
+	color: #999999;
+}
+
 #searchsubmit {
 	margin: .5em 0;
 	vertical-align: middle;
