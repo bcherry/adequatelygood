@@ -7,24 +7,18 @@
 {% endif %}
 
 {% block first_column %}
-{% if two_columns %}
-<div id="twoCol" class-"fix"><a name="main"></a>
-{% else %}
-<div id="mainCol" class="fix"><a name="main"></a>
-{% endif %}
 {% if article %}
-    <div id="article" class="post">
-        <div class="postMeta">
+    <div id="article" class="span-17 last post">
+        <div class="span-17 last clearfix postMeta">
+        	<span class="date">{{ article.published.date }}</span>
             {% if user_is_admin %}
-            <span class="articlebtn"><a id="editbtn" href="#">Edit</a></span>
-            <span class="articlebtn"><a id="deletebtn" href="#">Delete</a></span>
-            {% endif %}
-            {% if article.num_comments %}
-            <span class="comments"><a href="/{{ article.permalink }}#comments">{{ article.num_comments }}</a></span>
-            {% endif %}
-            <span class="date">{{ article.published.date }}</span>
+			<div class="postAdmin">
+            	<a id="editbtn" href="#">Edit</a>
+            	<a id="deletebtn" href="#">Delete</a>
+            </div>
+			{% endif %}
         </div>
-        <h2><a id="blogtitle" href="/{{ article.permalink }}" title="{{ article.title }}">{{ article.title }}</a></h2>
+        <h2 class="postTitle"><a id="blogtitle" href="/{{ article.permalink }}" title="{{ article.title }}">{{ article.title }}</a></h2>
         <div id="blogbody" class="entry">
             {{ article.html }}
         </div>
@@ -39,7 +33,7 @@
 {% else %}
     <div class="post">
         <div class="postMeta"><span class="date">No Matches</span></div>
-        <h2>No Article at Given Address</h2>
+        <h2 class="postTitle">No Article at Given Address</h2>
         <div class="entry">
             <p>You seem to have found a mis-linked page or search query with no associated results.</p>
             <p>Please trying your search again. 
@@ -67,7 +61,6 @@
         </div>
         {% endif %}
     </div>
-</div>
 {% endblock %}
 
 {% block end_body %}

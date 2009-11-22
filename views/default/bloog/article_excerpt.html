@@ -1,12 +1,9 @@
-<div class="post">
-    <div class="postMeta">
-        {% if article.num_comments %}
-        <a href="/{{ article.permalink }}#comments"><span class="comments">{{ article.num_comments }}</span></a>
-        {% endif %}
+<div class="span-17 last post">
+    <div class="span-17 last postMeta">
         <span class="date">{{ article.published.date }}</span>
     </div>
-    <h2><a href="/{{ article.permalink }}" title="{{ article.title }}">{{ article.title }}</a></h2>
-    <div class="entry">
+    <h2 class="postTitle"><a href="/{{ article.permalink }}">{{ article.title }}</a></h2>
+    <div class="span-17 last entry">
         <p>{{ article.html|truncatewords_html:68 }}</p>
     </div>
 </div>

@@ -56,24 +56,24 @@
 				<!-- Navigation Bar -->
 				<div class="prepend-2 span-20 append-2 last append-bottom nav">
 					<div class="span-4">
-						<a href="/" title="Return to the the frontpage">Home</a>
+						<a href="/">home</a>
 						<br />
 						<span class="alt" style="display:none;">go back home</span>
 					</div>
 					<div class="span-4">
-						<a href="#" id="archiveLink" title="View the archives">Archives</a>
+						<a href="#" id="archiveLink">archives</a>
 						<br />
 						<span class="alt" style="display:none;">browse randomly</span>
 					</div>
 					{% for link in navlinks %}
 					<div class="span-4">
-						<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}</a>
+						<a href="{{ link.url }}">{{ link.title|lower }}</a>
 						<br/>
 						<span class="alt" style="display:none;">{{ link.description|lower }}</span>
 					</div>
 					{% endfor %}
 					<div class="span-4 last">
-						<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom</a>
+						<a href="{{ blog.master_atom_url }}">atom</a>
 						<br/>
 						<span class="alt" style="display:none;">get my feed</span>
 					</div>
@@ -208,7 +208,7 @@
 			{% endblock %}
 
 			<hr />
-			
+			<!--
 			<div class="prepend-2 span-20 append-2 last append-bottom nav">
 				<div class="span-4">
 					<a href="/" title="Return to the the frontpage">Home
@@ -248,6 +248,7 @@
 			</div>
 			
 			<hr />
+			-->
 			
 			<div class="span-24 last">
 				<div id="attribution" class="span-12">

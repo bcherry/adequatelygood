@@ -1,7 +1,18 @@
+
 /* Header links should display like normal header text */ 
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+h1 a, h1 a:visited, h1 a:hover, h1 a:link, h1 a:focus, h2 a, h2 a:visited, h2 a:hover, h2 a:link, h2 a:focus, h3 a, h3 a:visited, h3 a:hover, h3 a:link, h3 a:focus, h4 a, h4 a:visited, h4 a:hover, h4 a:link, h4 a:focus, h5 a, h5 a:visited, h5 a:hover, h5 a:link, h5 a:focus, h6 a, h6 a:visited, h6 a:hover, h6 a:link, h6 a:focus {
 	text-decoration: inherit;
 	color: inherit;
+}
+
+/* Standard link styles */
+a, a:link, a:visited {
+	color: #52A2E9;
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	text-decoration: underline;
 }
 
 #title h1, #title h2, #title h3 {
@@ -60,6 +71,30 @@ h1 {
 	position: absolute;
 	display: block;
 	width: 100%;
+}
+
+.post .postMeta .date {
+	color: #777777;
+}
+
+.post .postTitle {
+	font-size: 21pt;
+	letter-spacing: -1px;
+	margin-bottom: 0.25em;
+}
+
+.post .postTitle a {
+	color: #333333;
+	text-decoration: none;
+}
+
+.post .postTitle a:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+
+.post .postAdmin {
+	float: right;
 }
 
 #searchsubmit {
