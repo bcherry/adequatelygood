@@ -25,6 +25,10 @@ h1 {
 	color: #424242;
 }
 
+h1 a:hover {
+	color: #191919;
+}
+
 #title h2 {
 	text-align: right;
 	line-height: 77px;
