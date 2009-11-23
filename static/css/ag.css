@@ -7,11 +7,12 @@ h1 a, h1 a:visited, h1 a:hover, h1 a:link, h1 a:focus, h2 a, h2 a:visited, h2 a:
 
 /* Standard link styles */
 a, a:link, a:visited {
-	color: #52A2E9;
+	color: #999999;
 	text-decoration: none;
 }
 
 a:hover, a:focus {
+	color: #222222;
 	text-decoration: underline;
 }
 
