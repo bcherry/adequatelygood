@@ -164,7 +164,11 @@ class Comment(models.SerializableModel):
 	def get_indentation(self):
 		# Indentation is based on degree of nesting in "thread"
 		nesting_str_array = self.thread.split('.')
-		return min([len(nesting_str_array), 10])
+		return min([len(nesting_str_array), 7])
+	
+	def get_indentation_inv(self):
+		# This is just the inverse of the indentation (to append empty grid cells)
+		return 7 - self.get_indentation()
 
 	def next_child_thread_string(self):
 		'Returns thread string for next child of this comment'

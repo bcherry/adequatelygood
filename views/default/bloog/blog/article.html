@@ -23,15 +23,17 @@
             {{ article.html }}
         </div>
     </div>
-    <div id="more_reading">
-        <p class="tags">Category: 
-            {% for tag in article.tags %}
-                <a href="/tag/{{ tag|urlencode }}">{{ tag }}</a>
-            {% endfor %}
+    <div id="more_reading" class="span-17 last">
+        <p class="tags">
+			{% comment %}
+				Fuck django templates, it's ridiculous that this if-elseif-else logic needs to be so complex, 
+				and all on the same line to not have extra white space
+			{% endcomment %}
+			{% for tag in article.tags %}<span class="alt">{% if forloop.last and not forloop.first %}{% ifequal forloop.counter 2 %}and{% else %}, and{% endifequal %}{% else %}{% if forloop.revcounter and forloop.counter0 %},{% else %}filed under{% endif %}{% endif %}</span> <a href="/tag/{{ tag|urlencode }}">{{ tag }}</a>{% endfor %}
         </p>
     </div>
 {% else %}
-    <div class="post">
+    <div class="span-17 last post">
         <div class="postMeta"><span class="date">No Matches</span></div>
         <h2 class="postTitle">No Article at Given Address</h2>
         <div class="entry">
@@ -42,7 +44,7 @@
         </div>
     </div>
 {% endif %}
-    <div id="comments_wrapper">
+    <div id="comments_wrapper" class="span-17 last">
         {% if allow_comments %}
         <a class="replybtn" href="#">Add a comment...</a>
         {% else %}
@@ -51,13 +53,13 @@
             {% endif %}
         {% endif %}
         {% if allow_comments or article.num_comments %}
-        <div id="comments" class="section">
-            <h3><span id="num_comments">{{ article.num_comments }}</span> Comments</h3>
-            <ol id="commentslist">
+        <div id="comments" class="span-17 last section">
+            <h3><span id="num_comments">{{ article.num_comments }}</span> comment{{ article.num_comments|pluralize }}</h3>
+            <div id="commentslist" class="span-17 last">
             {% for comment in article.comments %}
             {% include "comment.html" %}
             {% endfor %}
-            </ol>
+            </div>
         </div>
         {% endif %}
     </div>

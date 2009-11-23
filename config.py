@@ -60,14 +60,14 @@ PAGE = {
 	"title": BLOG["title"],
 	"articles_per_page": 5,
 	"navlinks": [
-		{ "title": "About", "description": "About this blog",
-		  "url": "/About-Ben"},
-		{ "title": "Contact", "description": "Send me a note",
-		  "url": "/contact"},
+		{ "title": "", "description": "",
+		  "url": ""},
+		{ "title": "", "description": "",
+		  "url": ""},
 	],
 	"featuredMyPages": {
 		"title": "The Author",
-		"description": "Ben is a 22 year-old software engineer and geek living in the San Francisco Bay Area.  He splits his time between work, hobby programming, video games, and the interwebs.",
+		"description": "Ben is a 22 year-old software engineer and geek living in the San Francisco bay area.  He splits his time between work, hobby programming, video games, and the interwebs.",
 		"entries": [
 			{ "title": "Git Hub",
 			  "url": "http://github.com/bcherry",
@@ -83,9 +83,31 @@ PAGE = {
 			  "description": "Serious Professional Stuff" },
 			{ "title": "Google Profile",
 			  "url": "http://www.google.com/profiles/bcherry",
-			  "description": "Google Owns My Soul" },
+			  "description": "Still Not Evil" },
 		]
 	},
+	"readingList": [
+		{ 
+			"title"		: "Coders at Work",
+			"author"	: "Peter Seibel",
+			"url"		: "http://www.amazon.com/Coders-at-Work-Peter-Seibel/dp/1430219483/",
+		},
+		{
+			"title"		: "Secrets of the JavaScript Ninja",
+			"author"	: "John Resig",
+			"url"		: "http://www.amazon.com/Secrets-JavaScript-Ninja-John-Resig/dp/193398869X/",
+		},
+		{
+			"title"		: "Code Complete",
+			"author"	: "Steve McConnell",
+			"url"		: "http://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670/",
+		},
+		{
+			"title"		: "xkcd: volume 0",
+			"author"	: "Randall Munroe",
+			"url"		: "http://store.xkcd.com/xkcd/#xkcdvolume0",
+		},
+	],
 	#"featuredOthersPages": {
 	#	 "title": "Google App Engine",
 	#	 "description": "Developer Resources",

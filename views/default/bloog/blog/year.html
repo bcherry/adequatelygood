@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
 {% block first_column %}
-    <div id="mainCol" class="fix"><a name="main"></a>
     {% if articles %}
-        <div class="post">
-            <h2>Articles from the year {{ year }}</h2>
+        <div class="listing">
+            <h2><span class="alt">articles from the year</span> {{ year }}</h2>
         </div>
         {% for article in articles %}
             {% include 'article_excerpt.html' %}
@@ -19,5 +18,4 @@
             </div>
         </div>
     {% endif %}
-    </div>
 {% endblock %}

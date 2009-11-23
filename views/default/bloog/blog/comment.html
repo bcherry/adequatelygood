@@ -1,4 +1,4 @@
-<li id="comment-{{ comment.key }}" class="alt item indent{{ comment.get_indentation }}">
+<div id="comment-{{ comment.key }}" class="prepend-{{ comment.get_indentation }} span-10 append-{{ comment.get_indentation_inv }} last item">
     <div class="fix">
         <p class="comment_meta">
             {% if use_gravatars and comment.email %}
@@ -17,4 +17,4 @@
         </p>
         {% endif %}
     </div>
-</li>
+</div>

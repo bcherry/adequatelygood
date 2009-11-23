@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 
 {% block first_column %}
-<div id="mainCol" class="fix"><a name="main"></a>
-    <div class="post">
-        <h2>List of Articles</h2>
-        {% for article in articles %}
-        <div class="entry"><p>
-            <a href="{{ article.permalink }}" alt="{{ article.title }}">{{ article.title }}</a>
-        </p></div>
-        {% endfor %}
-    </div>
+    <div class="listing">
+        <h2><span class="alt">all articles from</span> adequately good</h2>
+	</div>
+    {% for article in articles %}
+    <div class="entry"><p>
+        <a href="{{ article.permalink }}" alt="{{ article.title }}">{{ article.title }}</a>
+    </p></div>
+    {% endfor %}
 {% if not articles %}
     {% include 'bloog_intro.html' %}
 {% endif %}
 {% include 'pager.html' %}
-</div>
 {% endblock %}

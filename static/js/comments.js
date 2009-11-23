@@ -70,6 +70,7 @@
 		resetDialog();
 		href = $(this).get(0).href;
 		dialog.dialog('open');
+		return false;
 	};
 
 	var initComments = function() {

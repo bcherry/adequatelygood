@@ -65,13 +65,16 @@
 						<br />
 						<span class="alt" style="display:none;">browse randomly</span>
 					</div>
-					{% for link in navlinks %}
 					<div class="span-4">
-						<a href="{{ link.url }}">{{ link.title|lower }}</a>
+						<a href="/About-Ben">about</a>
 						<br/>
-						<span class="alt" style="display:none;">{{ link.description|lower }}</span>
+						<span class="alt" style="display:none;">about the author</span>
 					</div>
-					{% endfor %}
+					<div class="span-4">
+						<a href="/contact">contact</a>
+						<br/>
+						<span class="alt" style="display:none;">get in touch</span>
+					</div>
 					<div class="span-4 last">
 						<a href="{{ blog.master_atom_url }}">atom</a>
 						<br/>
@@ -90,178 +93,145 @@
 				</div>
 			</div>
 
-			<!-- First Column: Posts, etc. -->
-			<div id="content" class="span-17 colborder">
-				<a name="main"></a>
-				{% block first_column %}
-				{% for article in articles %}
-					{% include 'article_excerpt.html' %}
-				{% endfor %}
-				{% if not articles %}
-					{% include 'bloog_intro.html' %}
-				{% endif %}
-				{% include 'pager.html' %}
-				{% endblock %}
-			</div>
-
-			<!-- Second column: Search, links, etc. -->
-			{% block second_column %}
-			<div id="sidebar" class="span-6 last">
-				{% block search %}
-				<div id="search" class="span-6 last">
-					<form method="get" id="searchForm" class="span-6 last" action="/search">
-						<input type="text" class="span-6 blurred" value="Search..." title="Search..." name="s" id="s" />
-					</form>
-				</div>
-				{% endblock %}
-
-				{% block tags %}
-				<div id="tags">
-					<h3>Categories</h3>
-					{% if blog_tags %}
-						<ul>
-						{% for tag in blog_tags %}
-							{% ifnotequal tag.count 0 %}
-							<li>
-								<a href="/tag/{{ tag.name|urlencode }}">{{ tag.name }}</a>
-								({{ tag.count }})
-							</li>
-							{% endifnotequal %}
-						{% endfor %}
-						</ul>
-					{% else %}
-						No posts have been tagged yet.
+			<div id="colcontainer" class="span-24 last">
+				<!-- Main content: Posts, etc. -->
+				<div id="content" class="span-17 colborder">
+					<a name="main"></a>
+					{% block first_column %}
+					{% for article in articles %}
+						{% include 'article_excerpt.html' %}
+					{% endfor %}
+					{% if not articles %}
+						{% include 'bloog_intro.html' %}
 					{% endif %}
+					{% include 'pager.html' %}
+					{% endblock %}
 				</div>
-				{% endblock %}
 
-				{% block extra_panel %}
-				{% endblock %}
+				<!-- Sidebar: Search, links, etc. -->
+				{% block second_column %}
+				<div id="sidebar" class="span-6 last">
+					{% block search %}
+					<div id="search" class="span-6 last">
+						<form method="get" id="searchForm" class="span-6 last" action="/search">
+							<input type="text" class="span-6 blurred" value="Search..." title="Search..." name="s" id="s" />
+						</form>
+					</div>
+					{% endblock %}
 
-				{% if user_is_admin %}
-					<!-- Administrative Console -->
-					<div id="admin">
-						<h3>Administrative Panel</h3>
+					<hr class="space" />
+
+					{% block tags %}
+					<div id="tags">
+						<h3>categories</h3>
+						{% if blog_tags %}
+							<ul>
+							{% for tag in blog_tags %}
+								{% ifnotequal tag.count 0 %}
+								<li>
+									<a href="/tag/{{ tag.name|urlencode }}">{{ tag.name|lower }}</a>
+									({{ tag.count }})
+								</li>
+								{% endifnotequal %}
+							{% endfor %}
+							</ul>
+						{% else %}
+							No posts have been tagged yet.
+						{% endif %}
+					</div>
+					{% endblock %}
+				
+					<hr />
+
+					{% if user_is_admin %}
+						<!-- Administrative Console -->
+						<div id="admin">
+							<h3>admin shit, yo!</h3>
+							<ul>
+								<li><a id="newblog" href="#">New Blog Entry</a></li>
+								<li><a id="newarticle" href="#">New Article</a>
+									- unsyndicated<br />(e.g., about page)</li>
+								<li><a id="openshell" href="/admin/shell">Open Shell</a></li>
+								<li><a href="/admin/cache_stats">Memcached Stats</a></li>
+								<li><a href="/admin/timings">Timing Stats</a></li>
+							</ul>
+						</div>
+						
+						<hr />
+					{% endif %}
+
+					{% block featuredPages1 %}
+					<div id="links">
+						<h3>{{ featuredMyPages.title|lower }}</h3>
+						<p>
+							{{ featuredMyPages.description }}
+						</p>
 						<ul>
-							<li><a id="newblog" href="#">New Blog Entry</a></li>
-							<li><a id="newarticle" href="#">New Article</a>
-								- unsyndicated<br />(e.g., about page)</li>
-							<li><a id="openshell" href="/admin/shell">Open Shell</a></li>
-							<li><a href="/admin/cache_stats">Memcached Stats</a></li>
-							<li><a href="/admin/timings">Timing Stats</a></li>
+							{% for entry in featuredMyPages.entries %}
+							<li>
+								<a href="{{ entry.url }}">{{ entry.title }}</a>
+								- {{ entry.description }}
+							</li>
+							{% endfor %}
 						</ul>
 					</div>
-				{% endif %}
+					{% endblock %}
+				
+				
+					<hr />
 
-				{% block featuredPages1 %}
-				<div id="links">
-					<h3>{{ featuredMyPages.title }}</h3>
-					<p>
-						{{ featuredMyPages.description }}
-					</p>
-					<ul>
-						{% for entry in featuredMyPages.entries %}
-						<li>
-							<a href="{{ entry.url }}">{{ entry.title }}</a>
-							- {{ entry.description }}
-						</li>
-						{% endfor %}
-					</ul>
-				</div>
-				{% endblock %}
-
-				{% block subscribe %}
-				<div id="subscribe">
-					<h3>Subscribe</h3>
-					<p>
-						Keep up with my latest adequately good tips!
-					</p>
-					<ul>
-						<li>
-							<a href="{{ blog.master_atom_url }}" title="Full content Atom feed">Atom feed</a>
-						</li>
-					</ul>
-				</div>
-				{% endblock %}
-				{% block books %}
-				<div id="books">
-					<h3>What I'm Reading</h3>
-					<div id="ShelfariWidget114860">
-						<div class="preloader">
-							<img src="/static/images/ajax-loader.gif" />
-							<br />
-							Loading...
-						</div>
-						<noscript>
-							<p>Find new 
-								<a href="http://www.shelfari.com/books">books</a> 
-								and literate friends with Shelfari, the online 
-								<a href="http://www.shelfari.com/">book club</a>
-								.
-							</p>
-						</noscript>
+					{% block subscribe %}
+					<div id="subscribe">
+						<h3>subscribe</h3>
+						<p>
+							Keep up with the latest adequate posts.
+						</p>
+						<ul>
+							<li>
+								<a href="{{ blog.master_atom_url }}" title="Full content Atom feed">Atom feed</a>
+							</li>
+						</ul>
 					</div>
+					{% endblock %}
+				
+					<hr />
+				
+					{% block books %}
+					<div id="books">
+						<h3>my reading list</h3>
+						<p>
+							This is what I've been reading lately, but it's probably not totally up to date.
+						</p>
+						<ul>
+							{% for book in readingList %}
+							<li>
+								<a href="{{ book.url }}">{{ book.title }}</a>
+								- {{ book.author }}
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+				 	{% endblock %}
 				</div>
-			 	{% endblock %}
+				{% endblock %}
 			</div>
-			{% endblock %}
 
 			<hr />
-			<!--
-			<div class="prepend-2 span-20 append-2 last append-bottom nav">
-				<div class="span-4">
-					<a href="/" title="Return to the the frontpage">Home
-						<br/>
-						<span style="display:none;"></span>
-					</a>
-				</div>
-				{% if user %}
-				<div class="span-4">
-					<a href="{{ logout_url }}" title="Logout">Logout
-						<br/>
-						<span style="display:none;"></span>
-					</a>
-				</div>
-				{% else %}
-				<div class="span-4">
-					<a href="{{ login_url }}" title="Login">Login
-						<br/>
-						<span style="display:none;"></span>
-					</a>
-				</div>
-				{% endif %}
-				{% for link in navlinks %}
-				<div class="span-4">
-					<a href="{{ link.url }}" title="{{ link.description }}">{{ link.title }}
-						<br/>
-						<span style="display:none;"></span>
-					</a>
-				</div>
-				{% endfor %}
-				<div class="span-4 last">
-					<a href="{{ blog.master_atom_url }}" title="Subscribe to the main Atom feed">Atom
-						<br/>
-						<span style="display:none;"></span>
-					</a>
-				</div>
-			</div>
-			
-			<hr />
-			-->
 			
 			<div class="span-24 last">
 				<div id="attribution" class="span-12">
 					<div>Adequately Good is modified from <a href="http://bloog.billkatz.com">Bloog</a>, available at
 						<a href="http://github.com/DocSavage/bloog">GitHub</a> under an MIT license.</div>
-					<div>The reasonably decent design was created with <a href="http://blueprintcss.org/">Blueprint CSS</a>.</div>
-					<div>Cache debugging: Page was rendered {% now "M j, H:i:s" %}.
-						{% if user %}
-							({{ user.nickname }})
-						{% endif %}
-						{% if user_is_admin %}
-							User is administrator.
-						{% endif %}
-					</div>
+					<div>The reasonably decent design was created with the help of <a href="http://blueprintcss.org/">Blueprint CSS</a>.</div>
+					<div>Interaction is made wonderfully simple by <a href="http://jquery.com">jQuery</a> and <a href="http://jqueryui.com">jQuery UI</a>.</div>
+					{% if not user %}
+						<div>To log into Adequately Good, <a href="{{ login_url }}">click here</a>, but don't expect anything to change.</div>
+					{% else %}
+						<div>To log out of Adequately Good, <a href="{{ logout_url }}">click here</a>, but don't expect anything to change.</div>
+					{% endif %}
+					{% if user_is_admin %}
+						<div>Cache debugging: Page was rendered {% now "M j, H:i:s" %}.</div>
+					{% endif %}
 				</div>
 				<div class="prepend-8 span-4 last">
 					<img id="poweredby" src="/static/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine" />
@@ -301,10 +271,6 @@
 		<script type="text/javascript" src="/static/js/ag.js"></script>
 		<script type="text/javascript" src="/static/js/comments.js"></script>
 		{% if user_is_admin %}<script type="text/javascript" src="/static/js/admin.js"></script>{% endif %}
-		<script type="text/javascript">
-			$LAB
-			.script("http://www.shelfari.com/ws/114860/widget.js")
-		</script>
 
 		{% if user_is_admin %}
 		{% include "form_editor.html" %}

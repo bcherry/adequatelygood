@@ -16,6 +16,10 @@ a:hover, a:focus {
 	text-decoration: underline;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	letter-spacing: -1px;
+}
+
 #title h1, #title h2, #title h3 {
 	margin-bottom: 0;
 }
@@ -115,7 +119,70 @@ h1 a:hover {
 	vertical-align: middle;
 }
 
+#sidebar h3 {
+	margin-bottom: 0.5em;
+	color: #333333;
+	letter-spacing: -1px;
+	font-size: 16pt;
+}
+
+#sidebar ul {
+	list-style: none;
+	margin: 8px 0 4px;
+	padding-left: 0px;
+}
+
+#sidebar li {
+	background: url(/static/images/li.gif) no-repeat 0 3px;
+	color: #7F7F7F;
+	line-height: 1.2em;
+	padding: 4px 0 4px 16px;
+}
+
+#sidebar a, #sidebar a:link, #sidebar a:visited {
+	color: #424242;
+}
+
+#sidebar a:hover, #sidebar a:focus {
+	color: #191919;
+}
+
+#sidebar p {
+	margin-bottom: 1em;
+}
+
+.tags a {
+	font-size: 14pt;
+	letter-spacing: -1px;
+}
+
+#content, #sidebar {
+	padding-bottom: 32767px;
+	margin-bottom: -32767px;
+}
+
+#colcontainer {
+	overflow: hidden;
+	margin-bottom: 1.45em;
+}
+
+/* Some indentations useful for tree placement of comments */
+#comments_wrapper li.indent1{margin-left: 0em;}
+#comments_wrapper li.indent2{margin-left: 2em;}
+#comments_wrapper li.indent3{margin-left: 4em;}
+#comments_wrapper li.indent4{margin-left: 6em;}
+#comments_wrapper li.indent5{margin-left: 8em;}
+#comments_wrapper li.indent6{margin-left: 10em;}
+#comments_wrapper li.indent7{margin-left: 12em;}
+#comments_wrapper li.indent8{margin-left: 13em;}
+#comments_wrapper li.indent9{margin-left: 14em;}
+#comments_wrapper li.indent10{margin-left: 15em;}
+
 /* tweaks to blueprint -- TODO: rebuild blueprint with these rolled in */
 div.colborder {
 	border-color: #CCCCCC;
+}
+
+hr {
+	height: 1px;
 }
