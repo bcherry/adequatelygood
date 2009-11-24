@@ -10,11 +10,12 @@
 {% if article %}
     <div id="article" class="span-17 last post">
         <div class="span-17 last clearfix postMeta">
-        	<span class="date">{{ article.published.date }}</span>
+        	<span class="alt date">{{ article.published.date }}</span>
             {% if user_is_admin %}
-			<div class="postAdmin">
-            	<a id="editbtn" href="#">Edit</a>
-            	<a id="deletebtn" href="#">Delete</a>
+			<div class="smallalts postAdmin">
+            	<a id="editbtn" href="#">edit</a>
+				<span class="alt">or</span>
+            	<a id="deletebtn" href="#">delete</a>
             </div>
 			{% endif %}
         </div>
@@ -24,12 +25,12 @@
         </div>
     </div>
     <div id="more_reading" class="span-17 last">
-        <p class="tags">
+        <p class="smallalts tags">
 			{% comment %}
 				Fuck django templates, it's ridiculous that this if-elseif-else logic needs to be so complex, 
 				and all on the same line to not have extra white space
 			{% endcomment %}
-			{% for tag in article.tags %}<span class="alt">{% if forloop.last and not forloop.first %}{% ifequal forloop.counter 2 %}and{% else %}, and{% endifequal %}{% else %}{% if forloop.revcounter and forloop.counter0 %},{% else %}filed under{% endif %}{% endif %}</span> <a href="/tag/{{ tag|urlencode }}">{{ tag }}</a>{% endfor %}
+			{% for tag in article.tags %}<span class="alt">{% if forloop.last and not forloop.first %}{% ifequal forloop.counter 2 %} and{% else %}, and{% endifequal %}{% else %}{% if forloop.revcounter and forloop.counter0 %},{% else %}filed under{% endif %}{% endif %}</span> <a class="tight" href="/tag/{{ tag|urlencode }}">{{ tag }}</a>{% endfor %}
         </p>
     </div>
 {% else %}
@@ -46,7 +47,7 @@
 {% endif %}
     <div id="comments_wrapper" class="span-17 last">
         {% if allow_comments %}
-        <a class="replybtn" href="#">Add a comment...</a>
+        <a class="tight replybtn" href="#">add a comment...</a>
         {% else %}
             {% if article.num_comments %}
             <p>Comments are closed</p>

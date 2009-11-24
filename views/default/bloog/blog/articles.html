@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block first_column %}
-    <div class="listing">
-        <h2><span class="alt">all articles from</span> adequately good</h2>
+    <div class="smallalts listing">
+        <span class="alt">all articles from</span> 
+		<a class="tight" href="/">adequately good</a>
 	</div>
     {% for article in articles %}
     <div class="entry"><p>

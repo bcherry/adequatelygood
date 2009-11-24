@@ -1,20 +1,22 @@
 <div id="comment-{{ comment.key }}" class="prepend-{{ comment.get_indentation }} span-10 append-{{ comment.get_indentation_inv }} last item">
-    <div class="fix">
-        <p class="comment_meta">
+    <div class="box comment_box">
+        <div class="smallalts comment_meta">
             {% if use_gravatars and comment.email %}
             <img class="gravatar" src="http://www.gravatar.com/avatar/{{comment.email|gravatar}}?s=32&r=g&d=identicon" alt="" />
             {% endif %}
-            <span class="subject">{{ comment.title|default:"Re: Article"}}</span> by 
-            <span class="user">{{ comment.name|default:"Anonymous" }}</span>
-            <span class="date">({{ comment.published.date }})</span>
-        </p>
+            <span class="tight subject">{{ comment.title|default:"Re: Article"}}</span>
+ 			<span class="alt">by</span> 
+            <span class="tight user">{{ comment.name|default:"Anonymous" }}</span>
+            <span class="alt date">({{ comment.published.date }})</span>
+        </div>
         <div class="comment_text">
             {{ comment.body }}
         </div>
         {% if allow_comments %}
-        <p class="post_meta">
-            <a class="replybtn" title="Reply to Comment" href="#comment-{{ comment.key }}">Reply</a>
-        </p>
+        <div class="smallalts comment_reply">
+            <a class="tight replybtn" title="Reply to Comment" href="#comment-{{ comment.key }}">reply</a>
+			<span class="alt">to this comment</span>
+        </div>
         {% endif %}
     </div>
 </div>

@@ -2,8 +2,9 @@
 
 {% block first_column %}
     {% if articles %}
-        <div class="listing">
-            <h2><span class="alt">articles from the month</span> {{ month }}/{{ year }}</h2>
+        <div class="smallalts listing">
+            <span class="alt">all articles from the month</span> 
+			<a class="tight" href="/{{ year }}/{{ month }}">{{ month }}/{{ year }}</a>
         </div>
         {% for article in articles %}
             {% include '../article_excerpt.html' %}

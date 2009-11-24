@@ -21,11 +21,11 @@
 		}
 		, statement: { 
 			  _match: /\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|with|yield)\b/
-			, _style: 'color: navy; font-weight: bold;'
+			, _style: 'color: navy; font-weight: normal;'
 		}
 		, property: { 
 			  _match: /\b(None|True|False)\b/
-			, _style: 'color: Purple; font-weight: bold;'
+			, _style: 'color: Purple; font-weight: normal;'
 		}
 	}
 }

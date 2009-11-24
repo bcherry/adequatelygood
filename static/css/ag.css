@@ -7,17 +7,31 @@ h1 a, h1 a:visited, h1 a:hover, h1 a:link, h1 a:focus, h2 a, h2 a:visited, h2 a:
 
 /* Standard link styles */
 a, a:link, a:visited {
-	color: #999999;
+	color: #666666;
 	text-decoration: none;
 }
 
 a:hover, a:focus {
-	color: #222222;
+	color: #191919;
 	text-decoration: underline;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	letter-spacing: -1px;
+}
+
+code {
+	display: block;
+	margin: 0 0 1.5em;
+	font-weight: normal !important;
+}
+
+.smallalts .alt {
+	font-size: 0.7em;
+}
+
+.tight {
+	letter-spacing: -0.08em;
 }
 
 #title h1, #title h2, #title h3 {
@@ -80,6 +94,19 @@ h1 a:hover {
 	position: absolute;
 	display: block;
 	width: 100%;
+}
+
+.post .postMeta {
+	position: relative;
+}
+
+.post .postMeta .postAdmin {
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-transform: lowercase;
+	letter-spacing: -.08em;
+	font-size: 15pt;
 }
 
 .post .postMeta .date {
@@ -151,9 +178,33 @@ h1 a:hover {
 	margin-bottom: 1em;
 }
 
-.tags a {
+.tags {
 	font-size: 14pt;
-	letter-spacing: -1px;
+}
+
+.listing {
+	font-size: 19pt;
+}
+
+.replybtn {
+	font-size: 13pt;
+}
+
+.comment_box {
+	border: dashed 1px #CCCCCC;
+	background-color: #F6F6F6;
+}
+
+.comment_text {
+	margin-top: 17px;
+}
+
+.comment_meta {
+	font-size: 14pt;
+}
+
+.comment_reply {
+	font-size: 13pt;
 }
 
 #content, #sidebar {

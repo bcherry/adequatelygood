@@ -2,8 +2,9 @@
 
 {% block first_column %}
     {% if articles %}
-        <div class="listing">
-            <h2><span class="alt">articles found under</span> {{ search_term }}</h2>
+        <div class="smallalts listing">
+            <span class="alt">all articles found searching for</span>
+			<a class="tight" href="/search?s={{ search_term }}">{{ search_term }}</a>
         </div>
         {% for article in articles %}
             {% include '../article_excerpt.html' %}

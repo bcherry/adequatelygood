@@ -2,8 +2,9 @@
 
 {% block first_column %}
     {% if articles %}
-        <div class="listing">
-            <h2><span class="alt">articles filed under</span> {{ tag }}</h2>
+        <div class="smallalts listing">
+            <span class="alt">all articles filed under</span> 
+			<a class="tight" href="/tags/{{ tag }}">{{ tag }}</a>
         </div>
         {% for article in articles %}
             {% include '../article_excerpt.html' %}
