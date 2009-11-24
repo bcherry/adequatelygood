@@ -24,7 +24,8 @@ ChiliBook = { //implied global
 	, lineNumbers:        !true
 
 	, codeLanguage:       function( el ) {
-		var recipeName = $( el ).attr( "class" );
+		var split = $( el ).attr( "class" ) ? $(el).attr("class").split(" ") : [];
+		var recipeName = split.length > 0 ? split[0] : "";
 		return recipeName ? recipeName : '';
 	}
 
