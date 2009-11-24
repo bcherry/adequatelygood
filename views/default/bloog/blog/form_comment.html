@@ -1,8 +1,7 @@
-<style type="text/css">  
-p span.displaynone { display:none; }
-</style>  
-<div id="commentDialog" class="popupDialog" style="display:none;">
+<script type="text/tmpl" id="_tmpl_commentDialog">
+<div id="commentDialog" class="popupDialog">
     <div class="bd">
+		<style type="text/css">p span.displaynone { display: none; }</style>
         <form id="commentDialogForm" name="commentDialogForm" method="post" action="#">
             <p>
                 <label for="captcha">Verify you are human by entering the letters below: 
@@ -22,10 +21,9 @@ p span.displaynone { display:none; }
                 <label for="commentTitle">Title:</label><br />
                 <input type="text" id="commentTitle" name="commentTitle" size="50" />
             </p>
-            <textarea name="commentBody" id="commentBody" cols="50" rows="10">
-                <strong>Please enter your comment here.</strong>
-            </textarea>
+            <textarea name="commentBody" id="commentBody" cols="50" rows="10"><strong>Please enter your comment here.</strong></textarea>
         </form>
     </div>
 </div>
+</script>
 

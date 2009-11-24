@@ -24,7 +24,7 @@ WEBSITE: http://noteslog.com/chili/
 					  + this.x( content, '//style' ) 
 					  + "<span class='ie_style'>" + this.x( close ) + "</span>";
 			}
-			, _style: "color: DarkSlateGray; font-weight: bold;"
+			, _style: "color: DarkSlateGray; font-weight: normal;"
 		}
 		, comment: { 
 			  _match: /<!--[\w\W]*?-->/ 
@@ -55,7 +55,7 @@ WEBSITE: http://noteslog.com/chili/
 					  + this.x( content, '/tag_attrs' ) 
 					  + "<span class='tag_start'>" + this.x( close ) + "</span>";
 			}
-			, _style: "color: navy; font-weight: bold;"
+			, _style: "color: navy; font-weight: normal;"
 		} 
 		// matches an ending tag
 		// like "</div>"

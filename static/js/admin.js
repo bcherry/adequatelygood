@@ -1,20 +1,17 @@
 ;(function($){
 	var dialogConfig;
 	var dialog;
-	var editor;
-	var titleInput;
-	var tagsInput;
+	//var editor;
+	var domObjs;
 	var submitUrl = "/";
-
-	var initDialog = function() {
-		dialog = $("#postDialog").dialog(dialogConfig);
-		editor = CKEDITOR.replace("postBody");
-		titleInput = dialog.find("#postTitle");
-		tagsInput = dialog.find("#postTags");
-		consul.log("dialog initialized");
-	};
-
+	var tmplName = "_tmpl_postDialog";
+	
 	var openDialog = function() {
+		
+		dialog = $("<div/>");
+		domObjs = dialog.tmpl(tmplName,{});
+		dialog.dialog(dialogConfig);
+		
 		var doOpen = function() {
 			dialog.dialog("open");
 		}
@@ -45,22 +42,23 @@
 		if (body === undefined) {
 			body = "<p>Enter your text here</p>";
 		}
-		editor.setData(body);
+		//editor.setData(body);
+		$(domObjs.postBody).val(body);
 		if (title !== undefined) {
-			titleInput.val(title);
+			$(domObjs.postTitle).val(title);
 		}
 		if (tags !== undefined) {
 			if (tags.constructor == Array) {
 				tags = tags.join(", ");
 			}
-			tagsInput.val(tags);
+			$(domObjs.postTags).val(tags);
 		}
 	};
 
 	var submitPost = function() {
-		var body = editor.getData();
-		var title = titleInput.val();
-		var tags = tagsInput.val();
+		var body = $(domObjs.postBody).val();
+		var title = $(domObjs.postTitle).val();
+		var tags = $(domObjs.postTags).val();
 
 		consul.log("beginning submission");
 		$.post(submitUrl, {body:body, title:title, tags:tags}, function(data) {
@@ -68,12 +66,20 @@
 			window.location.href = data;
 		});
 	};
+	
+	var hardReset = function() {
+		dialog.dialog("destroy");
+		delete dialog;
+		delete domObjs;
+	};
 
 	var closeDialog = function() {
 		dialog.dialog("close");
+		hardReset();
 	};
 
 	var dialogOnClose = function(event, ui) {
+		hardReset();
 		consul.log("dialog closed");
 	};
 

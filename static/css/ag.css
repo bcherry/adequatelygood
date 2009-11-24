@@ -213,6 +213,12 @@ h1 a:hover {
 	font-size: 13pt;
 }
 
+.postDialog .postBody {
+	width: 98%;
+	font: 1em 'Monaco', 'lucida console', monospace; line-height: 1.5;
+	color: #191919;
+}
+
 #content, #sidebar {
 	padding-bottom: 32767px;
 	margin-bottom: -32767px;

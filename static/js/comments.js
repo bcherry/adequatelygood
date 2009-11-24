@@ -1,10 +1,20 @@
 ;(function($){
 	var dialog;
 	var editor;
+	var domObjs;
 	var href;
-	var inputs = {};
+
+	var hardReset = function() {
+		dialog.dialog("destroy");
+		editor.destroy();
+		delete dialog;
+		delete domObjs;
+		delete editor;
+		href = null;
+	};
 
 	var dialogOnClose = function() {
+		hardReset();
 		consul.log("dialog closed");
 	};
 
@@ -16,11 +26,10 @@
 		consul.log("comment submission begun, submitting to %s", href);
 		$.post(href, {
 			key		: href,
-			captcha	: inputs.captcha.val(),
-			name	: inputs.name.val(),
-			email	: inputs.email.val(),
-			homepage: inputs.homepage.val(),
-			title	: inputs.title.val(),
+			captcha	: $(domObjs.captcha).val(),
+			name	: $(domObjs.commentName).val(),
+			email	: $(domObjs.commentEmail).val(),
+			title	: $(domObjs.commentTitle).val(),
 			body	: editor.getData()
 		}, function(data) {
 			$("#num_comments").text(parseInt($("#num_comments").text(), 10) + 1);
@@ -36,7 +45,7 @@
 
 	var closeDialog = function() {
 		dialog.dialog('close');
-		href = null;
+		hardReset();
 	};
 
 	var dialogConfig = {
@@ -56,40 +65,17 @@
 		toolbar		: "Basic"
 	};
 
-	var resetDialog = function() {
-		inputs.captcha.val("");
-		inputs.name.val("");
-		inputs.email.val("");
-		inputs.homepage.val("");
-		inputs.title.val("");
-		inputs.body.val("");
-		editor.setData("");
-	};
-
 	var openDialog = function() {
-		resetDialog();
-		href = $(this).get(0).href;
+		dialog = $("<div/>");
+		domObjs = dialog.tmpl("_tmpl_commentDialog", {});	
+		dialog.dialog(dialogConfig);
+		href = $(this).get(0).href; // This needs to be a click handler to work right
+		editor = CKEDITOR.replace($(domObjs.commentBody).get(0), editorConfig);
 		dialog.dialog('open');
 		return false;
 	};
-
-	var initComments = function() {
-		if (!$("#commentDialog").length) {
-			return;
-		}
-		dialog = $("#commentDialog").dialog(dialogConfig);
-		editor = CKEDITOR.replace(dialog.find("#commentBody").get(0), editorConfig);
-
-		inputs.captcha = dialog.find("#captcha");
-		inputs.name = dialog.find("#commentName");
-		inputs.email = dialog.find("#commentEmail");
-		inputs.homepage = dialog.find("#commentHomepage");
-		inputs.title = dialog.find("#commentTitle");
-		inputs.body = dialog.find("#commentBody");
-	};
-
+	
 	$(function(){
-		initComments();
 		$(".replybtn").live("click", openDialog);
 	});
 })(jQuery);
