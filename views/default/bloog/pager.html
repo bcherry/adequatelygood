@@ -1,10 +1,10 @@
 <div id="more_reading">
     <p>
     {% if prev_offset %}
-        <a href="?{{ query_string }}offset={{ prev_offset }}&limit={{ limit }}">Prev</a>,
+        <a class="pager tight" href="?{{ query_string }}offset={{ prev_offset }}&limit={{ limit }}">previous</a>,
     {% endif %}
     {% if next_offset %}
-        <a href="?{{ query_string }}offset={{ next_offset }}&limit={{ limit }}">Next</a>
+        <a class="pager tight" href="?{{ query_string }}offset={{ next_offset }}&limit={{ limit }}">next</a>
     {% endif %}
     </p>
 </div>

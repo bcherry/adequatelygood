@@ -24,12 +24,14 @@ code {
 	display: block;
 	margin: 1.5em;
 	padding: 0;
+	word-wrap: break-word;
 }
 
 /* Mainly used for inline code, but no reason to make it exclusive */
 .inline {
 	display: inline;
 	margin: 0;
+	padding: 0;
 }
 
 .smallalts .alt {
@@ -100,6 +102,10 @@ h1 a:hover {
 	position: absolute;
 	display: block;
 	width: 100%;
+}
+
+.pager {
+	font-size: 14pt;
 }
 
 .post .postMeta {

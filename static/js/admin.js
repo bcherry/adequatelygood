@@ -26,7 +26,7 @@
 	
 	var ajaxOptions = {
 		cache		: false,
-		dataType	: "json",
+		dataType	: "text",
 		error		: handleError,
 		success		: handleSuccess,
 		type		: "POST"
