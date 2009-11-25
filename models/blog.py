@@ -73,7 +73,11 @@ class Article(search.SearchableModel, models.SerializableModel):
 	# Use keys instead of db.Category for consolidation of tag names
 	tags = db.StringListProperty(default=[])
 	tag_keys = db.ListProperty(db.Key, default=[])
+	two_columns = db.BooleanProperty()
 	allow_comments = db.BooleanProperty()
+	# A list of languages for code embedded in article.
+	# This lets us choose the proper javascript for pretty viewing.
+	embedded_code = db.StringListProperty()
 
 	def get_comments(self):
 		"""Return comments lexicographically sorted on thread string"""

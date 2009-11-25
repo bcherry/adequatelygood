@@ -64,7 +64,7 @@
 		$.post(submitUrl, {body:body, title:title, tags:tags}, function(data) {
 			consul.log("submission complete, response: " + data);
 			window.location.href = data;
-		}, function(data){alert(data);});
+		});
 	};
 	
 	var hardReset = function() {
@@ -124,6 +124,7 @@
 
 	// Bind event handlers, etc.
 	$(function() {
+		initDialog();
 		$("#newblog, #newarticle, #editbtn").live("click", openDialog);
 		$("#deletebtn").live("click", openDeleteDialog);
 	});

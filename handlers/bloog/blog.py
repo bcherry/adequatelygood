@@ -152,6 +152,14 @@ def do_sitemap_ping():
 				   payload=urllib.urlencode(form_fields),
 				   method=urlfetch.GET)
 
+def process_embedded_code(article):
+	# TODO -- Check for embedded code, escape opening triangular brackets
+	# within code, and set article embedded_code strings so we can
+	# use proper javascript.
+	from utils import codehighlighter
+	article.html, languages = codehighlighter.process_html(article.html)
+	article.embedded_code = languages
+
 def process_article_edit(handler, permalink):
 	# For http PUT, the parameters are passed in URIencoded string in body
 	body = handler.request.body
@@ -187,7 +195,6 @@ def process_article_edit(handler, permalink):
 		handler.error(400)
 
 def process_article_submission(handler, article_type):
-	handler.error(400)
 	property_hash = restful.get_sent_properties(handler.request.get, 
 		['title',
 		 ('body', get_sanitizer_func(handler, trusted_source=True)),
@@ -209,6 +216,7 @@ def process_article_submission(handler, article_type):
 		article.set_associated_data(
 			{'relevant_links': handler.request.get('relevant_links'),
 			 'amazon_items': handler.request.get('amazon_items')})
+		process_embedded_code(article)
 		article.put()
 		for key in article.tag_keys:
 			db.get(key).counter.increment()

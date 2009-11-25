@@ -108,4 +108,13 @@ PAGE = {
 			"url"		: "http://store.xkcd.com/xkcd/#xkcdvolume0",
 		},
 	],
+	#"featuredOthersPages": {
+	#	 "title": "Google App Engine",
+	#	 "description": "Developer Resources",
+	#	 "entries": [
+	#		 { "title": "Google App Engine",
+	#		   "url": "http://code.google.com/appengine/",
+	#		   "description": "The mothership" },
+	#	 ]
+	#},
 }
