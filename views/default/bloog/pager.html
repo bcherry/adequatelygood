@@ -1,10 +1,14 @@
 <div id="more_reading">
-    <p>
+    <p class="smallalts pager">
+	<span class="alt">go</span>
     {% if prev_offset %}
-        <a class="pager tight" href="?{{ query_string }}offset={{ prev_offset }}&limit={{ limit }}">previous</a>,
+        <a class="tight" href="?{{ query_string }}offset={{ prev_offset }}&limit={{ limit }}">previous</a>
     {% endif %}
+	{% if prev_offset and next_offset %}
+		<span class="alt">or</span>
+	{% endif %}
     {% if next_offset %}
-        <a class="pager tight" href="?{{ query_string }}offset={{ next_offset }}&limit={{ limit }}">next</a>
+        <a class="tight" href="?{{ query_string }}offset={{ next_offset }}&limit={{ limit }}">next</a>
     {% endif %}
     </p>
 </div>
