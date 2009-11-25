@@ -124,7 +124,6 @@
 
 	// Bind event handlers, etc.
 	$(function() {
-		initDialog();
 		$("#newblog, #newarticle, #editbtn").live("click", openDialog);
 		$("#deletebtn").live("click", openDeleteDialog);
 	});
