@@ -17,7 +17,7 @@ a:hover, a:focus {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	letter-spacing: -1px;
+	letter-spacing: -.08em;
 }
 
 code {
@@ -104,6 +104,19 @@ h1 a:hover {
 	width: 100%;
 }
 
+#archives hr {
+	margin: 0;
+}
+
+.archivelinks {
+	font-size: 12pt;
+	padding-left: 1em;
+}
+
+.archivelinks a {
+	margin-right: .5em;
+}
+
 .pager {
 	font-size: 14pt;
 }
@@ -143,6 +156,10 @@ h1 a:hover {
 
 .post .postAdmin {
 	float: right;
+}
+
+.contact {
+	font-size: 10pt;
 }
 
 #search input {

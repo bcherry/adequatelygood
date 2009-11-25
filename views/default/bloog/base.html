@@ -82,15 +82,18 @@
 					</div>
 				</div>
 				
-				<hr />
-				
 				<!-- Archives Links -->
-				<div id="archives" class="span-24" style="display:none;">
-					{% for year in archive_years %}
-						<div class="span-2"><a href="/{{ year }}">{{ year }}</a></div>
-					{% endfor %}
-					<div class="span-22 last"></div>
+				<div id="archives" class="span-24 last smallalts" style="display:none;">
+					<hr />
+					<div class="archivelinks">
+						<span class="alt">posts by year</span>
+						{% for year in archive_years %}
+							<a class="tight" href="/{{ year }}">{{ year }}</a>
+							{% endfor %}
+					</div>
 				</div>
+				
+				<hr />
 			</div>
 
 			<div id="colcontainer" class="span-24 last">

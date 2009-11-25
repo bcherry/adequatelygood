@@ -1,6 +1,6 @@
 ;(function($){
 	$("#archiveLink").click(function() {
-		$("#archives").toggle();
+		$("#archives").slideToggle();
 	});
 })(jQuery);
 
