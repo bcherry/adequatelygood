@@ -272,13 +272,7 @@ def process_comment_submission(handler, article):
 		property_hash['thread'] = thread_string
 		del property_hash['key']
 
-	# Get and store some pieces of information from parent article.
-	# TODO: See if this overhead can be avoided
-	if not article.num_comments:
-		article.num_comments = 1
-	else:
-		article.num_comments += 1
-	property_hash['article'] = article.put()
+	property_hash['article'] = article
 
 	try:
 		comment = models.blog.Comment(**property_hash)
@@ -287,6 +281,14 @@ def process_comment_submission(handler, article):
 		logging.debug("Bad comment: %s", property_hash)
 		handler.error(400)
 		return
+	
+	# Get and store some pieces of information from parent article.
+	# TODO: See if this overhead can be avoided
+	if not article.num_comments:
+		article.num_comments = 1
+	else:
+		article.num_comments += 1
+	property_hash['article'] = article.put()
 		
 	# Notify the author of a new comment (from matteocrippa.it)
 	if config.BLOG['send_comment_notification']:

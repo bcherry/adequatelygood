@@ -5,7 +5,6 @@
 
 	var hardReset = function() {
 		dialog.dialog("destroy");
-		editor.destroy();
 		delete dialog;
 		delete domObjs;
 		href = null;
@@ -19,26 +18,56 @@
 	var dialogOnOpen = function() {
 		consul.log("dialog opened");
 	};
+	
+	var handleError = function(xhr, textStatus, errorThrown) {
+		var errors = {
+			"400" : "Uh oh!  I couldn't save your comment.  Luckily, it doesn't look like you're a spam bot, you just forgot a required field or something.",
+			"401" : "Hmmmm, you're a suspicious character.  If you're human, try entering the captcha again.  If you're a robot, then we've got issues."
+		};
+		
+		if (!(xhr.status in errors)) {
+			errors[xhr.status] = "Ooops!  There was a mysterious error of some kind.  Sorry about that!  (" + xhr.status + " - " + xhr.statusText + ")";
+		}
+		
+		domObjs.errorText.text(errors[xhr.status]);
+		domObjs.error.show();
+	};
+	
+	var handleSuccess = function(data) {
+		$("#num_comments").text(parseInt($("#num_comments").text(), 10) + 1);
+		var parent_id = href.split('#')[1];
+		if (parent_id == '') {
+			$('#commentslist').prepend(data);
+		} else {
+    		$('#' + parent_id).after(data);
+		}
+		closeDialog();
+	};
+	
+	var ajaxOptions = {
+		cache		: false,
+		dataType	: "html",
+		error		: handleError,
+		success		: handleSuccess,
+		type		: "POST"
+	};
 
 	var submitComment = function() {
 		consul.log("comment submission begun, submitting to %s", href);
-		$.post(href, {
+		domObjs.error.hide();
+		
+		var options = ajaxOptions;
+		options.url = href;
+		options.data = {
 			key		: href,
 			captcha	: $(domObjs.captcha).val(),
 			name	: $(domObjs.commentName).val(),
 			email	: $(domObjs.commentEmail).val(),
 			title	: $(domObjs.commentTitle).val(),
 			body	: $(domObjs.commentBody).val()
-		}, function(data) {
-			$("#num_comments").text(parseInt($("#num_comments").text(), 10) + 1);
-			var parent_id = href.split('#')[1];
-			if (parent_id == '') {
-				$('#commentslist').prepend(data);
-			} else {
-            	$('#' + parent_id).after(data);
-			}
-			closeDialog();
-		}, "html");
+		};
+		
+		$.ajax(options);
 	};
 
 	var closeDialog = function() {

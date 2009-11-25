@@ -283,3 +283,10 @@ div.colborder {
 hr {
 	height: 1px;
 }
+
+/* tweaks to blueprint/jqueryUI combos!!!! */
+.ui-state-error .box {
+	margin: 0;
+	padding: .5em;
+	background: none;
+}

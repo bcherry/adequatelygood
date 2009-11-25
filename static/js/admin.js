@@ -6,6 +6,32 @@
 	var submitUrl = "/";
 	var tmplName = "_tmpl_postDialog";
 	
+	var handleError = function(xhr, textStatus, errorThrown) {
+		var errors = {
+			"400" : "Uh oh!  I couldn't save your post.  Seriously, I have no idea what went wrong.",
+		};
+		
+		if (!(xhr.status in errors)) {
+			errors[xhr.status] = "Ooops!  There was a mysterious error of some kind.  Sorry about that!  (" + xhr.status + " - " + xhr.statusText + ")";
+		}
+		
+		domObjs.errorText.text(errors[xhr.status]);
+		domObjs.error.show();
+	};
+	
+	var handleSuccess = function(data) {
+		consul.log("submission complete, response: " + data);
+		window.location.href = data;
+	};
+	
+	var ajaxOptions = {
+		cache		: false,
+		dataType	: "json",
+		error		: handleError,
+		success		: handleSuccess,
+		type		: "POST"
+	};
+	
 	var openDialog = function() {
 		
 		dialog = $("<div/>");
@@ -60,11 +86,14 @@
 		var title = $(domObjs.postTitle).val();
 		var tags = $(domObjs.postTags).val();
 
+		domObjs.error.hide();
+
 		consul.log("beginning submission");
-		$.post(submitUrl, {body:body, title:title, tags:tags}, function(data) {
-			consul.log("submission complete, response: " + data);
-			window.location.href = data;
-		});
+		var options = ajaxOptions;
+		options.url = submitUrl;
+		options.data = {body:body, title:title, tags:tags};
+		
+		$.ajax(options);
 	};
 	
 	var hardReset = function() {
