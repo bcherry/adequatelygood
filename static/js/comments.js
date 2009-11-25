@@ -1,6 +1,5 @@
 ;(function($){
 	var dialog;
-	var editor;
 	var domObjs;
 	var href;
 
@@ -9,7 +8,6 @@
 		editor.destroy();
 		delete dialog;
 		delete domObjs;
-		delete editor;
 		href = null;
 	};
 
@@ -30,7 +28,7 @@
 			name	: $(domObjs.commentName).val(),
 			email	: $(domObjs.commentEmail).val(),
 			title	: $(domObjs.commentTitle).val(),
-			body	: editor.getData()
+			body	: $(domObjs.commentBody).val()
 		}, function(data) {
 			$("#num_comments").text(parseInt($("#num_comments").text(), 10) + 1);
 			var parent_id = href.split('#')[1];
@@ -51,18 +49,14 @@
 	var dialogConfig = {
 		autoOpen	: false,
 		modal		: true,
-		title		: "Leave a Comment!",
+		title		: "leave a comment!",
 		width		: 500,
 		close		: dialogOnClose,
 		open		: dialogOnOpen,
 		buttons		: {
-			"Leave Comment"	: submitComment,
-			"Cancel"		: closeDialog
+			"leave comment"	: submitComment,
+			"cancel"		: closeDialog
 		}
-	};
-
-	var editorConfig = {
-		toolbar		: "Basic"
 	};
 
 	var openDialog = function() {
@@ -70,7 +64,6 @@
 		domObjs = dialog.tmpl("_tmpl_commentDialog", {});	
 		dialog.dialog(dialogConfig);
 		href = $(this).get(0).href; // This needs to be a click handler to work right
-		editor = CKEDITOR.replace($(domObjs.commentBody).get(0), editorConfig);
 		dialog.dialog('open');
 		return false;
 	};

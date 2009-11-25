@@ -40,7 +40,7 @@
 
 	var fillEditor = function(body, title, tags) {
 		if (body === undefined) {
-			body = "<p>Enter your text here</p>";
+			body = "";
 		}
 		//editor.setData(body);
 		$(domObjs.postBody).val(body);
@@ -90,13 +90,13 @@
 	dialogConfig = {
 		autoOpen	: false,
 		modal		: true,
-		title		: "An Adequately Good Post Editor",
+		title		: "an adequately good post editor",
 		width		: 800,
 		close		: dialogOnClose,
 		open		: dialogOnOpen,
 		buttons		: {
-			"Submit"	: submitPost,
-			"Cancel"	: closeDialog
+			"post"	: submitPost,
+			"cancel"	: closeDialog
 		}
 	};
 
@@ -112,10 +112,10 @@
 	var openDeleteDialog = function() {
 		$("<div/>").text("Are you sure you want to delete this entry?").dialog({
 			modal	: true,
-			title	: "Confirm Deletion",
+			title	: "confirm deletion",
 			buttons	: {
-				"Delete it!"	: submitDelete,
-				"Cancel!"		: function() {
+				"delete it"	: submitDelete,
+				"cancel"		: function() {
 					$(this).dialog("destroy");
 				}
 			}

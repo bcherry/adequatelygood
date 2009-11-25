@@ -1,25 +1,20 @@
 {% if user_is_admin %}
 
 <script type="text/tmpl" id="_tmpl_postDialog">
-<div class="postDialog">
-    <div class="bd">
-        <form id="postDialogForm" name="postDialogForm" method="post" action="#">
-            <br />
-            <p>
-                <label for="postTitle">Title:</label><br />
-                <input type="text" id="postTitle" name="postTitle" size="50" /></p>
-            <p>
-                <label for="postTags">Tags:</label><br />
-                <input type="text" id="postTags" name="postTags" size="50" /><br />
-                <sup><em>Separate tags with commas</em></sup>
-            </p>
-            <textarea id="postBody" name="postBody" class="postBody" cols="50" rows="10">
-                <strong>Please enter your text here.</strong>
-                <p>It will be sent to the server on submit.</p>
-            </textarea>
-            <input type="hidden" name="postFormat" value="html">
-        </form>
-    </div>
+<div class="span-19 last postDialog dialog">
+	<form id="postDialogForm" class="span-19 last" name="postDialogForm" method="post" action="#">
+		<label class="tight" for="postTitle">title</label>
+		<input type="text" class="span-10 append-9 last" id="postTitle" name="postTitle" size="50" />
+			
+		<label class="tight" for="postTags">tags</label>
+		<input type="text" class="span-10 append-9 last" id="postTags" name="postTags" size="50" />
+		<sup><em>separate tags with commas</em></sup>
+		
+		<label class="tight" for="postBody">post body</label>
+		<textarea id="postBody" class="span-19 last" name="postBody" class="postBody" cols="50" rows="10"></textarea>
+		
+		<input type="hidden" name="postFormat" value="html">
+	</form>
 </div>
 </script>
 

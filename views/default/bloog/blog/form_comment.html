@@ -1,29 +1,25 @@
 <script type="text/tmpl" id="_tmpl_commentDialog">
-<div id="commentDialog" class="popupDialog">
-    <div class="bd">
-		<style type="text/css">p span.displaynone { display: none; }</style>
-        <form id="commentDialogForm" name="commentDialogForm" method="post" action="#">
-            <p>
-                <label for="captcha">Verify you are human by entering the letters below: 
-                    {{ captcha1 }}<span class="displaynone">null</span>{{ captcha2 }}
-                </label><br />
-                <input type="text" id="captcha" name="captcha" size="30" />
-            </p>
-            <p>
-                <label for="commentName">Name:</label><br />
-                <input type="text" id="commentName" name="commentName" size="50" />
-            </p>
-            <p>
-                <label for="commentEmail">E-mail:</label><br />
-                <input type="text" id="commentEmail" name="commentEmail" size="50" />
-            </p>
-            <p>
-                <label for="commentTitle">Title:</label><br />
-                <input type="text" id="commentTitle" name="commentTitle" size="50" />
-            </p>
-            <textarea name="commentBody" id="commentBody" cols="50" rows="10"><strong>Please enter your comment here.</strong></textarea>
-        </form>
-    </div>
+<div id="commentDialog" class="span-12 last commentDialog dialog">
+	<style type="text/css">form span.displaynone { display: none; }</style>
+	<form id="commentDialogForm" class="span-12 last" name="commentDialogForm" method="post" action="#">
+	
+		<label class="tight" for="captcha">verify you are human by entering the following: <span class="captcha">
+			{{ captcha1 }}<span class="displaynone">null</span>{{ captcha2 }}</span>
+		</label>
+		<input type="text" class="span-12 last" id="captcha" name="captcha" size="30" />
+
+		<label class="tight" for="commentName">your name</label>
+		<input type="text" class="span-12 last" id="commentName" name="commentName" size="50" />
+
+		<label class="tight" for="commentEmail">your email</label>
+		<input type="text" class="span-12 last" id="commentEmail" name="commentEmail" size="50" />
+
+		<label class="tight" for="commentTitle">your comment title</label>
+		<input type="text" class="span-12 last" id="commentTitle" name="commentTitle" size="50" />
+		
+		<label class="tight" for="commentBody">your comment body</lable>
+		<textarea name="commentBody" id="commentBody" class="span-12 last" cols="50" rows="10"></textarea>
+	</form>
 </div>
 </script>
 

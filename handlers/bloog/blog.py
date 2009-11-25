@@ -56,6 +56,7 @@ from google.appengine.api import urlfetch
 from handlers import restful
 from utils import authorized
 from utils import sanitizer
+from utils.sanitizer import DangerousHTMLError
 import models
 import view
 import config
@@ -227,15 +228,12 @@ def process_article_submission(handler, article_type):
 		handler.error(400)
 
 def process_comment_submission(handler, article):
-	sanitize_comment = get_sanitizer_func(handler,
-										  allow_attributes=['href', 'src'],
-										  blacklist_tags=['img'])
 	property_hash = restful.get_sent_properties(handler.request.get, 
-		['name',
-		 'email',
-		 'homepage',
-		 'title',
-		 ('body', sanitize_comment),
+		[('name', cgi.escape),
+		 ('email', cgi.escape),
+		 ('homepage', cgi.escape),
+		 ('title', cgi.escape),
+		 ('body', cgi.escape),
 		 'key',
 		 'thread',	# If it's given, use it.  Else generate it.
 		 'captcha',
