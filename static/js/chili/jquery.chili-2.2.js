@@ -19,7 +19,7 @@ ChiliBook = { //implied global
 // options --------------------------------------------------------------------
 
 	, automatic:          true
-	, automaticSelector:  "code"
+	, automaticSelector:  "code, pre"
 
 	, lineNumbers:        !true
 
