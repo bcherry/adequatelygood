@@ -55,7 +55,7 @@
 				break;
 			case "editbtn":
 				submitUrl = "?_method=PUT";
-				$.getJSON("#", {}, function(data) {
+				$.getJSON(window.location.href, {}, function(data) {
 					fillEditor(data.body, data.title, data.tags);
 					doOpen();
 				});
