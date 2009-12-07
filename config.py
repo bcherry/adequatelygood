@@ -87,6 +87,21 @@ PAGE = {
 		]
 	},
 	"readingList": [
+		{
+			"title"		: "Even Faster Web Sites",
+			"author"	: "Steve Souders",
+			"url"		: "http://www.amazon.com/Even-Faster-Web-Sites-Performance/dp/0596522304",
+		},
+		{
+			"title"		: "JavaScript: The Good Parts",
+			"author"	: "Douglas Crockford",
+			"url"		: "http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742/",
+		},
+		{
+			"title"		: "xkcd: volume 0",
+			"author"	: "Randall Munroe",
+			"url"		: "http://store.xkcd.com/xkcd/#xkcdvolume0",
+		},
 		{ 
 			"title"		: "Coders at Work",
 			"author"	: "Peter Seibel",
@@ -101,11 +116,6 @@ PAGE = {
 			"title"		: "Code Complete",
 			"author"	: "Steve McConnell",
 			"url"		: "http://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670/",
-		},
-		{
-			"title"		: "xkcd: volume 0",
-			"author"	: "Randall Munroe",
-			"url"		: "http://store.xkcd.com/xkcd/#xkcdvolume0",
 		},
 	],
 	#"featuredOthersPages": {
