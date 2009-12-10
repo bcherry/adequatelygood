@@ -1,11 +1,5 @@
 {% extends "base.html" %}
 
-{% if article.embedded_code %}
-{% block head %}
-<meta name="description" content="{{article.html|description}}" />
-{% endblock %}
-{% endif %}
-
 {% block first_column %}
 {% if article %}
     <div id="article" class="span-17 last post">
@@ -46,31 +40,14 @@
     </div>
 {% endif %}
     <div id="comments_wrapper" class="span-17 last">
-        {% if allow_comments %}
-        <a class="tight replybtn" href="#">add a comment...</a>
-        {% else %}
-            {% if article.num_comments %}
-            <p>Comments are closed</p>
-            {% endif %}
-        {% endif %}
-        {% if allow_comments or article.num_comments %}
-        <div id="comments" class="span-17 last section">
-            <h3><span id="num_comments">{{ article.num_comments }}</span> comment{{ article.num_comments|pluralize }}</h3>
-            <div id="commentslist" class="span-17 last">
-            {% for comment in article.comments %}
-            {% include "comment.html" %}
-            {% endfor %}
-            </div>
-        </div>
-        {% endif %}
+		<div id="disqus_thread"></div>
+		<noscript>
+			<a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
+		</noscript>
     </div>
 {% endblock %}
 
 {% block end_body %}
-
-{% if allow_comments %}
-{% include "form_comment.html" %}
-{% endif %}
 
 {% endblock %}
 

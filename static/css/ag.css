@@ -285,6 +285,9 @@ h1 a:hover {
 #comments_wrapper li.indent9{margin-left: 14em;}
 #comments_wrapper li.indent10{margin-left: 15em;}
 
+/* DISQUS comments CSS */
+
+
 /* tweaks to jquery-ui -- TODO: rebuild jquery-ui with these rolled in */
 .ui-dialog-title {
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;

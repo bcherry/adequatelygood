@@ -22,6 +22,10 @@ handlers:
   script: handlers/shell/shell.py
   login: admin
 
+- url: /crossdomain\.xml
+  static_files: static/crossdomain.xml
+  upload: static/crossdomain.xml
+
 - url: .*
   script: main.py
 

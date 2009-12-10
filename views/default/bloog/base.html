@@ -250,6 +250,10 @@
 			ChiliBook.recipeFolder = "/static/js/chili/";
 			consul.turnOn({{blog.js_debug}});
 			jQuery.noConflict();
+			
+			// Disqus Comments variables
+			var disqus_developer = {blog.js_debug};
+			var disqus_container_id = "comments_wrapper";
 		</script>
 
 		
@@ -270,7 +274,8 @@
 		<script type="text/javascript" src="/static/js/jquery.templates.js"></script>
 		<script type="text/javascript" src="/static/js/base.js"></script>
 		<script type="text/javascript" src="/static/js/ag.js"></script>
-		<script type="text/javascript" src="/static/js/comments.js"></script>
+		<!--<script type="text/javascript" src="/static/js/comments.js"></script>-->
+		<script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
 		{% if user_is_admin %}<script type="text/javascript" src="/static/js/admin.js"></script>{% endif %}
 
 		{% if user_is_admin %}
