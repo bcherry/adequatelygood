@@ -7,6 +7,7 @@ APP_ROOT_DIR = os.path.abspath(os.path.dirname(__file__))
 # Set to true if we want to have our webapp print stack traces, etc
 DEBUG = os.environ['SERVER_SOFTWARE'].startswith('Dev')
 logging.info("Starting application in DEBUG mode: %s", DEBUG)
+#DEBUG = False
 
 # Don't change default_blog or default_page to prevent conflicts when merging #	 Bloog source code updates.
 # Do change blog or page dictionaries at the bottom of this config module.
@@ -29,7 +30,9 @@ BLOG = {
 	# You can override this default for each page through a handler's call to
 	#  view.ViewPage(cache_time=...)
 	"cache_time": 0 if DEBUG else 3600,
+	"debug": DEBUG,
 	"js_debug": "true" if DEBUG else "false",
+	"min": "" if DEBUG else "min.",
 	
 	# Use the default YUI-based theme.
 	# If another string is used besides 'default', calls to static files and

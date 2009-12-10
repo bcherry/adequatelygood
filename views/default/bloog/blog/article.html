@@ -41,6 +41,12 @@
 {% endif %}
     <div id="comments_wrapper" class="span-17 last">
 		<div id="disqus_thread"></div>
+		<script type="text/javascript">
+			// Disqus Comments variables
+			var disqus_developer = {{blog.js_debug}};
+			var disqus_container_id = "comments_wrapper";
+		</script>
+		<script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
 		<noscript>
 			<a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
 		</noscript>
