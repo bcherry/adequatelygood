@@ -286,7 +286,21 @@ h1 a:hover {
 #comments_wrapper li.indent10{margin-left: 15em;}
 
 /* DISQUS comments CSS */
+#dsq-content .dsq-dc-logo, #dsq-content .dsq-options, #dsq-content .dsq-item-trackback {
+	display: none;
+}
 
+#dsq-content h3 {
+	text-transform: lowercase;
+	margin: 0.5em 0;
+	color: #333333;
+	letter-spacing: -1px;
+	font-size: 16pt;
+}
+
+#dsq-content .dsq-comment-header {
+	background: none !important;
+}
 
 /* tweaks to jquery-ui -- TODO: rebuild jquery-ui with these rolled in */
 .ui-dialog-title {
