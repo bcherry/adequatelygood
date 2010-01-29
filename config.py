@@ -91,6 +91,11 @@ PAGE = {
 	},
 	"readingList": [
 		{
+			"title"		: "Cryptonomicon",
+			"author"	: "Neal Stephenson",
+			"url"		: "http://www.amazon.com/Cryptonomicon-Neal-Stephenson/dp/0380788624",
+		},
+		{
 			"title"		: "Even Faster Web Sites",
 			"author"	: "Steve Souders",
 			"url"		: "http://www.amazon.com/Even-Faster-Web-Sites-Performance/dp/0596522304",
