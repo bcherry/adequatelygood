@@ -55,13 +55,14 @@
 				break;
 			case "editbtn":
 				submitUrl = "?_method=PUT";
-				$.getJSON(window.location.href, {}, function(data) {
-					fillEditor(data.body, data.title, data.tags);
+				//$.getJSON(window.location.href, {}, function(data) {
+				//	fillEditor(data.body, data.title, data.tags);
 					doOpen();
-				});
+				//});
 				return;
 		}
 		doOpen();
+		return false;
 	};
 
 	var fillEditor = function(body, title, tags) {

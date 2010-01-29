@@ -145,7 +145,7 @@ def get_sanitizer_func(handler, **kwargs):
 		kwlist.update({ 'encoding': match_obj.group('charset').lower() })
 	logging.debug("Content-type: %s", handler.request.headers['CONTENT_TYPE'])
 	logging.debug("In sanitizer: %s", kwlist)
-	return lambda html : sanitizer.sanitize_html(html, **kwlist)
+	return lambda html : html#sanitizer.sanitize_html(html, **kwlist)
 
 def do_sitemap_ping():
 	form_fields = { "sitemap": "%s/sitemap.xml" % (config.BLOG['root_url'],) }
@@ -217,7 +217,7 @@ def process_article_submission(handler, article_type):
 		article.set_associated_data(
 			{'relevant_links': handler.request.get('relevant_links'),
 			 'amazon_items': handler.request.get('amazon_items')})
-		process_embedded_code(article)
+		#process_embedded_code(article)
 		article.put()
 		for key in article.tag_keys:
 			db.get(key).counter.increment()
