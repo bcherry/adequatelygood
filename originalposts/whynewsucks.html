@@ -1,20 +1,20 @@
 <p><pre class="js">
->>> function F() { return function inner() { return "inner invoked"; }; }
->>> F()
+&gt;&gt;&gt; function F() { return function inner() { return "inner invoked"; }; }
+&gt;&gt;&gt; F()
 inner()
->>> F()()
+&gt;&gt;&gt; F()()
 "inner invoked"
->>> new F
+&gt;&gt;&gt; new F
 inner()
->>> new F()
+&gt;&gt;&gt; new F()
 inner()
->>> (new F)
+&gt;&gt;&gt; (new F)
 inner()
->>> (new F)()
+&gt;&gt;&gt; (new F)()
 "inner invoked"
->>> new (F())
+&gt;&gt;&gt; new (F())
 { }
->>> new ((F)())
+&gt;&gt;&gt; new ((F)())
 { }
->>> (new F())()
+&gt;&gt;&gt; (new F())()
 "inner invoked"</pre></p>
