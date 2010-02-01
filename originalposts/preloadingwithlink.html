@@ -1,0 +1,24 @@
+<p>One of Yahoo's <a href="http://developer.yahoo.com/performance/rules.html" target="_blank">Best Practices for Speeding Up Your Web Site</a> is "Preload Components".  Most people are already familiar with doing this for images.  Code for that usually looks like this:</p>
+<p><pre class="js">var img = Image();
+img.src = "/path/to/something.jpg";</pre></p>
+<p>This code works in all browsers, and causes that image to be downloaded and placed in the browser's cache.</p>
+<p>But what if we want to go further?  For a lot of today's big applications, images are no longer the only bandwidth hog.  An application I work on has more than 2MB worth of JavaScript, CSS, and data (stored in JavaScript files).  We found that users on slow connections could take up to <em>60 seconds</em> to load our application for the first time!  Obviously, we could benefit from intelligently pre-loading this data in the background, on an earlier page where they don't need it yet.  But how?</p>
+<p>My first attempt was just to use the <code class="js inline">Image()</code> method above, but point at our text files instead.  This didn't work in Firefox.  I'm not sure why, but those files never appeared in the cache with that method.  So our next idea was to use <code class="html inline">&lt;iframe&gt;</code> tags.  This worked great, until we tried it in Internet Explorer.  IE chose to warn the user that our page was trying to download data they didn't ask for, and blocked the downloads until they approved them.  Obviously, this wouldn't work either.</p>
+<p>This left us scratching our heads, but we eventually had a breakthrough.  There is one other tag that is used to include text files in a web page.  That's the <code class="html inline">&lt;link rel="stylesheet"&gt;</code> tag.  But this couldn't possibly work with JavaScript, could it?  It turns out it could!</p>
+<p><pre class="js">var preload = function (file) {
+	var elem,
+		tag = "link",
+		attr = "href",
+		extra = " rel=\"stylesheet\" media=\"print\" ",
+		target = "head";
+	
+	elem = jQuery(["&lt;", tag, extra, attr, "=\"", file, "\"&lt;&gt;/", tag, "&gt;"].join(''));
+	elem.load(function () {
+		elem.remove();
+	});
+	jQuery(target).append(elem);
+
+	return elem;
+};</pre></p>
+<p>This function creates a temporary <code class="html inline">&lt;link&gt;</code> tag in the <code class="html inline">&lt;head&gt;</code> of your page, pointing at the requested file.  To work across all browsers, we needed to give it the rel="stylesheet" attribute.  To not cause preloaded CSS files to try and apply themselves to the current page, or trigger a re-flow, we added media="print".  Once the element has loaded, it removes itself from the DOM, but the file remains in the browser's cache.  While this example relies on the jQuery library, there is no reason it could not be easily re-written without such a dependency, or written as a jQuery plugin (providing <code class="js inline">jQuery.preload()</code>).</p>
+<p>This technique cut our aforementioned page load from 60s to 20s, over a slow connection.  I think this is a complete solution, and seems to work in all major browsers.  What do you think?</p>
