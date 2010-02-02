@@ -1,0 +1,25 @@
+<p>Virtually all major JavaScript deployments on the web today take advantage of a technique called "minification".  A minifier is essentially a compiler, except the source and target language are the same: JavaScript.  The minification process takes the source JavaScript program and produces a functionally equivalent JavaScript program, expressed in less bytes.  In a traditional computing context, this would be a completely useless process, but on the web, this process is essential to squeezing every last bit of performance out of large web applications.  Typical minifiers can produce file size reductions of up to 20% (TODO: get real numbers), which translates into real-world gains in application startup time.</p>
+<p>But you know all of this.  What many people don't know is just how a typical minifier works, and what the programmer can do to help it work even better, without sacrificing quality of the original source.</p>
+<h2>Understanding Minification</h2>
+<p>Before we can talk about optimizing for the minification process, it's critical to understand exactly what a minifier does.  Most tools provide some combination of the following techniques:</p>
+<ul>
+	<li>Whitespace Removal</li>
+	<li>Comment Stripping</li>
+	<li>Local Variable Renaming ("munging")</li>
+	<li>Control Character Removal/Insertion</li>
+</ul>
+<p>For the purposes of this article, I'm going to focus exclusively on four of the most popular minification tools, although the advice I'll give will generally apply to other tools as well.</p>
+<ol>
+	<li>Douglas Crockford's <a href="http://www.crockford.com/javascript/jsmin.html" target="_blank">JSMin</a>, the original minifier</li>
+	<li>Yahoo's <a href="http://developer.yahoo.com/yui/compressor/" target="_blank">YUI Compressor</a>, arguably the most popuplar minifier</li>
+	<li>Google's <a href="http://code.google.com/closure/compiler/" target="_blank">Closure Compiler</a>, easily the most advanced* minifier</li>
+	<li>Microsoft's <a href="http://aspnet.codeplex.com/Release/ProjectReleases.aspx?ReleaseId=35893" target="_blank">Ajax Minifier</a>, a unique, yet important, minifier</li>
+</ol>
+<p class="note">* There will be a section at the end devoted entirely to the ADVANCED_OPTIMIZATIONS mode of the Closure Compiler, but for the rest of this article I'll be discussing exclusively the SIMPLE_OPTIMIZATIONS mode.</p>
+<p>So, what goes on in each one of these steps of minification?</p>
+<h3>Whitespace Removal</h3>
+<p>This is the most basic technique and every tool does some variation on this.  In general, all runs of spaces, tabs, and newlines are collapsed into a single space, except those found in string literals, regular expression literals, and comments, which are left as-is.  An exception is JSMin, which chooses not to remove linefeeds (although it does standardize all '\r' to '\n', and then collapses all consecutive '\n' with a single '\n').  JSMin behaves this way because of JavaScript's semicolon-insertion mechanism, which is dangerous and complex.  All other tools do further processing and optimization of semicolons, which is why they are more aggressive with whitespace removal.</p>
+<h3>Comment Stripping</h3>
+<p>This is one of the greatest benefits of using a minifier.  Prior to minification tools, every comment included in JavaScript source code had a direct, measurable negative impact on performance, which probably contributed to the proliferation of poorly documented hackery on the web that's given JavaScript a bad reputation.  Luckily, these tools allow you to comment as liberally as you like, without worrying about affecting download sizes.</p>
+<p>All comments are (generally, see below) removed.  In some cases, comments may be replaced with a single whitespace character, to avoid breaking code like <code class="js inline">var/*poor location for a comment*/foo = 1;</code>.  JSMin replaces comments of the <code class="js inline">//</code> style with linefeeds, other tools remove them entirely.</p>
+<p>The YUI Compressor (TODO: check on others) will preserve multi-line comments beginning with <code class="js inline">/*!</code>, although the <code class="inline">!</code> will be removed from the output.  This is generally used to preserve open-source licenses in minified code.  Other tools do not understand or respect this convention, and will remove these comments.</p>

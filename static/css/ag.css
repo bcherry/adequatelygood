@@ -159,6 +159,14 @@ h1 a:hover {
 	float: right;
 }
 
+.entry .note {
+	color: #333333;
+	font-size: 8pt;
+	margin-left: 2.5em;
+	margin-top: -1.5em;
+	padding: 0.2em .8em;
+}
+
 .contact {
 	font-size: 10pt;
 }
