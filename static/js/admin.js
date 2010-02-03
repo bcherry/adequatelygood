@@ -1,14 +1,29 @@
-;(function($){
-	var dialogConfig;
-	var dialog;
-	//var editor;
-	var domObjs;
-	var submitUrl = "/";
-	var tmplName = "_tmpl_postDialog";
+/*jslint white: true, onevar: true, browser: true, devel: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, regexp: true, strict: false, newcap: true, immed: true */
+/*globals jQuery: false, consul: false, window: false */
+(function () {
+	var $ = jQuery,
+		dialogConfig,
+		dialog,
+		domObjs,
+		submitUrl = "/",
+		tmplName = "_tmpl_postDialog",
+		ajaxOptions,
+		
+		handleError,
+		handleSuccess,
+		openDialog,
+		fillEditor,
+		submitPost,
+		hardReset,
+		closeDialog,
+		dialogOnClose,
+		dialogOnOpen,
+		submitDelete,
+		openDeleteDialog;
 	
-	var handleError = function(xhr, textStatus, errorThrown) {
+	handleError = function (xhr, textStatus, errorThrown) {
 		var errors = {
-			"400" : "Uh oh!  I couldn't save your post.  Seriously, I have no idea what went wrong.",
+			"400" : "Uh oh!  I couldn't save your post.  Seriously, I have no idea what went wrong."
 		};
 		
 		if (!(xhr.status in errors)) {
@@ -19,53 +34,47 @@
 		domObjs.error.show();
 	};
 	
-	var handleSuccess = function(data) {
+	handleSuccess = function (data) {
 		consul.log("submission complete, response: " + data);
 		window.location.href = data;
 	};
 	
-	var ajaxOptions = {
-		cache		: false,
-		dataType	: "text",
-		error		: handleError,
-		success		: handleSuccess,
-		type		: "POST"
-	};
-	
-	var openDialog = function() {
-		
+	openDialog = function () {
+		var today = new Date(),
+			month = today.getMonth() + 1,
+			year = today.getFullYear();
+			
 		dialog = $("<div/>");
-		domObjs = dialog.tmpl(tmplName,{});
+		domObjs = dialog.tmpl(tmplName, {});
 		dialog.dialog(dialogConfig);
 		
-		var doOpen = function() {
+		function doOpen() {
 			dialog.dialog("open");
 		}
+		
 		switch ($(this).attr("id")) {
-			case "newarticle":
-				submitUrl = "/";
-				fillEditor("","","");
-				break;
-			case "newblog":
-				var today = new Date();
-				var month = today.getMonth() + 1;
-				var year = today.getFullYear();
-				submitUrl = "/" + year + "/" + month;
-				fillEditor("","","");
-				break;
-			case "editbtn":
-				submitUrl = "?_method=PUT";
-				//$.getJSON(window.location.href, {}, function(data) {
-				//	fillEditor(data.body, data.title, data.tags);
-					doOpen();
-				//});
-				return;
+		case "newarticle":
+			submitUrl = "/";
+			fillEditor("", "", "");
+			break;
+		case "newblog":
+
+			submitUrl = "/" + year + "/" + month;
+			fillEditor("", "", "");
+			break;
+		case "editbtn":
+			submitUrl = "?_method=PUT";
+			//$.getJSON(window.location.href, {}, function(data) {
+			//	fillEditor(data.body, data.title, data.tags);
+				doOpen();
+			//});
+			return;
 		}
 		doOpen();
 		return false;
 	};
 
-	var fillEditor = function(body, title, tags) {
+	fillEditor = function (body, title, tags) {
 		if (body === undefined) {
 			body = "";
 		}
@@ -75,77 +84,91 @@
 			$(domObjs.postTitle).val(title);
 		}
 		if (tags !== undefined) {
-			if (tags.constructor == Array) {
+			if (tags.constructor === Array) {
 				tags = tags.join(", ");
 			}
 			$(domObjs.postTags).val(tags);
 		}
 	};
 
-	var submitPost = function() {
-		var body = $(domObjs.postBody).val();
-		var title = $(domObjs.postTitle).val();
-		var tags = $(domObjs.postTags).val();
+	ajaxOptions = {
+		cache		: false,
+		dataType	: "text",
+		error		: handleError,
+		success		: handleSuccess,
+		type		: "POST"
+	};
+	
+	submitPost = function () {
+		var body = $(domObjs.postBody).val(),
+			title = $(domObjs.postTitle).val(),
+			tags = $(domObjs.postTags).val(),
+			options = ajaxOptions;
 
 		domObjs.error.hide();
 
 		consul.log("beginning submission");
-		var options = ajaxOptions;
 		options.url = submitUrl;
-		options.data = {body:body, title:title, tags:tags};
+		options.data = {
+			body: body,
+			title: title,
+			tags: tags
+		};
 		
 		$.ajax(options);
 	};
 	
-	var hardReset = function() {
+	hardReset = function () {
 		dialog.dialog("destroy");
-		delete dialog;
-		delete domObjs;
+		dialog = null;
+		domObjs = null;
 	};
 
-	var closeDialog = function() {
+	closeDialog = function () {
 		dialog.dialog("close");
 		hardReset();
 	};
 
-	var dialogOnClose = function(event, ui) {
+	dialogOnClose = function (event, ui) {
 		hardReset();
 		consul.log("dialog closed");
 	};
 
-	var dialogOnOpen = function(event, ui) {
+	dialogOnOpen = function (event, ui) {
 		consul.log("dialog opened");
 	};
 
 	dialogConfig = {
-		autoOpen	: false,
-		modal		: true,
-		title		: "an adequately good post editor",
-		width		: 800,
-		close		: dialogOnClose,
-		open		: dialogOnOpen,
-		buttons		: {
-			"post"	: submitPost,
-			"cancel"	: closeDialog
+		autoOpen: false,
+		modal: true,
+		title: "an adequately good post editor",
+		width: 800,
+		close: dialogOnClose,
+		open: dialogOnOpen,
+		buttons: {
+			post: submitPost,
+			cancel: closeDialog
 		}
 	};
 
-	var submitDelete = function() {
+	submitDelete = function () {
 		$.ajax({
-			type 		: "DELETE",
-			url 		: "#",
-			success 	: function(data) { window.location.href = data; },
-			dataType 	: "text"
+			type: "DELETE",
+			url: "#",
+			success: function (data) {
+				window.location.href = data;
+			},
+			dataType: "text"
 		});
 	};
 
-	var openDeleteDialog = function() {
+	openDeleteDialog = function () {
 		$("<div/>").text("Are you sure you want to delete this entry?").dialog({
 			modal	: true,
 			title	: "confirm deletion",
 			buttons	: {
 				"delete it"	: submitDelete,
-				"cancel"		: function() {
+				cancel: function () {
 					$(this).dialog("destroy");
 				}
 			}
@@ -153,9 +176,18 @@
 	};
 
 	// Bind event handlers, etc.
-	$(function() {
+	$(function () {
 		$("#newblog, #newarticle, #editbtn").live("click", openDialog);
 		$("#deletebtn").live("click", openDeleteDialog);
+		
+		// TODO highlighting (for dev)
+		$(":contains(TODO)").not(":has(:contains(TODO))").each(function () {
+			var that = $(this),
+				html = that.html();
+			
+			html = html.replace(/(\(TODO:.*?\))/g, "<span class=\"todo\">$1</span>");
+			that.html(html);
+		});
 	});
-})(jQuery);
+}());
 

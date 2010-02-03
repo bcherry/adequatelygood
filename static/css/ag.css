@@ -167,6 +167,10 @@ h1 a:hover {
 	padding: 0.2em .8em;
 }
 
+.entry .todo {
+	color: red;
+}
+
 .contact {
 	font-size: 10pt;
 }
