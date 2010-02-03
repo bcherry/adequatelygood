@@ -132,8 +132,9 @@ class Article(search.SearchableModel, models.SerializableModel):
 		and will cause issues with XML, so reconvert ampersands to
 		valid XML entities &amp;
 		"""
-		import re
-		return re.sub('&(?!amp;)', '&amp;', self.html)
+		# import re
+		# return re.sub('&(?!amp;)', '&amp;', self.html)
+		return self.html # Not really in need of the encoding, since I'm encoding my ampersands already
 	
 class Comment(models.SerializableModel):
 	"""Stores comments and their position in comment threads.

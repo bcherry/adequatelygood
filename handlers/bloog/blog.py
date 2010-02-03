@@ -573,12 +573,19 @@ class MonthHandler(restful.Controller):
 class AtomHandler(webapp.RequestHandler):
 	def get(self):
 		logging.debug("Sending Atom feed")
+		# TODO: make this better
 		articles = db.Query(models.blog.Article). \
 					  filter('article_type =', 'blog entry'). \
-					  order('-published').fetch(limit=10)
-		updated = ''
+					  order('-published').fetch(limit=100)
+		articles.reverse()
+		articles = articles[6:]
+		articles.reverse()
+		articles = articles[0:9]
+		
+		updated = 0
 		if articles:
-			updated = articles[0].rfc3339_updated()
+			updated = max(x.updated for x in articles)
+		updated = updated.strftime('%Y-%m-%dT%H:%M:%SZ')
 		
 		self.response.headers['Content-Type'] = 'application/atom+xml'
 		page = view.ViewPage()
