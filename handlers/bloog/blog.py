@@ -53,6 +53,8 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import mail
 from google.appengine.api import urlfetch
 
+from django.utils import simplejson
+
 from handlers import restful
 from utils import authorized
 from utils import sanitizer
@@ -332,11 +334,10 @@ def render_article(handler, article):
 				age = (datetime.datetime.now() - article.published).days
 				allow_comments = (age <= config.BLOG['days_can_comment'])
 			page = view.ViewPage()
-			page.render(handler, { "allow_comments": allow_comments,
-								   "article": article,
-								   "captcha1": captcha[:3],
-								   "captcha2": captcha[3:6],
-								   "use_gravatars": config.BLOG['use_gravatars']
+			page.render(handler, {
+				"article": article,
+				"js_title": simplejson.dumps(article.title),
+				"js_tags": simplejson.dumps(article.tags),
 			})
 	else:
 		# This didn't fall into any of our pages or aliases.
