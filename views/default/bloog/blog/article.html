@@ -57,3 +57,11 @@
 
 {% endblock %}
 
+{% block page_script %}{% comment %}<script type="text/javascript">{% endcomment %}
+(function () {
+	var my = AG.article = {};
+	my.title = "{{ article.title }}";
+	my.tags = ['{{ article.tags|join:"', '" }}'];
+}());
+{% comment %}</script>{% endcomment %}{% endblock %}
+

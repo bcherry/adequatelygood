@@ -64,10 +64,8 @@
 			break;
 		case "editbtn":
 			submitUrl = "?_method=PUT";
-			//$.getJSON(window.location.href, {}, function(data) {
-			//	fillEditor(data.body, data.title, data.tags);
-				doOpen();
-			//});
+			fillEditor('', AG.article.title, AG.article.tags.join(", "));
+			doOpen();
 			return;
 		}
 		doOpen();
@@ -126,7 +124,6 @@
 
 	closeDialog = function () {
 		dialog.dialog("close");
-		hardReset();
 	};
 
 	dialogOnClose = function (event, ui) {

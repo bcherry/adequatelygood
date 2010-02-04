@@ -247,6 +247,11 @@
 			ChiliBook.recipeFolder = "/static/js/chili/";
 			consul.turnOn({{blog.js_debug}});
 			jQuery.noConflict();
+			
+			var AG = {};
+			// Page Script
+			{% block page_script %}
+			{% endblock %}
 		</script>
 		
 		<!-- Include LABjs and request the rest of the script files-->
