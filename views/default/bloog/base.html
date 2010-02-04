@@ -12,14 +12,15 @@
 		  <link rel="stylesheet" href="/static/css/blueprint/ie.{{blog.min}}css" type="text/css" media="screen, projection">
 		<![endif]-->
 		
-		<!-- jQuery UI "Smoothness" Theme -->
+		<!-- jQuery UI w/ "Smoothness" Theme -->
 		<link rel="stylesheet" type="text/css" href="/static/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.min.css" />
 		
 		<!-- Site CSS -->
 		<link rel="stylesheet" href="/static/css/ag.{{blog.min}}css" type="text/css" media="screen" />
 		
 		<!-- Extra <head> Links -->
-		<link rel="alternate" type="application/rss+xml" title="{{ blog.title }} RSS Feed" href="{{ blog.root_url }}{{ blog.master_atom_url }}" />
+		<link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="{{ blog.feedburner_url }}" />
+		
 		<!-- TODO: favicon -->
 		
 		{% block head %}
@@ -73,7 +74,7 @@
 						<span class="alt" style="display:none;">get in touch</span>
 					</div>
 					<div class="span-4 last">
-						<a href="{{ blog.master_atom_url }}">atom</a>
+						<a href="{{ blog.feedburner_url }}">atom</a>
 						<br/>
 						<span class="alt" style="display:none;">get my feed</span>
 					</div>
@@ -188,7 +189,7 @@
 						</p>
 						<ul>
 							<li>
-								<a href="{{ blog.master_atom_url }}" title="Full content Atom feed">Atom feed</a>
+								<a href="{{ blog.feedburner_url }}" title="Adequately Good Atom Feed">Atom feed</a>
 							</li>
 						</ul>
 					</div>

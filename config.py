@@ -24,6 +24,7 @@ BLOG = {
 	"description": "decent programming advice",
 	"root_url": "http://www.adequatelygood.com",
 	"master_atom_url": "/feeds/atom.xml",
+	"feedburner_url": "http://feeds.feedburner.com/adequatelygood",
 	# By default, visitors can comment on article for this many days.
 	# This can be overridden by setting article.allow_comments
 	"days_can_comment": 60,
