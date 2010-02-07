@@ -50,15 +50,15 @@ console.log(x); // 2</pre>
 	// x is still 1.
 }</pre>
 <p>This method is actually quite flexible, and can be used anywhere you need a temporary scope, not just within block statements.  However, I strongly recommend that you take the time to really understand and appreciate JavaScript scoping.  It's quite powerful, and one of my favorite features of the language.  If you understand scoping, hoisting will make a lot more sense to you.</p>
-<h2>Hoisting</h2>
-<p>Now that you understand scoping, it's important to understand how names enter a given scope.  There are four basic ways:</p>
+<h2>Declarations, Names, and Hoisting</h2>
+<p>In JavaScript, a name enters a scope in one of four basic ways:</p>
 <ol>
-	<li>Language defined: All scopes are by default given the names <code class="js inline">this</code> and <code class="js inline">arguments</code>.</li>
+	<li>Language-defined: All scopes are, by default, given the names <code class="js inline">this</code> and <code class="js inline">arguments</code>.</li>
 	<li>Formal parameters: Functions can have optional formal named parameters, which are scoped to the body of that function.</li>
 	<li>Function declarations: These are of the form <code class="js inline">function foo() {}</code>.</li>
 	<li>Variable declarations: These take the form <code class="js inline">var foo;</code>.</li>
 </ol>
-<p>Hoisting is actually a fairly simple concept.  Variable declarations and function declarations are always moved invisibly to the top of the containing scope.  Function parameters and language-defined names are, obviously, already there.  This means that code like this:</p>
+<p>Function declarations and variable declarations are always moved ("hoisted") invisibly to the top of their containing scope by the JavaScript interpreter.  Function parameters and language-defined names are, obviously, already there.  This means that code like this:</p>
 <pre class="js">function foo() {
 	bar();
 	var x = 1;
@@ -69,7 +69,7 @@ is actually interpreted like this:
 	bar();
 	x = 1;
 }</pre>
-<p>It turns out that it doesn't matter whether the line that contains the variable declaration would ever be executed.  The following two functions are equivalent:</p>
+<p>It turns out that it doesn't matter whether the line that contains the declaration would ever be executed.  The following two functions are equivalent:</p>
 <pre class="js">function foo() {
 	if (false) {
 		var x = 1;
@@ -85,21 +85,54 @@ function foo() {
 	return;
 	y = 1;
 }</pre>
-<p>Notice that the assignment portion of the declarations were not hoisted.  Only the name is hoisted.  This is not the case with function declarations, where the entire function body will be hoisted as well.  But remember that there are two normal ways to declare functions.  Consider the following JavaScript.</p>
+<p>Notice that the assignment portion of the declarations were not hoisted.  Only the name is hoisted.  This is not the case with function declarations, where the entire function body will be hoisted as well.  But remember that there are two normal ways to declare functions.  Consider the following JavaScript:</p>
 <pre class="js">function test() {
 	foo(); // TypeError "foo is not a function"
 	bar(); // "this will run!"
-	var foo = function () {
+	var foo = function () { // function expression assigned to local variable 'foo'
 		alert("this won't run!");
 	}
-	function bar() {
+	function bar() { // function declaration, given the name 'bar'
 		alert("this will run!");
 	}
 }
 test();</pre>
-<p>That covers the basics of hoisting, which is not as complex or confusing as it seems.  However, there are some important caveats and exceptions to keep in mind.  The first is name resolution order.  Remember that there are four ways for names to enter a given scope.  The order I listed them above is the order they are resolved in.  In general, if a name has already been defined, it is never overridden by another property of the same name.  This means that a function declaration takes priority over a variable declaration.  This does not mean that an assignment to that name will not work, just that the declaration portion will be ignored.  There are a few exceptions:</p>
+<p>In this case, only the function declaration has its body hoisted to the top.  The name 'foo' is hoisted, but the body is left behind, to be assigned during execution.</p>
+<p>That covers the basics of hoisting, which is not as complex or confusing as it seems.  Of course, this being JavaScript, there is a little more complexity in certain special cases.</p>
+<h3>Name Resolution Order</h3>
+<p>The most important special case to keep in mind is name resolution order.  Remember that there are four ways for names to enter a given scope.  The order I listed them above is the order they are resolved in.  In general, if a name has already been defined, it is never overridden by another property of the same name.  This means that a function declaration takes priority over a variable declaration.  This does not mean that an assignment to that name will not work, just that the declaration portion will be ignored.  There are a few exceptions:</p>
 <ul>
-	<li>The built-in name <code class="js inline">arguments</code> will be overriden by a formal parameter of the same name.  This is a bad feature.  Don't use the name <code class="js inline">arguments</code> in your parameters.</li>
-	<li>Trying to use the name <code class="js inline">this</code> will cause a SyntaxError.  This is a good feature.</li>
-	<li>If multiple formal parameters have the same name, the one occurring latest in the list will take precedence.</li>
+	<li>The built-in name <code class="js inline">arguments</code> behaves oddly.  It  seems to be declared following the formal parameters, but before function declarations.  This means that a formal parameter with the name <code class="js inline">arguments</code> will take precedence over the built-in, even if it is undefined.  This is a bad feature.  Don't use the name <code class="js inline">arguments</code> as a formal parameter.</li>
+	<li>Trying to use the name <code class="js inline">this</code> as an identifier anywhere will cause a SyntaxError.  This is a good feature.</li>
+	<li>If multiple formal parameters have the same name, the one occurring latest in the list will take precedence, even if it is undefined.</li>
 </ul>
+<h3>Named Function Expressions</h3>
+<p>You can give names to functions defined in function expressions, with syntax like a function declaration.  This does not make it a function declaration, and the name is not brought into scope, nor is the body hoisted.  Here's some code to illustrate what I mean:</p>
+<pre class="js">
+foo(); // TypeError "foo is not a function"
+bar(); // valid
+baz(); // TypeError "baz is not a function"
+spam(); // ReferenceError "spam is not defined"
+
+var foo = function () {}; // anonymous function expression ('foo' gets hoisted)
+function bar() {}; // function declaration ('bar' and the function body get hoisted)
+var baz = function spam() {}; // named function expression (only 'baz' gets hoisted)
+
+foo(); // valid
+bar(); // valid
+baz(); // valid
+spam(); // ReferenceError "spam is not defined"
+</pre>
+<h2>How to Code With This Knowledge</h2>
+<p>Now that you understand scoping and hoisting, what does that mean for coding in JavaScript?  The most important thing is to always declare your variables with a <code class="js inline">var</code> statement.  I <strong>strongly</strong> recommend that you have <em>exactly one</em> <code class="js inline">var</code> statement per scope, and that it be at the top.  If you force yourself to do this, you will never have hoisting-related confusion.  However, doing this can make it hard to keep track of which variables have actually been declared in the current scope.  I recommend using <a href="http://www.jslint.com" target="_blank">JSLint</a> with the <code class="js inline">onevar</code> option to enforce this.  If you've done all of this, your code should look something like this:</p>
+<pre class="js">/*jslint onevar: true [...] */
+function foo(a, b, c) {
+	var x = 1,
+		bar,
+		baz = "something";
+}
+</pre>
+<h2>What the Standard Says</h2>
+<p>I find that it's often useful to just consult the <a href="http://www.mozilla.org/js/language/E262-3.pdf" target="_blank">ECMAScript Standard (pdf)</a> directly to understand how these things work.  Here's what it has to say about variable declarations and scope (section 12.2.2):</p>
+<blockquote>If the variable statement occurs inside a FunctionDeclaration, the variables are defined with function-local scope in that function, as described in section 10.1.3. Otherwise, they are defined with global scope (that is, they are created as members of the global object, as described in section 10.1.3) using property attributes { DontDelete }. Variables are created when the execution scope is entered. A Block does not define a new execution scope. Only Program and FunctionDeclaration produce a new scope. Variables are initialised to undefined when created. A variable with an Initialiser is assigned the value of its AssignmentExpression when the VariableStatement is executed, not when the variable is created.</blockquote>
+<p>I hope this article has shed some light on one of the most common sources of confusion to JavaScript programmers.  I have tried to be as thorough as possible, to avoid creating more confusion.  If I have made any mistakes or have large omissions, please let me know.</p>
