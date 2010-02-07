@@ -1,5 +1,5 @@
 /*jslint white: true, onevar: true, browser: true, devel: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, regexp: true, strict: false, newcap: true, immed: true */
-/*globals jQuery: false, consul: false, window: false */
+/*globals jQuery: false, consul: false, window: false, AG: false */
 (function () {
 	var $ = jQuery,
 		dialogConfig,

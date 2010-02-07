@@ -1,0 +1,105 @@
+<p>Do you know what value will be alerted if the following is executed as a JavaScript program?</p>
+<pre class="js">var foo = 1;
+function bar() {
+	if (!foo) {
+		var foo = 10;
+	}
+	alert(foo);
+}
+bar();</pre>
+<p>If it surprises you that the answer is "10", then this one will probably really throw you for a loop:</p>
+<pre class="js">var a = 1;
+function b() {
+	a = 10;
+	return;
+	function a() {}
+}
+b();
+alert(a);</pre>
+<p>Here, of course, the browser will alert "1".  So what's going on here?  While it might seem strange, dangerous, and confusing, this is actually a powerful and expressive feature of the language.  I don't know if there is a standard name for it, but I've come to like the term "hoisting".  This article will try to shed some light on this mechanism, but first lets take a necessary detour to understand JavaScript's scoping.</p>
+<h2>Scoping in JavaScript</h2>
+<p>One of the sources of most confusion for JavaScript beginners is scoping.  Actually, it's not just beginners.  I've met a lot of experienced JavaScript programmers who don't fully understand scoping.  The reason scoping is so confusing in JavaScript is because it looks like a C-family language.  Consider the following C program:</p>
+<pre class="cplusplus">#include &lt;stdio.h&gt;
+int main() {
+	int x = 1;
+	printf("%d, ", x); // 1
+	if (1) {
+		int x = 2;
+		printf("%d, ", x); // 2
+	}
+	printf("%d\n", x); // 1
+}</pre>
+<p>The output from this program will be <code class="cplusplus inline">1, 2, 1</code>.  This is because C, and the rest of the C family, has <strong>block-level scope</strong>.  When control enters a block, such as the <code class="cplusplus inline">if</code> statement, new variables can be declared within that scope, without affecting the outer scope.  This is not the case in JavaScript.  Try the following in Firebug:</p>
+<pre class="js">var x = 1;
+console.log(x); // 1
+if (true) {
+	var x = 2;
+	console.log(x); // 2
+}
+console.log(x); // 2</pre>
+<p>In this case, Firebug will show <code class="js inline">1, 2, 2</code>.  This is because JavaScript has <strong>function-level scope</strong>.  This is radically different from the C family.  Blocks, such as <code class="js inline">if</code> statements, <strong>do not</strong> create a new scope.  Only functions create a new scope.</p>
+<p>To a lot of programmers who are used to languages like C, C++, C#, or Java, this is unexpected and unwelcome.  Luckily, because of the flexibility of JavaScript functions, there is a workaround.  If you must create temporary scopes within a function, do the following:</p>
+<pre class="js">function foo() {
+	var x = 1;
+	if (x) {
+		(function () {
+			var x = 2;
+			// some other code
+		}());
+	}
+	// x is still 1.
+}</pre>
+<p>This method is actually quite flexible, and can be used anywhere you need a temporary scope, not just within block statements.  However, I strongly recommend that you take the time to really understand and appreciate JavaScript scoping.  It's quite powerful, and one of my favorite features of the language.  If you understand scoping, hoisting will make a lot more sense to you.</p>
+<h2>Hoisting</h2>
+<p>Now that you understand scoping, it's important to understand how names enter a given scope.  There are four basic ways:</p>
+<ol>
+	<li>Language defined: All scopes are by default given the names <code class="js inline">this</code> and <code class="js inline">arguments</code>.</li>
+	<li>Formal parameters: Functions can have optional formal named parameters, which are scoped to the body of that function.</li>
+	<li>Function declarations: These are of the form <code class="js inline">function foo() {}</code>.</li>
+	<li>Variable declarations: These take the form <code class="js inline">var foo;</code>.</li>
+</ol>
+<p>Hoisting is actually a fairly simple concept.  Variable declarations and function declarations are always moved invisibly to the top of the containing scope.  Function parameters and language-defined names are, obviously, already there.  This means that code like this:</p>
+<pre class="js">function foo() {
+	bar();
+	var x = 1;
+}</pre>
+is actually interpreted like this:
+<pre class="js">function foo() {
+	var x;
+	bar();
+	x = 1;
+}</pre>
+<p>It turns out that it doesn't matter whether the line that contains the variable declaration would ever be executed.  The following two functions are equivalent:</p>
+<pre class="js">function foo() {
+	if (false) {
+		var x = 1;
+	}
+	return;
+	var y = 1;
+}
+function foo() {
+	var x, y;
+	if (false) {
+		x = 1;
+	}
+	return;
+	y = 1;
+}</pre>
+<p>Notice that the assignment portion of the declarations were not hoisted.  Only the name is hoisted.  This is not the case with function declarations, where the entire function body will be hoisted as well.  But remember that there are two normal ways to declare functions.  Consider the following JavaScript.</p>
+<pre class="js">function test() {
+	foo(); // TypeError "foo is not a function"
+	bar(); // "this will run!"
+	var foo = function () {
+		alert("this won't run!");
+	}
+	function bar() {
+		alert("this will run!");
+	}
+}
+test();</pre>
+<p>That covers the basics of hoisting, which is not as complex or confusing as it seems.  However, there are some important caveats and exceptions to keep in mind.  The first is name resolution order.  Remember that there are four ways for names to enter a given scope.  The order I listed them above is the order they are resolved in.  In general, if a name has already been defined, it is never overridden by another property of the same name.  This means that a function declaration takes priority over a variable declaration.  This does not mean that an assignment to that name will not work, just that the declaration portion will be ignored.  There are a few exceptions:</p>
+<ul>
+	<li>The built-in name <code class="js inline">arguments</code> will be overriden by a formal parameter of the same name.  This is a bad feature.  Don't use the name <code class="js inline">arguments</code> in your parameters.</li>
+	<li>Trying to use the name <code class="js inline">this</code> will cause a SyntaxError.  This is a good feature.</li>
+	<li>If multiple formal parameters have the same name, the one occurring latest in the list will take precedence.</li>
+</ul>
