@@ -16,7 +16,7 @@ function b() {
 }
 b();
 alert(a);</pre>
-<p>Here, of course, the browser will alert "1".  So what's going on here?  While it might seem strange, dangerous, and confusing, this is actually a powerful and expressive feature of the language.  I don't know if there is a standard name for it, but I've come to like the term "hoisting".  This article will try to shed some light on this mechanism, but first lets take a necessary detour to understand JavaScript's scoping.</p>
+<p>Here, of course, the browser will alert "1".  So what's going on here?  While it might seem strange, dangerous, and confusing, this is actually a powerful and expressive feature of the language.  I don't know if there is a standard name for this specific behavior, but I've come to like the term "hoisting".  This article will try to shed some light on this mechanism, but first lets take a necessary detour to understand JavaScript's scoping.</p>
 <h2>Scoping in JavaScript</h2>
 <p>One of the sources of most confusion for JavaScript beginners is scoping.  Actually, it's not just beginners.  I've met a lot of experienced JavaScript programmers who don't fully understand scoping.  The reason scoping is so confusing in JavaScript is because it looks like a C-family language.  Consider the following C program:</p>
 <pre class="cplusplus">#include &lt;stdio.h&gt;
@@ -53,10 +53,10 @@ console.log(x); // 2</pre>
 <h2>Declarations, Names, and Hoisting</h2>
 <p>In JavaScript, a name enters a scope in one of four basic ways:</p>
 <ol>
-	<li>Language-defined: All scopes are, by default, given the names <code class="js inline">this</code> and <code class="js inline">arguments</code>.</li>
-	<li>Formal parameters: Functions can have optional formal named parameters, which are scoped to the body of that function.</li>
-	<li>Function declarations: These are of the form <code class="js inline">function foo() {}</code>.</li>
-	<li>Variable declarations: These take the form <code class="js inline">var foo;</code>.</li>
+	<li><strong>Language-defined:</strong>  All scopes are, by default, given the names <code class="js inline">this</code> and <code class="js inline">arguments</code>.</li>
+	<li><strong>Formal parameters:</strong>  Functions can have named formal parameters, which are scoped to the body of that function.</li>
+	<li><strong>Function declarations:</strong>  These are of the form <code class="js inline">function foo() {}</code>.</li>
+	<li><strong>Variable declarations:</strong>  These take the form <code class="js inline">var foo;</code>.</li>
 </ol>
 <p>Function declarations and variable declarations are always moved ("hoisted") invisibly to the top of their containing scope by the JavaScript interpreter.  Function parameters and language-defined names are, obviously, already there.  This means that code like this:</p>
 <pre class="js">function foo() {
