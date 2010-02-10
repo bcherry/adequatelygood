@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block head_title %}
+<title>Adequately Good - {{ article.title }}</title>
+{% endblock %}
+
 {% block first_column %}
 {% if article %}
     <div id="article" class="span-17 last post">

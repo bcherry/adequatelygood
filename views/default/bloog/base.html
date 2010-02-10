@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="{{ blog.html_type }}; charset={{ blog.charset }}" />
+		{% block head_title %}
 		<title>{{ title }}</title>
+		{% endblock %}
 		<meta name="generator" content="Bloog {{ bloog_version }}" />
 		
 		<!-- Blueprint CSS Framework -->
