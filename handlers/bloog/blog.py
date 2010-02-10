@@ -223,7 +223,9 @@ def process_article_submission(handler, article_type):
 		article.put()
 		for key in article.tag_keys:
 			db.get(key).counter.increment()
-		do_sitemap_ping()
+			
+		if not config.DEBUG:
+			do_sitemap_ping()
 		restful.send_successful_response(handler, '/' + article.permalink)
 		view.invalidate_cache()
 	else:

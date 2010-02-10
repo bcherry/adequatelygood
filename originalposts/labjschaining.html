@@ -1,0 +1,73 @@
+<p>Kyle Simpson <a href="" target="_blank">describes a technique</a> for simulated chaining in JavaScript using a loop.  The technique is straightforward enough.  Instead of something like</p>
+<pre class="js">MyObj.func(arg1).func(arg2).func(arg3);</pre>
+<p>He recommends you do</p>
+<pre class="js">var args = [arg1, arg2, arg3],
+	MyChain = MyObj,
+	i;
+
+for (i = 0; i &lt; args.length; i += 1) {
+	MyChain = MyChain.func(args[i]);
+}</pre>
+<p>This allows the chain to function the same as in the first example, but gives room to breathe in between "links", so that you can add more complex logic about which links to include, and which to skip.  I think this is great.  However, for some situations, I think there is a better solution.</p>
+<p>Kyle's awesome utility, <a href="http://www.labjs.com" target="_blank">LABjs</a>, relies on chaining, off the global variable <code class="js inline">$LAB</code>.  His looped chaining example solves a particular problem that LABjs has, which is that</p>
+<pre class="js">$LAB.script("script1.js")
+	.wait()
+	.script("script2.js");</pre>
+<p>is not the same as</p>
+<pre class="js">$LAB.script("script1.js")
+	.wait();
+$LAB.script("script2.js");</pre>
+<p>In this case, LABjs only blocks and manages scripts as they exist in a single chain.  If you start a new chain, the entire thing will be considered to be <strong>in parallel</strong> to the other chains.</p>
+<p>I think I have a stronger solution, which is to modify LABjs itself to constantly update the global <code class="js inline">$LAB</code> to always point to the end of the most recent chain.  Here's an (untested) mockup of what such a mechanism would look like, leaving out the actual code that makes LABjs go:</p>
+<pre class="js">var $LAB = (function () {
+	var lab = engine(true);
+	delete lab.start;
+	
+	function engine(autostart) {
+		var queue = [],
+			next,
+			that = {
+				start: {
+					go();
+				},
+				script: function (name) {
+					queue.push(name);
+				},
+				wait: function () {
+					var e = engine();
+					
+					next = e.start;
+					delete e.start; // remove this so the client can't get to it
+					
+					if (autostart) {
+						go();
+					}
+					
+					// Set the global $LAB to point to this new engine
+					$LAB = e;
+					
+					return e;
+				}
+			},
+			go = function () {
+				// process queue, attach callback to call next() (if a function)
+			};
+	}
+
+	return lab;
+}());</pre>
+<p>Then, you could do something like this, and not worry about the broken chain:</p>
+<pre class="js">$LAB.script("script1.js")
+	.script("script2.js");
+if (includeExtraLib) {
+	$LAB.script("extraLib.js");
+}
+$LAB.wait();
+if (loggedIn) {
+	$LAB.script("userloggedin.js");
+} else {
+	$LAB.script("userloggedout.js");
+}
+// etc.</pre>
+<p>Of course, this method has some clear drawbacks.  Implicitly changing a global like that is not a good practice, unless it's well documented and the behavior makes sense.  In this case, I think it does.  For other uses, this might not be the best approach.  Nevertheless, I think that including this ability, either through a configuration value or an extra getter function like <code class="js inline">$LAB.endOfChain()</code> makes a lot of sense in a library that relies on chaining.</p>
+<p>Thanks to Kyle for creating LABjs, which is an incredible tool with a wonderfully simple API.  Feel free to "View Source" on this page, you'll see that I'm using it :)</p>
