@@ -1,0 +1,7 @@
+(function (arg) {
+	return arguments.length;
+}(undefined));
+
+Number.prototype.isOne = function() { return this === 1; };
+var x = 1;
+x.isOne();
