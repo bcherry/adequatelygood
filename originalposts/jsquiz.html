@@ -5,3 +5,6 @@
 Number.prototype.isOne = function() { return this === 1; };
 var x = 1;
 x.isOne();
+
+var x;
+console.log((x = 2 && false, 1), x);
