@@ -1,0 +1,22 @@
+<p>Take a look at this web site.  Notice anything out of the ordinary.  Hopefully you don't, none of the layout or styling has changed noticeably recently.  However, try a "View Source".  Now do you see something different?  This page is now rendered with the following doctype:</p>
+<pre class="html">&lt;!DOCTYPE html&gt;</pre>
+<p>That's right, this web site is now HTML5!  If you dig past the doctype, you'll find all sorts of HTML5 semantic elements, including <code class="html inline">&lt;nav&gt;</code>, <code class="html inline">&lt;article&gt;</code>, and <code class="html inline">&lt;time&gt;</code>, among others.  Making the transition was reasonably painless with the help of Mark Pilgrim's <a href="http://diveintohtml5.org/semantics.html" target="_blank">excellent article on making the switch</a>.  For the most part, I just had to change a few elements and rewrite my CSS.  There were a few headaches because <a href="http://blueprintcss.org" target="_blank">Blueprint CSS</a> expects your grid elements to be <code class="html inline">&lt;div&gt;</code>s, but the following CSS added the right capabilities to my semantic elements to be compatible with Blueprint:</p>
+<pre class="css">header, footer, nav, article {
+	float: left;
+	margin-right: 10px;
+}</pre>
+<p>Of course, IE doesn't understand the new HTML5 elements.  Luckily, there's an easy solution.  I chose to write it myself, since it's so simple, but there's a <a href="http://html5shiv.googlecode.com/svn/trunk/html5.js" target="_blank">publicly available complete solution</a> you can use as well.  Here's mine, for reference (in the <code class="html inline">&lt;head&gt;</code>):</p>
+<pre class="html">&lt;!-- IE HTML5 Compatibility --&gt;
+&lt;!--[if IE]&gt;
+	&lt;script type="text/javascript"&gt;
+		(function () {
+			var tags = "header hgroup nav article time footer".split(" "),
+				i = 0,
+				l = tags.length;
+			for (; i &lt; l; i += 1) {
+				document.createElement(tags[i]);
+			}
+		}());
+&lt;![endif]--&gt;</pre>
+<p>And that's all there was to it!  It's great that you can start using basic HTML5 <em>right now</em> without any difficulties, and it will work in all browsers, even IE6!  Of course, you can't just start using the more advanced features like <code class="html inline">&lt;video&gt;</code> or Web Workers, but basic markup is a great start.</p>
+<p>So what do you think?  You ready to upgrade your own personal site?</p>

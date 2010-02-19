@@ -343,7 +343,7 @@ hr {
 	height: 1px;
 }
 
-header, footer, nav {
+header, footer, nav, article {
 	float: left;
 	margin-right: 10px;
 }
