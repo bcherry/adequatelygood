@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block first_column %}
-<div class="span-17 last dialog contact">
-	<h2>contact me</h2>
+<article class="span-17 last dialog contact">
+	<header>
+		<h1>contact me</h1>
+	</header>
 	<form id="htmlform" action="{{ current_url }}" method="post">
 		<label class="tight" for="author">your name</label>
 		<input type="text" id="author" name="author" size="22" tabindex="1" value="{{ nickname }}"/>
@@ -23,5 +25,5 @@
 		<input type="hidden" name="token" value="{{ token }}" />
 		<input type="hidden" name="curtime" value="{{ curtime|floatformat }}" />
 	</form>
-</div>
+</article>
 {% endblock %}
