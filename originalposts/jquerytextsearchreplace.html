@@ -1,5 +1,5 @@
 <p>Ever had a need to to a text search/replace through the DOM?  For articles in drafting on this blog I often use the form (TODO: something) as notes for myself to do some more research.  I don't want them sticking around in the text I publish, so I highlighted them red (only for myself).  Here's the script I used to accomplish that:</p>
-<p><pre class="js inline">jQuery(function () {
+<pre class="js inline">jQuery(function () {
 	jQuery(":contains(TODO)").not(":has(:contains(TODO))").each(function () {
 		var that = $(this),
 			html = that.html();
@@ -7,5 +7,5 @@
 		html = html.replace(/(\(TODO:.*?\))/g, "&lt;span class=\"todo\"&gt;$1&lt;/span&gt;");
 		that.html(html);
 	});
-});</pre></p>
+});</pre>
 <p>The trick is to find only the nodes that contain the actual text, not ancestors of such nodes, which is what you would get with just <code class="js inline">jQuery(":contains(TOOD)")</code>.  Filtering with <code class="js inline">.not(":has(:contains(TODO))")</code> ensures you've got the bottom most ones.  I tried doing this with the <code class="js inline">":not()"</code> filter, but it didn't work.  I guess that might be a jQuery bug, but the <code class="js inline">.not()</code> method is a fine alternative.</p>

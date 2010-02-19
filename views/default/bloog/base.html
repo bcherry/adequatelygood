@@ -235,9 +235,9 @@
 					<div>The reasonably decent design was created with the help of <a href="http://blueprintcss.org/">Blueprint CSS</a>.</div>
 					<div>Interaction is made wonderfully simple by <a href="http://jquery.com">jQuery</a> and <a href="http://jqueryui.com">jQuery UI</a>.</div>
 					{% if not user %}
-						<div>To log into Adequately Good, <a href="{{ login_url }}">click here</a>, but don't expect anything to change.</div>
+						<div>To log into Adequately Good, <a href="{{ login_url|escape }}">click here</a>, but don't expect anything to change.</div>
 					{% else %}
-						<div>To log out of Adequately Good, <a href="{{ logout_url }}">click here</a>, but don't expect anything to change.</div>
+						<div>To log out of Adequately Good, <a href="{{ logout_url|escape }}">click here</a>, but don't expect anything to change.</div>
 					{% endif %}
 					{% if user_is_admin %}
 						<div>Cache debugging: Page was rendered {% now "M j, H:i:s" %}.</div>
