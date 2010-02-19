@@ -1,23 +1,25 @@
 {% extends "base.html" %}
 
 {% block first_column %}
-    {% if articles %}
-        <div class="smallalts listing">
-            <span class="alt">all articles filed under</span> 
+	{% if articles %}
+		<div class="smallalts listing">
+			<span class="alt">all articles filed under</span> 
 			<a class="tight" href="/tags/{{ tag }}">{{ tag }}</a>
-        </div>
-        {% for article in articles %}
-            {% include '../article_excerpt.html' %}
-        {% endfor %}
-        {% include 'pager.html' %}
-    {% else %}
-        <div class="post">
-            <div class="postMeta"><span class="date">No Matches</span></div>
-            <h2>No articles tagged with '{{ tag }}'</h2>
-            <div class="entry">
-                <p>It's possible that an article with the tag was removed.</p>
-                <p>Please try another tag or use the full-text search.</p>
-            </div>
-        </div>
-    {% endif %}
+		</div>
+		{% for article in articles %}
+			{% include '../article_excerpt.html' %}
+		{% endfor %}
+		{% include 'pager.html' %}
+	{% else %}
+		<article class="span-17 last">
+			<header class="span-17 last">
+				<span class="date">No Matches</span>
+				<h2>No articles tagged with '{{ tag }}'</h2>
+			</header>
+			<div class="span-17 last entry">
+				<p>It's possible that an article with the tag was removed.</p>
+				<p>Please try another tag or use the full-text search.</p>
+			</div>
+		</article>
+	{% endif %}
 {% endblock %}

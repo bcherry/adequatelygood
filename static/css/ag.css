@@ -47,13 +47,13 @@ code {
 	margin-bottom: 0;
 }
 
-h1 {
+#title h1 {
 	font-size: 42pt;
 	letter-spacing: -.08em;
 	color: #424242;
 }
 
-h1 a:hover {
+#title h1 a:hover {
 	color: #191919;
 }
 
@@ -122,11 +122,11 @@ nav span {
 	font-size: 14pt;
 }
 
-.post .postMeta {
+article header {
 	position: relative;
 }
 
-.post .postMeta .postAdmin {
+article header .postAdmin {
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -135,27 +135,28 @@ nav span {
 	font-size: 15pt;
 }
 
-.post .postMeta .date {
+/* I use span.date elements for text content in place of an actual time/date */
+article header time, article header .date {
 	color: #777777;
 }
 
-.post .postTitle {
+article header h1 {
 	font-size: 21pt;
 	letter-spacing: -1px;
-	margin-bottom: 0.25em;
+	margin-top: 0.25em;
+	color: #333333;
 }
 
-.post .postTitle a {
-	color: #333333;
+article header h1 a {
 	text-decoration: none;
 }
 
-.post .postTitle a:hover {
+article header h1 a:hover {
 	color: #000000;
 	text-decoration: underline;
 }
 
-.post .postAdmin {
+article .postAdmin {
 	float: right;
 }
 

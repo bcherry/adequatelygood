@@ -7,24 +7,24 @@
 		{% endblock %}
 		
 		<!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
-		<link rel="stylesheet" href="/static/css/blueprint/blueprint.min.css" type="text/css" media="screen, projection" />
-		<link rel="stylesheet" href="/static/css/blueprint/print.min.css" type="text/css" media="print" />
+		<link rel="stylesheet" href="/static/css/blueprint/blueprint.min.css" media="screen, projection" />
+		<link rel="stylesheet" href="/static/css/blueprint/print.min.css" media="print" />
 		<!--[if lt IE 8]>
-		  <link rel="stylesheet" href="/static/css/blueprint/ie.{{blog.min}}css" type="text/css" media="screen, projection">
+		  <link rel="stylesheet" href="/static/css/blueprint/ie.{{blog.min}}css" media="screen, projection">
 		<![endif]-->
-		<link rel="stylesheet" type="text/css" href="/static/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.min.css" />
-		<link rel="stylesheet" href="/static/css/ag.{{blog.min}}css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="/static/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.min.css" />
+		<link rel="stylesheet" href="/static/css/ag.{{blog.min}}css" media="screen" />
 		
 		<!-- Extra <head> Links -->
 		<link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="{{ blog.feedburner_url }}" />
 		
 		<!-- TODO: favicon -->
 		
-		<!-- IE6 HTML5 Compatibility -->
-		<!--[if eq IE 6]>
+		<!-- IE HTML5 Compatibility -->
+		<!--[if IE]>
 			<script type="text/javascript">
 				(function () {
-					var tags = "header articles article nav footer".split(" "),
+					var tags = "header hgroup nav article time footer".split(" "),
 						i = 0,
 						l = tags.length;
 					for (; i < l; i += 1) {
@@ -43,7 +43,7 @@
 			<!-- Header -->
 			<header class="span-24 last">
 				<!-- Title -->
-				<div id="title" class="span-24 last">
+				<hgroup id="title" class="span-24 last">
 					<div class="span-17 colborder prepend-top append-bottom">
 						<h1>
 							<a href="/">{{ blog.title|lower }}</a>
@@ -56,7 +56,7 @@
 							<a href="http://www.bcherry.net">ben cherry</a>
 						</h2>
 					</div>
-				</div>
+				</hgroup>
 				
 				<hr />
 				

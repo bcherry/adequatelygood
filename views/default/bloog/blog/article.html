@@ -6,9 +6,9 @@
 
 {% block first_column %}
 {% if article %}
-	<article class="span-17 last post">
-		<div class="span-17 last clearfix postMeta">
-			<span class="alt date">{{ article.published.date }}</span>
+	<article class="span-17 last">
+		<header class="span-17 last">
+			<time class="alt" datetime="{{ article.published.date }}" pubdate>{{ article.published.date }}</time>
 			{% if user_is_admin %}
 			<div class="smallalts postAdmin">
 				<a id="editbtn" href="#">edit</a>
@@ -16,9 +16,9 @@
 				<a id="deletebtn" href="#">delete</a>
 			</div>
 			{% endif %}
-		</div>
-		<h2 class="postTitle"><a id="blogtitle" href="/{{ article.permalink }}" title="{{ article.title }}">{{ article.title }}</a></h2>
-		<div id="blogbody" class="entry">
+			<h1><a href="/{{ article.permalink }}" title="{{ article.title }}">{{ article.title }}</a></h1>
+		</header>
+		<div id="blogbody" class="span-17 last entry">
 			{{ article.html }}
 		</div>
 	</article>
@@ -32,16 +32,18 @@
 		</p>
 	</div>
 {% else %}
-	<div class="span-17 last post">
-		<div class="postMeta"><span class="date">No Matches</span></div>
-		<h2 class="postTitle">No Article at Given Address</h2>
+	<article class="span-17 last">
+		<header>
+			<span class="date">No Matches</span>
+			<h1>No Article at Given Address</h1>
+		</header>
 		<div class="entry">
 			<p>You seem to have found a mis-linked page or search query with no associated results.</p>
 			<p>Please trying your search again. 
 				If you feel that you should be staring at something a little more concrete, feel free to email the author of this site 
 				or browse the archives.</p>
 		</div>
-	</div>
+	</article>
 {% endif %}
 	<div id="comments_wrapper" class="span-17 last">
 		<div id="disqus_thread"></div>
