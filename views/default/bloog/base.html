@@ -1,30 +1,37 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 	<head>
-		<meta http-equiv="Content-Type" content="{{ blog.html_type }}; charset={{ blog.charset }}" />
+		<meta charset="utf-8" />
 		{% block head_title %}
 		<title>{{ title }}</title>
 		{% endblock %}
-		<meta name="generator" content="Bloog {{ bloog_version }}" />
 		
-		<!-- Blueprint CSS Framework -->
+		<!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
 		<link rel="stylesheet" href="/static/css/blueprint/blueprint.min.css" type="text/css" media="screen, projection" />
 		<link rel="stylesheet" href="/static/css/blueprint/print.min.css" type="text/css" media="print" />
 		<!--[if lt IE 8]>
 		  <link rel="stylesheet" href="/static/css/blueprint/ie.{{blog.min}}css" type="text/css" media="screen, projection">
 		<![endif]-->
-		
-		<!-- jQuery UI w/ "Smoothness" Theme -->
 		<link rel="stylesheet" type="text/css" href="/static/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.min.css" />
-		
-		<!-- Site CSS -->
 		<link rel="stylesheet" href="/static/css/ag.{{blog.min}}css" type="text/css" media="screen" />
 		
 		<!-- Extra <head> Links -->
 		<link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="{{ blog.feedburner_url }}" />
-		<meta name="google-site-verification" content="uRjpVvsMFgU42hj25g6PsfIAVm7ahbIc8CHUcQQ3R2E" />
 		
 		<!-- TODO: favicon -->
+		
+		<!-- IE6 HTML5 Compatibility -->
+		<!--[if eq IE 6]>
+			<script type="text/javascript">
+				(function () {
+					var tags = "header articles article nav footer".split(" "),
+						i = 0,
+						l = tags.length;
+					for (; i < l; i += 1) {
+						document.createElement(tags[i]);
+					}
+				}());
+		<![endif]-->
 		
 		{% block head %}
 		{% endblock %}
@@ -34,7 +41,7 @@
 		<div id="container" class="container">
 			
 			<!-- Header -->
-			<div id="header" class="span-24 last">
+			<header class="span-24 last">
 				<!-- Title -->
 				<div id="title" class="span-24 last">
 					<div class="span-17 colborder prepend-top append-bottom">
@@ -54,7 +61,7 @@
 				<hr />
 				
 				<!-- Navigation Bar -->
-				<div class="prepend-2 span-20 append-2 last append-bottom nav">
+				<nav class="prepend-2 span-20 append-2 last append-bottom">
 					<div class="span-4">
 						<a href="/">home</a>
 						<br />
@@ -80,7 +87,7 @@
 						<br/>
 						<span class="alt" style="display:none;">get my feed</span>
 					</div>
-				</div>
+				</nav>
 				
 				<!-- Archives Links -->
 				<div id="archives" class="span-24 last smallalts" style="display:none;">
@@ -94,7 +101,7 @@
 				</div>
 				
 				<hr />
-			</div>
+			</header>
 
 			<div id="colcontainer" class="span-24 last">
 				<!-- Main content: Posts, etc. -->
@@ -221,7 +228,7 @@
 
 			<hr />
 			
-			<div class="span-24 last">
+			<footer class="span-24 last">
 				<div id="attribution" class="span-12">
 					<div>Adequately Good is modified from <a href="http://bloog.billkatz.com">Bloog</a>, available at
 						<a href="http://github.com/DocSavage/bloog">GitHub</a> under an MIT license.</div>
@@ -239,7 +246,7 @@
 				<div class="prepend-8 span-4 last">
 					<img id="poweredby" src="/static/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine" />
 				</div>
-			</div>
+			</footer>
 		</div>
 		
 		

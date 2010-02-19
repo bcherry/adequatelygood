@@ -176,7 +176,6 @@ class ViewPage(object):
 		# Define some parameters it'd be nice to have in views by default.
 		template_params = {
 			"current_url": url,
-			"bloog_version": config.BLOG['bloog_version'],
 			"user": users.get_current_user(),
 			"user_is_admin": users.is_current_user_admin(),
 			"login_url": users.create_login_url(handler.request.uri),

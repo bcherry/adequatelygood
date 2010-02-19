@@ -13,9 +13,6 @@ logging.info("Starting application in DEBUG mode: %s", DEBUG)
 # Do change blog or page dictionaries at the bottom of this config module.
 
 BLOG = {
-	"bloog_version": "0.8",
-	"html_type": "text/html",
-	"charset": "utf-8",
 	"title": "Adequately Good",
 	"author": "Ben Cherry",
 	# This must be the email address of a registered administrator for the

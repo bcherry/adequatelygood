@@ -6,44 +6,44 @@
 
 {% block first_column %}
 {% if article %}
-    <div id="article" class="span-17 last post">
-        <div class="span-17 last clearfix postMeta">
-        	<span class="alt date">{{ article.published.date }}</span>
-            {% if user_is_admin %}
+	<article class="span-17 last post">
+		<div class="span-17 last clearfix postMeta">
+			<span class="alt date">{{ article.published.date }}</span>
+			{% if user_is_admin %}
 			<div class="smallalts postAdmin">
-            	<a id="editbtn" href="#">edit</a>
+				<a id="editbtn" href="#">edit</a>
 				<span class="alt">or</span>
-            	<a id="deletebtn" href="#">delete</a>
-            </div>
+				<a id="deletebtn" href="#">delete</a>
+			</div>
 			{% endif %}
-        </div>
-        <h2 class="postTitle"><a id="blogtitle" href="/{{ article.permalink }}" title="{{ article.title }}">{{ article.title }}</a></h2>
-        <div id="blogbody" class="entry">
-            {{ article.html }}
-        </div>
-    </div>
-    <div id="more_reading" class="span-17 last">
-        <p class="smallalts tags">
+		</div>
+		<h2 class="postTitle"><a id="blogtitle" href="/{{ article.permalink }}" title="{{ article.title }}">{{ article.title }}</a></h2>
+		<div id="blogbody" class="entry">
+			{{ article.html }}
+		</div>
+	</article>
+	<div id="more_reading" class="span-17 last">
+		<p class="smallalts tags">
 			{% comment %}
 				Fuck django templates, it's ridiculous that this if-elseif-else logic needs to be so complex, 
 				and all on the same line to not have extra white space
 			{% endcomment %}
 			{% for tag in article.tags %}<span class="alt">{% if forloop.last and not forloop.first %}{% ifequal forloop.counter 2 %} and{% else %}, and{% endifequal %}{% else %}{% if forloop.revcounter and forloop.counter0 %},{% else %}filed under{% endif %}{% endif %}</span> <a class="tight" href="/tag/{{ tag|urlencode }}">{{ tag }}</a>{% endfor %}
-        </p>
-    </div>
+		</p>
+	</div>
 {% else %}
-    <div class="span-17 last post">
-        <div class="postMeta"><span class="date">No Matches</span></div>
-        <h2 class="postTitle">No Article at Given Address</h2>
-        <div class="entry">
-            <p>You seem to have found a mis-linked page or search query with no associated results.</p>
-            <p>Please trying your search again. 
-                If you feel that you should be staring at something a little more concrete, feel free to email the author of this site 
-                or browse the archives.</p>
-        </div>
-    </div>
+	<div class="span-17 last post">
+		<div class="postMeta"><span class="date">No Matches</span></div>
+		<h2 class="postTitle">No Article at Given Address</h2>
+		<div class="entry">
+			<p>You seem to have found a mis-linked page or search query with no associated results.</p>
+			<p>Please trying your search again. 
+				If you feel that you should be staring at something a little more concrete, feel free to email the author of this site 
+				or browse the archives.</p>
+		</div>
+	</div>
 {% endif %}
-    <div id="comments_wrapper" class="span-17 last">
+	<div id="comments_wrapper" class="span-17 last">
 		<div id="disqus_thread"></div>
 		<script type="text/javascript">
 			// Disqus Comments variables
@@ -54,7 +54,7 @@
 		<noscript>
 			<a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
 		</noscript>
-    </div>
+	</div>
 {% endblock %}
 
 {% block end_body %}

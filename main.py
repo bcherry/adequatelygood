@@ -21,7 +21,7 @@
 # DEALINGS IN THE SOFTWARE.
 
 
-__author__ = 'William T. Katz'
+__author__ = 'Ben Cherry'
 
 import config
 import os
