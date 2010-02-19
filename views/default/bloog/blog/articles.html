@@ -7,7 +7,7 @@
 	</div>
     {% for article in articles %}
     <div class="span-17 last entry"><p>
-        <a href="{{ article.permalink }}" alt="{{ article.title }}">{{ article.title }}</a>
+        <a href="{{ article.permalink }}">{{ article.title }}</a>
     </p></div>
     {% endfor %}
 {% if not articles %}

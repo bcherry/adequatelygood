@@ -43,12 +43,14 @@
 			<!-- Header -->
 			<header class="span-24 last">
 				<!-- Title -->
-				<hgroup id="title" class="span-24 last">
+				<div id="title" class="span-24 last">
 					<div class="span-17 colborder prepend-top append-bottom">
-						<h1>
-							<a href="/">{{ blog.title|lower }}</a>
-						</h1>
-						<h3 class="prepend-2 alt">{{ blog.description }}</h3>
+						<hgroup>
+							<h1>
+								<a href="/">{{ blog.title|lower }}</a>
+							</h1>
+							<h3 class="prepend-2 alt">{{ blog.description }}</h3>
+						</hgroup>
 					</div>
 					<div class="span-6 last prepend-top append-bottom">
 						<h2>
@@ -56,7 +58,7 @@
 							<a href="http://www.bcherry.net">ben cherry</a>
 						</h2>
 					</div>
-				</hgroup>
+				</div>
 				
 				<hr />
 				
