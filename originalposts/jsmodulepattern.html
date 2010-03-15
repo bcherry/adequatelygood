@@ -46,7 +46,7 @@
 <p>We use the <code class="js inline">var</code> keyword again for consistency, even though it's not necessary.  After this code has run, our module will have gained a new public method named <code class="js inline">MODULE.anotherMethod</code>.  This augmentation file will also maintain its own private internal state and imports.</p>
 <h3>Loose Augmentation</h3>
 <p>While our example above requires our initial module creation to be first, and the augmentation to happen second, that isn't always necessary.  One of the best things a JavaScript application can do for performance is to load scripts asynchronously.  We can create flexible multi-part modules that can load themselves in any order with <strong>loose augmentation</strong>.  Each file should have the following structure:</p>
-<pre class="js">var MODULE = (function (my)) {
+<pre class="js">var MODULE = (function (my) {
 	// add capabilities...
 	
 	return my;
@@ -106,7 +106,7 @@
 <p>This pattern occurred to me today while I was at work, I have not seen this elsewhere.  I think this is a very useful pattern, and would have been worth writing about all on its own.</p>
 <h3>Sub-modules</h3>
 <p>Our final advanced pattern is actually the simplest.  There are many good cases for creating sub-modules.  It is just like creating regular modules:</p>
-<pre class="js">MODULE.sub = (function ()) {
+<pre class="js">MODULE.sub = (function () {
 	var my = {};
 	// ...
 	
