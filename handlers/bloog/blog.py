@@ -59,6 +59,7 @@ from handlers import restful
 from utils import authorized
 from utils import sanitizer
 from utils.sanitizer import DangerousHTMLError
+import markdown
 import models
 import view
 import config
@@ -97,9 +98,10 @@ def get_datetime(time_string = None):
 	return datetime.datetime.now()
 
 def get_format(format_string):
-	if not format_string or format_string not in ['html', 'textile']:
-		format_string = 'html'
-	return format_string
+	# if not format_string or format_string not in ['html', 'textile']:
+	# 	format_string = 'html'
+	# return format_string
+	return "markdown"
 
 def get_tag_key(tag_name):
 	obj = models.blog.Tag.get_or_insert(tag_name)
@@ -130,9 +132,8 @@ def get_friendly_url(title):
 						 re.sub('\s+', '-', title.strip())))
 
 def get_html(body, markup_type):
-	if markup_type == 'textile':
-		from external.libs import textile
-		return textile.textile(body)
+	if markup_type == 'markdown':
+		return markdown.markdown(body)
 	return body
 
 def get_captcha(key):
@@ -190,7 +191,7 @@ def process_article_edit(handler, permalink):
 			db.get(removed_tag).counter.decrement()
 		for added_tag in after_tags - before_tags:
 			db.get(added_tag).counter.increment()
-		process_embedded_code(article)
+		# process_embedded_code(article)
 		article.put()
 		restful.send_successful_response(handler, '/' + article.permalink)
 		view.invalidate_cache()
