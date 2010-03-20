@@ -82,9 +82,9 @@ PAGE = {
 			{ "title": "LinkedIn",
 			  "url": "http://www.linkedin.com/in/bcherryprogrammer",
 			  "description": "Serious Professional Stuff" },
-			{ "title": "Google Profile",
-			  "url": "http://www.google.com/profiles/bcherry",
-			  "description": "Still Not Evil" },
+			{ "title": "Presentations",
+			  "url": "http://www.bcherry.net/talks/",
+			  "description": "Slides From My Talks" },
 		]
 	},
 	"readingList": [

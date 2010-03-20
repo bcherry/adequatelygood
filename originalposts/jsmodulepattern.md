@@ -80,7 +80,7 @@ While our example above requires our initial module creation to be first, and th
 		return my;
 	}(MODULE || {}));
 
-In this pattern, the `{@class=js inline}var` statement is always necessary.  Note that the import will create the module if it does not already exist.  This means you can use a tool like [LABjs](http://labjs.com/) and load all of your module files in parallel, without needing to block.</a>
+In this pattern, the `{@class=js inline}var` statement is always necessary.  Note that the import will create the module if it does not already exist.  This means you can use a tool like [LABjs](http://labjs.com/) and load all of your module files in parallel, without needing to block.
 
 ### Tight Augmentation
 
