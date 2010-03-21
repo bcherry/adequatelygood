@@ -21,7 +21,7 @@ h1, h2, h3, h4, h5, h6 {
 	letter-spacing: -0.08em;
 }
 
-code {
+pre {
 	display: block;
 	margin: 0.5em;
 	padding: 0;
@@ -29,7 +29,7 @@ code {
 }
 
 /* Mainly used for inline code, but no reason to make it exclusive */
-.inline {
+code, .inline {
 	display: inline;
 	margin: 0;
 	padding: 0;
