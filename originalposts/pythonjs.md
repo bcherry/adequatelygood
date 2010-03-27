@@ -1,8 +1,8 @@
-One of JavaScript's most convenient features is the object syntax.  Objects are so easy to work with.  You've got a lot of ways to make them, although the object literal syntax in particular kicks ass. You can access and assign them with either the dot operator or dictionary syntax.  Missing properties just return `undefined`.  This is just a really fantastic object model.
+One of JavaScript's most convenient features is the object syntax.  Objects are so easy to work with.  You've got a lot of ways to make them, although the object literal syntax in particular kicks ass. You can access and assign them with either the dot operator or dictionary syntax.  Missing properties just return `{@class=js}undefined`.  This is just a really fantastic object model.
 
 So, today, I sat down to write my first serious Python code in a while, and found myself trying use a dictionary like a JavaScript object.  This was a total failure, obviously.  Python simply does not have that.  Luckily, it's an incredibly malleable language, if you're willing to do the legwork.  So, in about 30 min, I implemented JavaScript-style objects.
 
-To make an JavaScript-style object, you use `{@class=python}js.JsObject()`.
+To make a JavaScript-style object, you use `{@class=python}js.JsObject()`.
 
 	@@@python
 	import js
@@ -33,7 +33,7 @@ The properties are iterable just as in JavaScript.  This is different than norma
 	for prop in foo:
 		print prop, foo[prop] # bar 1, baz 2
 
-You can also delete properties, using either the dot operator or dictionary syntax.  It won't `{@class=python}raise` if the prop doesn't exist, either.
+You can also delete properties, using either the dot operator or dictionary syntax.  It won't `{@class=python}raise` if the property doesn't exist, either.
 
 	@@@python
 	del foo.bar
@@ -64,9 +64,9 @@ And, finally, the constructor function is more flexible than I let on initially.
 	print foo # {'a': 1, 'b': 2}
 	
 
-So yeah, that's pretty awesome.  I thought about handling prototypal inheritance too, but I just don't see the need.  I almost never use prototypes in JavaScript, I'm positive I would never use them in Python.  I'm also not crazy about the creation syntax, but I couldn't find a way to re-purpose the dictionary literal `{}`, and didn't want to use a name like `dict` or `object`.  I also wanted to keep with Python conventions and upper-camel-case the class name, so `js.JsObject()` is what I settled on.
+So yeah, that's pretty awesome.  I thought about handling prototypal inheritance too, but I just don't see the need.  I almost never use prototypes in JavaScript, I'm positive I would never use them in Python.  I'm also not crazy about the creation syntax, but I couldn't find a way to re-purpose the dictionary literal `{}`, and didn't want to override built-in names like `{@class=python}dict` or `{@class=python}object`.  I also wanted to keep with Python conventions and UpperCamelCase the class name, so `{@class=python}js.JsObject()` is what I settled on.
 
-You're probably curious about the implementation, so here's the full source code.  I'm probably missing some useful things, but this is what I have so far.  It's quite simple, for the most part it just overrides everything to some form of dictionary method on `{@class=python}self.___dict__`.  You can also find [js.py on GitHub](http://github.com/bcherry/js-py/blob/master/js.py).
+You're probably curious about the implementation, so here's the full source code.  I'm probably missing some useful things, but this is what I have so far.  It's quite simple; for the most part it just overrides everything to some form of dictionary method on `{@class=python}self.___dict__`.  You can also find [js.py on GitHub](http://github.com/bcherry/js-py/blob/master/js.py).
 
 	@@@python
 	class JsObject(object):
