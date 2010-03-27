@@ -96,7 +96,20 @@ The JavaScript interpreter does not start by calling the `toString` and `valueOf
  7. Since the result is of type `{@class=js}String`, `{@class=js}ToString` returns all the way to `{@class=js}alert`.
  8. `{@class=js}alert` displays the value.
 
-Wow, that's a lot of work just to get the string representation of this object!
+Wow, that's a lot of work just to get the string representation of this object!  The key mechanism that needs explaining is the `ToPrimitive` function.  This function is used to take a value and get a primitive value instead.  If the input is already a primitive value, that is `{@class=js}String`, `{@class=js}Undefined`, `{@class=js}Null`, `{@class=js}Boolean`, or `{@class=js}Number`, then the value will be returned without conversion.  However, if the value is an `{@class=js}Object`, then it will dive into the `[[DefaultValue]]` method to find a _default value_ for the object.
+
+`[[DefaultValue]]` is not all that complex.  It takes an optional _hint_, which should be either `{@class=js}Number` or `{@class=js}String`.  If a _hint_ is not provided, it will default to `{@class=js}Number` unless the object is a `{@class=js}Date`, in which case it defaults to `{@class=js}String` (this is silly).  After this has been figured out, it will call `toString` and `valueOf`, in order, to find a primitive value.  This is where the _hint_ comes into play.  If the _hint_ is `{@class=js}Number`, then `valueOf` will be tried first, if it's `{@class=js}String` then `toString` will be.  Here's the process:
+
+ 1. If the first method exists, and is callable, call it and get the result, otherwise skip to 3.
+ 2. If the result of 1 is a primitive, return it.
+ 3. If the second method exists, and is callable, call it and get the result, otherwise skip to 5.
+ 4. If the result of 3 is a primitive, return it.
+ 5. Throw a `TypeError` exception.
+
+That might seem complex, and it is, but it should only take a few read-throughs to get it down.  I think I've presented it in a much clearer way then the specification.
+
+### Implications
+
 
 
 ### How About Performance?
