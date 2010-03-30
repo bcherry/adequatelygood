@@ -320,6 +320,36 @@ article .postAdmin {
 	background: none !important;
 }
 
+/* InfluAds Advertisment CSS */
+.influads_block {
+	margin-bottom: 10px;
+}
+
+.influads_text {
+	font-size: 12px;
+}
+
+.influads_powered_div {
+	font-size: 9px;
+	margin-top: 5px;
+}
+
+
+/*
+.influads_link_img {
+
+}
+
+.influads_img {
+	
+}
+
+.influads_powered_link {
+	
+}
+*/
+
+
 /* tweaks to jquery-ui -- TODO: rebuild jquery-ui with these rolled in */
 .ui-dialog-title {
 	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
