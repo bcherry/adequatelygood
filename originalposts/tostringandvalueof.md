@@ -50,7 +50,7 @@ We'll be using a simple example `population` object that holds a country name an
 	
 This works, but the calls to `alert` are not very useful.  What we'd really like is for the first `{@class=js}alert` to show `{@class=js}'[Population "USA" 350000000]'` and the second to show `{@class=js}"750000000"`.  So, let's code that up next.
 
-### `toString`
+### toString
 
 All objects inherit the method `toString` from `{@class=js}Object.prototype`, which returns `{@class=js}"[object Object]"`.  However, we can easily override this by providing `toString` as a method of our object, or its prototype.  In this example, we'll attach it directly to each instance, but feel free to use the prototype instead.
 
@@ -74,7 +74,7 @@ All objects inherit the method `toString` from `{@class=js}Object.prototype`, wh
 
 <span class="note">__Note__: I'm using __closure__ on the `country` parameter, rather than using `{@class=js}this.country`.  This only works due to how the constructor is set up.  If you placed `toString` on the prototype, you would need to use `{@class=js}this.country`.</span>
 
-### `valueOf`
+### valueOf
 
 All JavaScript objects also inherit the method `valueOf` from `Object.prototype`.  By default, this method simply returns the object itself, but is generally overridden to convert an object to a `{@class=js}Number`, or another primitive value, so it can be used by operators like `+`.  We can do the same thing as above to complete our basic example.
 
@@ -134,7 +134,7 @@ While this is a lot, it's pretty straightforward.  However, he key mechanism tha
 
 The value that is returned by `[[DefaultValue]]` is guaranteed to be primitive.  If it was not, a `TypeError` would have been thrown.  This also implies that `toString` and `valueOf` should return primitives on order to be useful in this context.
 
-### Confusion About the `+` Operator
+### Confusion About the + Operator
 
 Here's an example with a (possibly) unexpected result:
 
