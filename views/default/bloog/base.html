@@ -280,7 +280,12 @@
 			$LAB
 			.script("/static/js/jquery-ui-1.7.2.custom.min.js")
 			.script("/static/js/jquery.templates.{{blog.min}}js")
-			.wait()
+			.script("http://platform.twitter.com/anywhere.js?id=xaBabDhFcEVjxwctbbgjA&amp;v=1")
+			.wait(function () {
+				twttr.anywhere(function(twitter) {
+					twitter.hovercards();
+				});
+			})
 			.script("/static/js/base.{{blog.min}}js")
 			.script("/static/js/ag.{{blog.min}}js")
 			{% if user_is_admin %}.script("/static/js/admin.{{blog.min}}js"){% endif %}
