@@ -47,3 +47,5 @@ class CacheStatsHandler(restful.Controller):
     @authorized.role("admin")
     def delete(self):
         memcache.flush_all()
+
+#from google.appengine.api import memcache;memcache.flush_all()
