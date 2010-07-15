@@ -58,12 +58,8 @@ class ContactHandler(restful.Controller):
             self.error(403)
 
         user = users.get_current_user()
-        sender = user.email() if user else config.BLOG['email']
-        reply_to = self.request.get('email') or \
-                   (user_email() if user else 'unknown@foo.com')
         mail.send_mail(
-            sender = sender,
-            reply_to = self.request.get('author') + '<' + reply_to + '>',
+            sender = self.request.get('author') + '<' +self.request.get('email') + '>',
             to = config.BLOG['email'],
             subject = self.request.get('subject') or 'No Subject Given',
             body = self.request.get('message') or 'No Message Given'

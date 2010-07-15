@@ -1,304 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		{% block head_title %}
-		<title>{{ title }}</title>
-		{% endblock %}
-		
-		<!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
-		<link rel="stylesheet" href="/static/css/blueprint/blueprint.min.css" media="screen, projection" />
-		<link rel="stylesheet" href="/static/css/blueprint/print.min.css" media="print" />
-		<!--[if lt IE 8]>
-		  <link rel="stylesheet" href="/static/css/blueprint/ie.{{blog.min}}css" media="screen, projection">
-		<![endif]-->
-		<link rel="stylesheet" href="/static/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.min.css" />
-		<link rel="stylesheet" href="/static/css/ag.{{blog.min}}css" media="screen" />
-		
-		<!-- Extra <head> Links -->
-		<link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="{{ blog.feedburner_url }}" />
-		
-		<!-- TODO: favicon -->
-		
-		<!-- IE HTML5 Compatibility -->
-		<!--[if IE]>
-			<script type="text/javascript">
-				(function () {
-					var tags = "header hgroup nav article time footer".split(" "),
-						i = 0,
-						l = tags.length;
-					for (; i < l; i += 1) {
-						document.createElement(tags[i]);
-					}
-				}());
-			</script>
-		<![endif]-->
-		
-		{% block head %}
-		{% endblock %}
-	</head>
-	<body>
-		<a name="top"></a>
-		<div id="container" class="container">
-			
-			<!-- Header -->
-			<header class="span-24 last">
-				<!-- Title -->
-				<div id="title" class="span-24 last">
-					<div class="span-17 colborder prepend-top append-bottom">
-						<hgroup>
-							<h1>
-								<a href="/">{{ blog.title|lower }}</a>
-							</h1>
-							<h3 class="prepend-2 alt">{{ blog.description }}</h3>
-						</hgroup>
-					</div>
-					<div class="span-6 last prepend-top append-bottom">
-						<h2>
-							written by
-							<a href="http://www.bcherry.net">ben cherry</a>
-						</h2>
-					</div>
-				</div>
-				
-				<hr />
-				
-				<!-- Navigation Bar -->
-				<nav class="prepend-2 span-20 append-2 last append-bottom">
-					<div class="span-4">
-						<a href="/">home</a>
-					</div>
-					<div class="span-4">
-						<a href="#" id="archiveLink">archives</a>
-					</div>
-					<div class="span-4">
-						<a href="/About-Ben">about</a>
-					</div>
-					<div class="span-4">
-						<a href="/contact">contact</a>
-					</div>
-					<div class="span-4 last">
-						<a href="{{ blog.feedburner_url }}">feed</a>
-					</div>
-				</nav>
-				
-				<!-- Archives Links -->
-				<div id="archives" class="span-24 last smallalts" style="display:none;">
-					<hr />
-					<div class="archivelinks">
-						<span class="alt">posts by year</span>
-						{% for year in archive_years %}
-							<a class="tight" href="/{{ year }}">{{ year }}</a>
-							{% endfor %}
-					</div>
-				</div>
-				
-				<hr />
-			</header>
+  <head>
+    <meta charset="utf-8" />
+    {% block head_title %}
+    <title>{{ title }}</title>
+    {% endblock %}
+    
+    <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
+    <link rel="stylesheet" href="/static/css/blueprint/blueprint.min.css" media="screen, projection" />
+    <link rel="stylesheet" href="/static/css/blueprint/print.min.css" media="print" />
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="/static/css/blueprint/ie.{{blog.min}}css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/static/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.min.css" />
+    <link rel="stylesheet" href="/static/css/ag.{{blog.min}}css" media="screen" />
+    
+    <!-- Extra <head> Links -->
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="{{ blog.feedburner_url }}" />
+    
+    <!-- TODO: favicon -->
+    
+    <!-- IE HTML5 Compatibility -->
+    <!--[if IE]>
+      <script type="text/javascript">
+        (function () {
+          var tags = "header hgroup nav article time footer".split(" "),
+            i = 0,
+            l = tags.length;
+          for (; i < l; i += 1) {
+            document.createElement(tags[i]);
+          }
+        }());
+      </script>
+    <![endif]-->
+    
+    {% block head %}
+    {% endblock %}
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="container" class="container">
+      
+      <!-- Header -->
+      <header class="span-24 last">
+        <!-- Title -->
+        <div id="title" class="span-24 last">
+          <div class="span-17 colborder prepend-top append-bottom">
+            <hgroup>
+              <h1>
+                <a href="/">{{ blog.title|lower }}</a>
+              </h1>
+              <h3 class="prepend-2 alt">{{ blog.description }}</h3>
+            </hgroup>
+          </div>
+          <div class="span-6 last prepend-top append-bottom">
+            <h2>
+              written by
+              <a href="http://www.bcherry.net">ben cherry</a>
+            </h2>
+          </div>
+        </div>
+        
+        <hr />
+        
+        <!-- Navigation Bar -->
+        <nav class="prepend-2 span-20 append-2 last append-bottom">
+          <div class="span-4">
+            <a href="/">home</a>
+          </div>
+          <div class="span-4">
+            <a href="#" id="archiveLink">archives</a>
+          </div>
+          <div class="span-4">
+            <a href="/About-Ben">about</a>
+          </div>
+          <div class="span-4">
+            <a href="/contact">contact</a>
+          </div>
+          <div class="span-4 last">
+            <a href="{{ blog.feedburner_url }}">feed</a>
+          </div>
+        </nav>
+        
+        <!-- Archives Links -->
+        <div id="archives" class="span-24 last smallalts" style="display:none;">
+          <hr />
+          <div class="archivelinks">
+            <span class="alt">posts by year</span>
+            {% for year in archive_years %}
+              <a class="tight" href="/{{ year }}">{{ year }}</a>
+              {% endfor %}
+          </div>
+        </div>
+        
+        <hr />
+      </header>
 
-			<div id="colcontainer" class="span-24 last">
-				<!-- Main content: Posts, etc. -->
-				<div id="content" class="span-17 colborder">
-					<a name="main"></a>
-					{% block first_column %}
-					{% for article in articles %}
-						{% include 'article_excerpt.html' %}
-					{% endfor %}
-					{% if not articles %}
-						{% include 'bloog_intro.html' %}
-					{% endif %}
-					{% include 'pager.html' %}
-					{% endblock %}
-				</div>
+      <div id="colcontainer" class="span-24 last">
+        <!-- Main content: Posts, etc. -->
+        <div id="content" class="span-17 colborder">
+          <a name="main"></a>
+          {% block first_column %}
+          {% for article in articles %}
+            {% include 'article_excerpt.html' %}
+          {% endfor %}
+          {% if not articles %}
+            {% include 'bloog_intro.html' %}
+          {% endif %}
+          {% include 'pager.html' %}
+          {% endblock %}
+        </div>
 
-				<!-- Sidebar: Search, links, etc. -->
-				{% block second_column %}
-				<div id="sidebar" class="span-6 last">
-					{% block search %}
-					<div id="search" class="span-6 last">
-						<form method="get" id="searchForm" class="span-6 last" action="/search">
-							<input type="text" class="span-6 blurred" value="Search..." title="Search..." name="s" id="s" />
-						</form>
-					</div>
-					{% endblock %}
+        <!-- Sidebar: Search, links, etc. -->
+        {% block second_column %}
+        <div id="sidebar" class="span-6 last">
+          {% block search %}
+          <div id="search" class="span-6 last">
+            <form method="get" id="searchForm" class="span-6 last" action="/search">
+              <input type="text" class="span-6 blurred" value="Search..." title="Search..." name="s" id="s" />
+            </form>
+          </div>
+          {% endblock %}
 
-					<hr class="space" />
-					
-					{% block advertisement %}
-					<!-- Advertising -->
-					<div id="advertisement">
-						<h3>advertisement</h3>
-						<script src="http://engine.influads.com/publisher/v/noCss"></script>
-					</div>
-					
-					{% endblock %}
-					
-					<hr />
+          <hr class="space" />
+          
+          {% block advertisement %}
+          <!-- Advertising -->
+          <div id="advertisement">
+            <h3>advertisement</h3>
+            <script src="http://engine.influads.com/publisher/v/noCss"></script>
+          </div>
+          
+          {% endblock %}
+          
+          <hr />
+          
+          {% block featuredPages1 %}
+          <div id="links">
+            <h3>{{ featuredMyPages.title|lower }}</h3>
+            <p>
+              {{ featuredMyPages.description }}
+            </p>
+            <ul>
+              {% for entry in featuredMyPages.entries %}
+              <li>
+                <a href="{{ entry.url }}">{{ entry.title }}</a>
+                - {{ entry.description }}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endblock %}
+          
+          <hr />
+          
+          {% if user_is_admin %}
+            <!-- Administrative Console -->
+            <div id="admin">
+              <h3>admin shit, yo!</h3>
+              <ul>
+                <li><a id="newblog" href="#">New Blog Entry</a></li>
+                <li><a id="newarticle" href="#">New Article</a>
+                  - unsyndicated<br />(e.g., about page)</li>
+                <li><a id="openshell" href="/admin/shell">Open Shell</a></li>
+                <li><a href="/admin/cache_stats">Memcached Stats</a></li>
+                <li><a href="/admin/timings">Timing Stats</a></li>
+              </ul>
+            </div>
+            
+            <hr />
+          {% endif %}
 
-					{% block tags %}
-					<div id="tags">
-						<h3>categories</h3>
-						{% if blog_tags %}
-							<ul>
-							{% for tag in blog_tags %}
-								{% ifnotequal tag.count 0 %}
-								<li>
-									<a href="/tag/{{ tag.name|urlencode }}">{{ tag.name|lower }}</a>
-									({{ tag.count }})
-								</li>
-								{% endifnotequal %}
-							{% endfor %}
-							</ul>
-						{% else %}
-							No posts have been tagged yet.
-						{% endif %}
-					</div>
-					{% endblock %}
-				
-					<hr />
+          {% block tags %}
+          <div id="tags">
+            <h3>categories</h3>
+            {% if blog_tags %}
+              <ul>
+              {% for tag in blog_tags %}
+                {% ifnotequal tag.count 0 %}
+                <li>
+                  <a href="/tag/{{ tag.name|urlencode }}">{{ tag.name|lower }}</a>
+                  ({{ tag.count }})
+                </li>
+                {% endifnotequal %}
+              {% endfor %}
+              </ul>
+            {% else %}
+              No posts have been tagged yet.
+            {% endif %}
+          </div>
+          {% endblock %}
+        
+          <hr />
+          
+          {% block subscribe %}
+          <div id="subscribe">
+            <h3>subscribe</h3>
+            <p>
+              Keep up with the latest adequate posts.
+            </p>
+            <ul>
+              <li>
+                <a href="{{ blog.feedburner_url }}" title="Adequately Good Atom Feed">Feedburner</a>
+                - My Atom Feed
+              </li>
+            </ul>
+          </div>
+          {% endblock %}
+        
+          <hr />
+        
+          {% block books %}
+          <div id="books">
+            <h3>my reading list</h3>
+            <p>
+              This is what I've been reading lately and recommend anyone interested in similar topics to check out.
+            </p>
+            <ul>
+              {% for book in readingList %}
+              <li>
+                <a href="{{ book.url }}">{{ book.title }}</a>
+                - {{ book.author }}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endblock %}
+        </div>
+        {% endblock %}
+      </div>
 
-					{% if user_is_admin %}
-						<!-- Administrative Console -->
-						<div id="admin">
-							<h3>admin shit, yo!</h3>
-							<ul>
-								<li><a id="newblog" href="#">New Blog Entry</a></li>
-								<li><a id="newarticle" href="#">New Article</a>
-									- unsyndicated<br />(e.g., about page)</li>
-								<li><a id="openshell" href="/admin/shell">Open Shell</a></li>
-								<li><a href="/admin/cache_stats">Memcached Stats</a></li>
-								<li><a href="/admin/timings">Timing Stats</a></li>
-							</ul>
-						</div>
-						
-						<hr />
-					{% endif %}
+      <hr />
+      
+      <footer class="span-24 last">
+        <div id="attribution" class="span-12">
+          <div>Adequately Good is modified from <a href="http://bloog.billkatz.com">Bloog</a>, available at
+            <a href="http://github.com/DocSavage/bloog">GitHub</a> under an MIT license.</div>
+          <div>The reasonably decent design was created with the help of <a href="http://blueprintcss.org/">Blueprint CSS</a>.</div>
+          <div>Interaction is made wonderfully simple by <a href="http://jquery.com">jQuery</a>. Twitter integration is supplied by <a href="http://dev.twitter.com/anywhere/">@anywhere</a>.</div>
+          {% if not user %}
+            <div>To log into Adequately Good, <a href="{{ login_url|escape }}">click here</a>, but don't expect anything to change.</div>
+          {% else %}
+            <div>To log out of Adequately Good, <a href="{{ logout_url|escape }}">click here</a>, but don't expect anything to change.</div>
+          {% endif %}
+          {% if user_is_admin %}
+            <div>Cache debugging: Page was rendered {% now "M j, H:i:s" %}.</div>
+          {% endif %}
+        </div>
+        <div class="prepend-8 span-4 last">
+          <img id="poweredby" src="/static/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine" />
+        </div>
+      </footer>
+    </div>
+    
+    <!-- Exception Hub start -->
+    <script src="http://js.exceptionhub.com/javascripts/eh.js"></script>
+    <script>
+    ExceptionHub.setup("8ff0f84d25456b049a9c1a83f8e62b56", 21, 'production');
+    </script>
+    <!-- Exception Hub end -->
+    
+    <script type="text/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" src="/static/js/chili/jquery.chili-2.2.{{blog.min}}js"></script>
+    <script type="text/javascript" src="/static/js/consul.{{blog.min}}js"></script>
+    <script type="text/javascript">
+      ChiliBook.recipeFolder = "/static/js/chili/";
+      consul.turnOn({{blog.js_debug}});
+      jQuery.noConflict();
+      
+      var AG = {};
+      // Page Script
+      {% block page_script %}
+      {% endblock %}
+    </script>
+    
+    <!-- Include LABjs and request the rest of the script files-->
+    <script type="text/javascript" src="/static/js/LAB.min.js"></script>
+    <script type="text/javascript">
+      $LAB
+      .script("/static/js/jquery-ui-1.7.2.custom.min.js")
+      .script("/static/js/jquery.templates.{{blog.min}}js")
+      .script("http://platform.twitter.com/anywhere.js?id=xaBabDhFcEVjxwctbbgjA&amp;v=1")
+      .wait(function () {
+        twttr.anywhere(function(twitter) {
+          twitter.hovercards();
+        });
+      })
+      .script("/static/js/base.{{blog.min}}js")
+      .script("/static/js/ag.{{blog.min}}js")
+      {% if user_is_admin %}.script("/static/js/admin.{{blog.min}}js"){% endif %}
+    </script>
 
-					{% block featuredPages1 %}
-					<div id="links">
-						<h3>{{ featuredMyPages.title|lower }}</h3>
-						<p>
-							{{ featuredMyPages.description }}
-						</p>
-						<ul>
-							{% for entry in featuredMyPages.entries %}
-							<li>
-								<a href="{{ entry.url }}">{{ entry.title }}</a>
-								- {{ entry.description }}
-							</li>
-							{% endfor %}
-						</ul>
-					</div>
-					{% endblock %}
-				
-				
-					<hr />
+    {% if user_is_admin %}
+    {% include "form_editor.html" %}
+    {% endif %}
 
-					{% block subscribe %}
-					<div id="subscribe">
-						<h3>subscribe</h3>
-						<p>
-							Keep up with the latest adequate posts.
-						</p>
-						<ul>
-							<li>
-								<a href="{{ blog.feedburner_url }}" title="Adequately Good Atom Feed">Atom feed</a>
-							</li>
-						</ul>
-					</div>
-					{% endblock %}
-				
-					<hr />
-				
-					{% block books %}
-					<div id="books">
-						<h3>my reading list</h3>
-						<p>
-							This is what I've been reading lately and recommend anyone interested in similar topics to check out.
-						</p>
-						<ul>
-							{% for book in readingList %}
-							<li>
-								<a href="{{ book.url }}">{{ book.title }}</a>
-								- {{ book.author }}
-							</li>
-							{% endfor %}
-						</ul>
-					</div>
-				 	{% endblock %}
-				</div>
-				{% endblock %}
-			</div>
-
-			<hr />
-			
-			<footer class="span-24 last">
-				<div id="attribution" class="span-12">
-					<div>Adequately Good is modified from <a href="http://bloog.billkatz.com">Bloog</a>, available at
-						<a href="http://github.com/DocSavage/bloog">GitHub</a> under an MIT license.</div>
-					<div>The reasonably decent design was created with the help of <a href="http://blueprintcss.org/">Blueprint CSS</a>.</div>
-					<div>Interaction is made wonderfully simple by <a href="http://jquery.com">jQuery</a> and <a href="http://jqueryui.com">jQuery UI</a>.</div>
-					{% if not user %}
-						<div>To log into Adequately Good, <a href="{{ login_url|escape }}">click here</a>, but don't expect anything to change.</div>
-					{% else %}
-						<div>To log out of Adequately Good, <a href="{{ logout_url|escape }}">click here</a>, but don't expect anything to change.</div>
-					{% endif %}
-					{% if user_is_admin %}
-						<div>Cache debugging: Page was rendered {% now "M j, H:i:s" %}.</div>
-					{% endif %}
-				</div>
-				<div class="prepend-8 span-4 last">
-					<img id="poweredby" src="/static/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine" />
-				</div>
-			</footer>
-		</div>
-		
-		<!-- Exception Hub start -->
-		<script src="http://js.exceptionhub.com/javascripts/eh.js"></script>
-		<script>
-		ExceptionHub.setup("8ff0f84d25456b049a9c1a83f8e62b56", 21, 'production');
-		</script>
-		<!-- Exception Hub end -->
-		
-		<script type="text/javascript" src="/static/js/jquery-1.3.2.min.js"></script>
-		<script type="text/javascript" src="/static/js/chili/jquery.chili-2.2.{{blog.min}}js"></script>
-		<script type="text/javascript" src="/static/js/consul.{{blog.min}}js"></script>
-		<script type="text/javascript">
-			ChiliBook.recipeFolder = "/static/js/chili/";
-			consul.turnOn({{blog.js_debug}});
-			jQuery.noConflict();
-			
-			var AG = {};
-			// Page Script
-			{% block page_script %}
-			{% endblock %}
-		</script>
-		
-		<!-- Include LABjs and request the rest of the script files-->
-		<script type="text/javascript" src="/static/js/LAB.min.js"></script>
-		<script type="text/javascript">
-			$LAB
-			.script("/static/js/jquery-ui-1.7.2.custom.min.js")
-			.script("/static/js/jquery.templates.{{blog.min}}js")
-			.script("http://platform.twitter.com/anywhere.js?id=xaBabDhFcEVjxwctbbgjA&amp;v=1")
-			.wait(function () {
-				twttr.anywhere(function(twitter) {
-					twitter.hovercards();
-				});
-			})
-			.script("/static/js/base.{{blog.min}}js")
-			.script("/static/js/ag.{{blog.min}}js")
-			{% if user_is_admin %}.script("/static/js/admin.{{blog.min}}js"){% endif %}
-		</script>
-
-		{% if user_is_admin %}
-		{% include "form_editor.html" %}
-		{% endif %}
-
-		{% block end_body %}
-		{% endblock %}
-		
-		<!-- Google Analytics -->
-		<script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
-	</body>
+    {% block end_body %}
+    {% endblock %}
+    
+    <!-- Google Analytics -->
+    <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
+  </body>
 </html>
