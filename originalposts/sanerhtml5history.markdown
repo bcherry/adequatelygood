@@ -1,4 +1,4 @@
-Included in the laundry list of new features that are descending on the world of web development with HTML5 are two quite nice ones:  [History Management](https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history) and [the `hashchange` event](https://developer.mozilla.org/en/DOM/window.onhashchange).  These two features allow for much richer JavaScript applications.  Let's start with a quick overview of what these provide.
+Included in the laundry list of new features that are descending on the world of web development with HTML5 are two quite nice ones:  [History Management](https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history) and [the `hashchange` event](https://developer.mozilla.org/en/DOM/window.onhashchange).  These two features allow for much richer and faster JavaScript applications.  Let's start with a quick overview of what these provide.
 
 ## Hashchange
 
