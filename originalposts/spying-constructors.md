@@ -123,4 +123,4 @@ The other neat thing is that, so long as you're not trapping stale references to
 
 You can find the complete code (and a bit more) for this excercise at [www.bcherry.net/playground/spying-constructors](http://www.bcherry.net/playground/spying-constructors).  I hope this was informative.  I think I'll probably end up either contributing a patch to JsMockito with this, or building my own bare-bones set of mocking/spying functions for use with [QUnit](http://docs.jquery.com/QUnit).
 
-<span class="note">P.S. It's been some time since I've updated, but I'm hoping this to be the first of many new, interesting JavaScript posts inspired by the work I'm doing at Twitter with @bs, @hoverbird, @ded, and @dsa.</span>
+<span class="note">___P.S. It's been some time since I've updated, but I'm hoping this will be the first of many new, interesting JavaScript posts inspired by the work I'm doing at Twitter with @bs, @hoverbird, @ded, and @dsa.___</span>
