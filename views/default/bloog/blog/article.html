@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head_title %}
-<title>Adequately Good - {{ article.title }}</title>
+<title>Adequately Good - {{ article.title }} - by Ben Cherry</title>
 {% endblock %}
 
 {% block first_column %}
@@ -25,7 +25,7 @@
 	<div id="more_reading" class="span-17 last">
 		<p class="smallalts tags">
 			{% comment %}
-				Fuck django templates, it's ridiculous that this if-elseif-else logic needs to be so complex, 
+				Fuck django templates, it's ridiculous that this if-elseif-else logic needs to be so complex,
 				and all on the same line to not have extra white space
 			{% endcomment %}
 			{% for tag in article.tags %}<span class="alt">{% if forloop.last and not forloop.first %}{% ifequal forloop.counter 2 %} and{% else %}, and{% endifequal %}{% else %}{% if forloop.revcounter and forloop.counter0 %},{% else %}filed under{% endif %}{% endif %}</span> <a class="tight" href="/tag/{{ tag|urlencode }}">{{ tag }}</a>{% endfor %}
@@ -39,8 +39,8 @@
 		</header>
 		<div class="entry">
 			<p>You seem to have found a mis-linked page or search query with no associated results.</p>
-			<p>Please trying your search again. 
-				If you feel that you should be staring at something a little more concrete, feel free to email the author of this site 
+			<p>Please trying your search again.
+				If you feel that you should be staring at something a little more concrete, feel free to email the author of this site
 				or browse the archives.</p>
 		</div>
 	</article>
