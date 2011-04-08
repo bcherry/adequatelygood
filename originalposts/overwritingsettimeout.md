@@ -26,7 +26,7 @@ You might try something like the following:
     var temp = setTimeout,
         setTimeout = function() {};
 
-Now, you might expect `{@class=js}temp` to contain the original `{@class=js}setTimeout`, but it unfortunately will come up `{@class=js}undefined`.  This is due to [JavaScript hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting).  I even tried `{@class=js}var temp = window.setTimeout` first, but the property on `{@class=js}window` was immediately hoisted on top of.
+Now, you might expect `{@class=js}temp` to contain the original `{@class=js}setTimeout`, but it unfortunately will come up `{@class=js}undefined`.  This is due to [JavaScript hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting).  I even tried `{@class=js}var temp = window.setTimeout` first, but the property on `{@class=js}window` was immediately hoisted on top.
 
 So, I resolved to find another way to get at the original value.  After some digging, I discovered a reference to the original `{@class=js}setTimeout` on the window's prototype, which you can access at `{@class=js}window.constructor.prototype.setTimeout`.  Alright!  Things are looking good.  Unfortunately, things quickly went downhill.
 
@@ -74,6 +74,39 @@ Done and done.  The most flexible thing to do is just to quickly fix the inconsi
 
     __originals = undefined;
 
-That's it!  This snippet will smooth out that inconsistency in Internet Explorer, and allow you to proceed with whatever overrides or replacements you need on those methods.  No need to use `{@class=js}var` again in the future, so you can avoid the hoisting pains.  I've tested this in IE6, 7, 8, and 9, as well as Chrome, Safari, Firefox 3/4, and Opera, all on Mac and Windows, and it's rock-solid.
+This snippet will smooth out that inconsistency in Internet Explorer, and allow you to proceed with whatever overrides or replacements you need on those methods.  No need to use `{@class=js}var` again in the future, so you can avoid the hoisting pains.  I've tested this in IE6, 7, 8, and 9, as well as Chrome, Safari, Firefox 3/4, and Opera, all on Mac and Windows, and it's rock-solid.
 
+## Update! A Better Solution
 
+After further investigation, helped by many including @angusTweets and @kangax, I have fully uncovered the problem in IE, with an extremely simple and safe solution.
+
+It turns out that the problem is not always present.  For instance, open up a brand new, blank window in IE7 or IE8, and try the following in the JS console:
+
+    @@@js
+    window.setTimeout = 1;
+    setTimeout; // 1
+    setTimeout = 2; // 2
+
+But then, try this instead (again, in a fresh window):
+
+    @@@js
+    setTimeout;
+    window.setTimeout = 1;
+    setTimeout; // {...}
+    window.setTimeout; // 1
+    setTimeout = 1; // Error
+
+So what's going on here?  Well, I've come up with a solid theory.
+
+Initially, the property `setTimeout` exists on the `prototype` of `window`, not on `window` itself.  So, when you ask for `window.setTimeout`, it actually traverses one step on the prototype chain to resolve the reference.  Similarly, when you ask for `setTimeout`, it traverses down the scope chain, then to `window`, then down the prototype chain to resolve the reference.
+
+I suspect that IE has a built-in optimization where it automatically caches the resolution of implied globals that are discovered all the way down on the prototype of the global object.  It would have good reason to do so, as these are commonly requested references, and traversing that chain is costly.  However, it must be setting this reference as read-only, since it's just a caching optimization.  This has the unfortunate side-effect of causing an exception to be thrown when attempting to assign to the reference by using it as an lvalue.  The only way to kill this new reference is by using `var` in the global scope, but this puts us in the hoisting problem.  What to do?
+
+Assuming this theory is correct, there's actually a simple solution.  To prevent this "optimization", we simply need to move the reference one step up the chain, directly onto `window`.  Luckily, this is quite easy:
+
+    @@@js
+    window.setTimeout = window.setTimeout;
+
+That's it!  Assuming you've done this __before__ any reference to `setTimeout` on its own, this will move the reference and completely avoid this problem.  You may now safely assign to `setTimeout` without using `var`.  This works because `window.setTimeout`, when used as an lvalue (on the left side of the assignment), does not walk the prototype chain, but on the right side, it does.  So this will always pull a property out of the prototype chain and put it right on the object.  Incidentally, IE exhibits the same problem with every other property on the window prototype, and the same solution will fix them.  You can easily find the other properties, but a few of them are `alert`, `attachEvent`, `scrollTo`, `blur`, and many others.
+
+This solution has been tested in all browsers, has no side effects, and is wonderfully simple.  It's always nice when things work out that way.

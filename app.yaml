@@ -21,6 +21,11 @@ handlers:
   static_files: static/robots.txt
   upload: static/robots.txt
 
+- url: /ttw-a124t38\.txt
+  static_files: static/ttw-a124t38.txt
+  upload: static/ttw-a124t38.txt
+
+
 - url: /admin/shell.*
   script: handlers/shell/shell.py
   login: admin
