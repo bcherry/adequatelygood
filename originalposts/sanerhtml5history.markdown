@@ -74,7 +74,7 @@ I've also created a demo page that presents [A Saner HTML5 History App](http://w
 
 That's my take on the HTML5 history features.  It's unfortunate that what the browsers are implementing is not what we really need, but it's encouraging that they do provide enough to implement what we do really need.  Let me know in the comments if you agree, disagree, or have questions about my approach.
 
- [pathchange]: http://www.bcherry.net/playground/static/lib/js/jquery.pathchange.js
+ [pathchange]: http://www.bcherry.net/static/lib/js/jquery.pathchange.js
 
 <span class="note">___Note Number One: It's also worth pointing out that I discovered a [serious bug](https://bugs.webkit.org/show_bug.cgi?id=42940) in WebKit's implementation of history management while working on this today.  In short, the "popstate" event is often lost when the network is occupied, which makes little sense.  [Here's a demo page with a reproducible case](http://www.bcherry.net/playground/pushstate) that I threw together.  It fires off a request to download an image which takes 1s on every "popstate", which means hitting "back" more than once every second leads to lost history entries and an application that gets out of sync with the URL.  You could work around this by polling the URL in addition to listening to "popstate", but it's not a good workaround.  Until this is fixed, you'll have to be wary of this if you ship this feature to your users, and it probably is not suitable for very complex AJAX apps.  Firefox 4 does not have the same problem.___</span>
 
