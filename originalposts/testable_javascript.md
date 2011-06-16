@@ -111,7 +111,7 @@ The crucial method for our `{@class=js}Templater` object is `{@class=js}supplant
 		this._templates = {};
 	}
 
-	Template.prototype = {
+	Templater.prototype = {
 		_supplant: function(str, params) {
 			for (var prop in params) {
 				str.split("{" + prop +"}").join(params[prop]);
