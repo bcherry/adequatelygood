@@ -31,18 +31,18 @@ BLOG = {
   "debug": DEBUG,
   "js_debug": "true" if DEBUG else "false",
   "min": "" if DEBUG else "min.",
-  
+
   # Use the default YUI-based theme.
   # If another string is used besides 'default', calls to static files and
   #  use of template files in /views will go to directory by that name.
   "theme": ["default"],
-  
+
   # Display gravatars alongside user comments?
   "use_gravatars": True,
-  
+
   # Do you want to be emailed when new comments are posted?
   "send_comment_notification": True,
-  
+
   # If you want to use legacy ID mapping for your former blog platform,
   # define it here and insert the necessary mapping code in the
   # legacy_id_mapping() function in ArticleHandler (blog.py).
@@ -50,7 +50,7 @@ BLOG = {
   "legacy_blog_software": None,
   #"legacy_blog_software": "Drupal",
   #"legacy_blog_software": "Serendipity",
-  
+
   # If you want imported legacy entries _not_ mapped in the file above to
   # redirect to their new permanent URL rather than responding on their
   # old URL, set this flag to True.
@@ -62,7 +62,7 @@ PAGE = {
   "articles_per_page": 5,
   "featuredMyPages": {
     "title": "The Author",
-    "description": "Ben is a 23 year-old front-end engineer at Twitter.  He lives in San Francisco and splits his time between work, coding, climbing, drinking, and the interwebs.",
+    "description": "Ben is a 24 year-old front-end engineer at Twitter.  He lives in San Francisco and splits his time between work, coding, climbing, drinking, and the interwebs.",
     "entries": [{
       "title": "Twitter",
       "url": "http://twitter.com/bcherry",
@@ -101,7 +101,7 @@ PAGE = {
       "author"  : "Douglas Crockford",
       "url"   : "http://www.amazon.com/JavaScript-Good-Parts-Douglas-Crockford/dp/0596517742/",
     },
-    { 
+    {
       "title"   : "Coders at Work",
       "author"  : "Peter Seibel",
       "url"   : "http://www.amazon.com/Coders-at-Work-Peter-Seibel/dp/1430219483/",
