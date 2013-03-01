@@ -1,9 +1,0 @@
-<article class="span-17 last">
-    <header class="span-17 last">
-        <time class="alt" datetime="{{ article.published.date }}" pubdate>{{ article.published.date }}</time>
-    	<h1><a href="/{{ article.permalink }}">{{ article.title }}</a></h1>
-	</header>
-    <div class="span-17 last entry">
-        {{ article.html|truncatewords_html:68 }}
-    </div>
-</article>

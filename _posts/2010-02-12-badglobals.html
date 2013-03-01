@@ -1,0 +1,81 @@
+---
+title: Finding Improper JavaScript Globals
+layout: post
+tags: [javascript, tools]
+permalink: /2010/2/Finding-Improper-JavaScript-Globals
+---
+
+<p>When I interview web developers, my first JavaScript question is usually the following:</p>
+<blockquote>What is the difference, in JavaScript, between <code class="js inline">x = 1</code> and <code class="js inline">var x = 1</code>.  Feel free to answer in as much or as little detail as you feel comfortable.</blockquote>
+<p>Most people would give an answer about how the <code class="js inline">var</code> keyword makes something a local variable, omitting it makes it a global variable.  While I'd love to hear about scope chains, the window object, and hear the term "implied global" in an answer, that basic answer is good enough.  It might not show a thorough knowledge of JavaScript, but at least it shows some level of understanding of the most common dangerous feature.</p>
+<p>There are three basic ways to make a global variable in JavaScript.  You can use <code class="js inline">var</code> (<strong>declared global</strong>), you can just assign to it without having declared it (<strong>implied global</strong>), or you can set a property on the <code class="js inline">window</code> object (<strong>window global</strong>).  Here's those three:</p>
+<pre class="js">var x = 1; // declared global
+y = 2; // implied global
+window.z = 3; // window global</pre>
+<p>Implied globals are bad because they're hard to keep track of, and their declarations aren't <a href="http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting">hoisted</a>.  I don't like window globals either, because mixing <code class="js inline">window.x</code> and <code class="js inline">x</code> is bad form.  In my opinion, <strong>all globals should be declared globals</strong>.  Unfortunately, JavaScript makes this really hard to maintain.  There are tools like <a href="http://www.jslint.com/">JSLint</a> that will perform analysis of your code and help you out, but it can't do an entire code base at once, at least not easily.</p>
+<p>I've written a tool that performs <strong>run-time analysis</strong> of your application, and finds all of the improperly declared globals (both implied and window globals).  Check out a demo <a href="http://www.bcherry.net/badglobals">here</a>.</p>
+<h2>Introducing badglobals.js</h2>
+<p><a href="http://www.bcherry.net/static/lib/js/badglobals.js">badglobals.js</a> is a tool for finding all of the improperly declared global variables in your application.  Using it is simple, but don't use it in production code (see "How It Works" below).</p>
+<ol>
+	<li>Include <a href="http://www.bcherry.net/static/lib/js/badglobals.js">badglobals.js</a> in your page, before any other scripts.</li>
+	<li>When you want to do analysis, open Firebug and run <code class="js inline">BADGLOBALS.check()</code>.</li>
+	<li>You'll see a warning statement in the console for every bad global found.  These contain both the name, and the value.</li>
+</ol>
+<p>In addition, there are a few slightly more advanced features you might be interested in.</p>
+<h3>Exclusions</h3>
+<p>If you have some globals you don't want to be reported about (such as third-party libraries), you can easily exclude them manually.  Before you run the check, just call <code class="js inline">.exclude</code>, like so:</p>
+<pre class="js">BADGLOBALS.exclude("jQuery", "$", "YAHOO");</pre>
+<p>Feel free to call this method as many times as you'd like, it always adds, and never removes.  By default, all browser built-ins are excluded (these are found when the script is included).  Sometimes, the variable <code class="js inline">_firebug</code> enters after the script include, and shows in the report.  You should exclude this.</p>
+<h3>Report Object</h3>
+<p>While the warnings are probably enough, badglobals.js also builds a report object, containing more information.  Access it by calling <code class="js inline">BADGLOBALS.report()</code>.  This will run <code class="js inline">.check()</code> if it has not run already.  The report object has the following properties:</p>
+<ul>
+	<li><strong>bad:</strong> An array of the names of the bad globals found.</li>
+	<li><strong>good:</strong> An array of the names of the good globals found.</li>
+	<li><strong>skipped:</strong> An array of the names of the globals that were not checked.</li>
+</ul>
+<p>And that's all there is to badglobals.js.  It's really simple to use, but remarkably effective.</p>
+<h2>How It Works</h2>
+<p>badglobals.js works because of one key difference between implied/window globals and declared globals:  <strong>declared globals cannot be deleted</strong>.  This is because using <code class="js inline">var</code> causes the internal property [[DontDelete]] to be set.</p>
+<pre class="js">var x = 1;
+y = 2;
+window.z = 3;
+
+delete x; // false
+delete y; // true
+delete z; // true
+
+x; // 1
+y; // undefined
+z; // undefined</pre>
+<p>badglobals.js simply tries to delete every property of window (skipping the built-ins, of course).  If the delete succeeds, it was declared wrong.  It always puts it back, but I wouldn't trust this to run in production code, because it just <em>seems dangerous</em>.  Here's the core section of badglobals.js:</p>
+<pre class="js">for (prop in window) {
+	if (window.hasOwnProperty(prop)) {
+		if (skip.indexOf(prop) >= 0 || exclude.indexOf(prop) >= 0) {
+			skipped.push(prop);
+		} else {
+			val = window[prop];
+			if (delete window[prop]) {
+				console.warn("Found non-var global %o with value %o", prop, val);
+				bad.push(prop);
+				try {
+					window[prop] = val;
+				} catch (e) {
+					console.error("Oops, there was an error putting %o back :(", prop);
+				}
+			} else {
+				good.push(prop);
+			}
+		}
+	}
+}</pre>
+<h3>Browser Support</h3>
+<p>This script will not work in Internet Explorer, because I use the array <code class="js inline">indexOf</code> method, among other things.  I also think IE doesn't exactly follow the standard when it comes to <code class="js inline">delete</code>, so the checks might not work.  I don't consider this a problem, because this is a <strong>developer tool</strong>, not production code.  You'll find the complete set of bad globals with Firefox or Chrome, so you should not need to check in Internet Explorer as well.  I have not tested it in Opera, but the <code class="js inline">console</code> references will certainly fail.</p>
+<h3>Thanks to...</h3>
+<p>I got the idea for this tool from the <a href="http://perfectionkills.com/understanding-delete/">excellent article</a> on <code class="js inline">delete</code> by kangax, over at <a href="http://perfectionkills.com">his blog</a>.  If you haven't read that article, you really should.  The depth and quality is incredible.</p>
+<h2>Get badglobals.js</h2>
+<p>Here are the links, one more time:</p>
+<ul>
+	<li><a href="http://www.bcherry.net/static/lib/js/badglobals.js">Raw Script</a></li>
+	<li><a href="http://github.com/bcherry/bcherry/blob/master/bcherry-web/static/lib/js/badglobals.js">Script at GitHub</a></li>
+	<li><a href="http://www.bcherry.net/badglobals">Demo Page</a></li>
+</ul>

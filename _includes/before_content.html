@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ page.title }}</title>
+
+    <!-- CSS, including Blueprint, jQuery w/Smoothness, and AG CSS -->
+    <link rel="stylesheet" href="/css/blueprint/blueprint.min.css" media="screen, projection" />
+    <link rel="stylesheet" href="/css/blueprint/print.min.css" media="print" />
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="/css/blueprint/ie.{{blog.min}}css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="/css/jquery-ui-smoothness/jquery-ui-1.7.2.custom.min.css" />
+    <link rel="stylesheet" href="/css/ag.{{blog.min}}css" media="screen" />
+
+    <!-- Extra <head> Links -->
+    <link rel="alternate" type="application/atom+xml" title="Adequately Good Atom Feed" href="{{ blog.feedburner_url }}" />
+
+    <!-- TODO: favicon -->
+
+    <!-- IE HTML5 Compatibility -->
+    <!--[if IE]>
+      <script type="text/javascript">
+        (function () {
+          var tags = "header hgroup nav article time footer".split(" "),
+            i = 0,
+            l = tags.length;
+          for (; i < l; i += 1) {
+            document.createElement(tags[i]);
+          }
+        }());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <a name="top"></a>
+    <div id="container" class="container">
+
+      <!-- Header -->
+      <header class="span-24 last">
+        <!-- Title -->
+        <div id="title" class="span-24 last">
+          <div class="span-17 colborder prepend-top append-bottom">
+            <hgroup>
+              <h1>
+                <a href="/">adequately good</a>
+              </h1>
+              <h3 class="prepend-2 alt">decent programming advice</h3>
+            </hgroup>
+          </div>
+          <div class="span-6 last prepend-top append-bottom">
+            <h2>
+              written by
+              <a href="http://twitter.com/bcherry">ben cherry</a>
+            </h2>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Navigation Bar -->
+        <nav class="prepend-2 span-20 append-2 last append-bottom">
+          <div class="span-4">
+            <a href="/">home</a>
+          </div>
+          <div class="span-4">
+            <a href="#" id="archiveLink">archives</a>
+          </div>
+          <div class="span-4">
+            <a href="/About-Ben">about</a>
+          </div>
+          <div class="span-4">
+            <a href="/contact">contact</a>
+          </div>
+          <div class="span-4 last">
+            <a href="{{ blog.feedburner_url }}">feed</a>
+          </div>
+        </nav>
+
+        <!-- Archives Links -->
+        <div id="archives" class="span-24 last smallalts" style="display:none;">
+          <hr />
+          <div class="archivelinks">
+            <span class="alt">posts by year</span>
+            {% for year in archive_years %}
+              <a class="tight" href="/{{ year }}">{{ year }}</a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <hr />
+      </header>
+
+      <div id="colcontainer" class="span-24 last">
+        <!-- Main content: Posts, etc. -->
+        <div id="content" class="span-17 colborder">
+          <a name="main"></a>

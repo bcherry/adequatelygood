@@ -1,0 +1,28 @@
+{% include before_content.html %}
+<article class="span-17 last">
+  <header class="span-17 last">
+    <time class="alt" datetime="{{ page.date }}" pubdate>{{ page.date }}</time>
+    <h1><a href="{{ page.url }}">{{ page.title }}</a></h1>
+  </header>
+  <div id="blogbody" class="span-17 last entry">
+    {{ content }}
+  </div>
+</article>
+<div id="more_reading" class="span-17 last">
+  <p class="smallalts tags">
+    {% for tag in page.tags %}<span class="alt">{% if forloop.last and forloop.first != true %}{% if forloop.index == 2 %} and{% else %}, and{% endif %}{% elsif forloop.rindex0 and forloop.index > 1 %},{% else %}filed under{% endif %}</span> <a class="tight" href="/tag/{{ tag|escape }}">{{ tag }}</a>{% endfor %}
+  </p>
+</div>
+<div id="comments_wrapper" class="span-17 last">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    // Disqus Comments variables
+    var disqus_developer = false;
+    var disqus_container_id = "comments_wrapper";
+  </script>
+  <script type="text/javascript" src="http://disqus.com/forums/adequatelygood/embed.js"></script>
+  <noscript>
+    <a href="http://disqus.com/forums/adequatelygood/?url=ref">View the discussion thread.</a>
+  </noscript>
+</div>
+{% include after_content.html %}

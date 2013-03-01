@@ -1,0 +1,98 @@
+        </div>
+
+        <!-- Sidebar: Search, links, etc. -->
+        <div id="sidebar" class="span-6 last">
+          <hr class="space" />
+
+          <div id="links">
+            <h3>the author</h3>
+            <p>
+              Ben is a 25 year-old software engineer. He lives and works in San Francisco. Many people think he invented the term "hoisting" in JavaScript, but this is untrue.
+            </p>
+            <ul>
+              <li><a href="http://twitter.com/bcherry">Twitter</a> - @<a class="twitter-anywhere-user" href="http://twitter.com/bcherry">bcherry</a></li>
+              <li><a href="http://github.com/bcherry">GitHub</a> - My Code</li>
+              <li><a href="http://www.linkedin.com/in/bcherryprogrammer">LinkedIn</a> - Professional Profile</li>
+              <li><a href="http://www.facebook.com/bcherry">Facebook</a> - That Other Social Network</li>
+              <li><a href="http://www.bcherry.net/talks/">Presentations</a> - Slides From My Talks</li>
+            </ul>
+            <iframe allowtransparency="true" frameborder="0" scrolling="no"
+              src="http://platform.twitter.com/widgets/follow_button.html?screen_name=bcherry&amp;button=grey&amp;text_color=7F7F7F&amp;link_color=666666"
+              style="width:300px; height:20px;"></iframe>
+          </div>
+
+          <hr />
+
+          {% comment %}
+          <div id="tags">
+            <h3>categories</h3>
+            {% if blog_tags %}
+              <ul>
+              {% for tag in blog_tags %}
+                {% if tag.count != 0 %}
+                <li>
+                  <a href="/tag/{{ tag.name|urlencode }}">{{ tag.name|downcase }}</a>
+                  ({{ tag.count }})
+                </li>
+                {% endif %}
+              {% endfor %}
+              </ul>
+            {% else %}
+              No posts have been tagged yet.
+            {% endif %}
+          </div>
+          {% endcomment %}
+
+          <hr />
+
+          {% comment %}
+          <div id="subscribe">
+            <h3>subscribe</h3>
+            <p>
+              Keep up with the latest adequate posts.
+            </p>
+            <ul>
+              <li>
+                <a href="{{ blog.feedburner_url }}" title="Adequately Good Atom Feed">Feedburner</a>
+                - My Atom Feed
+              </li>
+            </ul>
+          </div>
+          {% endcomment %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Exception Hub start -->
+    <script src="http://js.exceptionhub.com/javascripts/eh.js"></script>
+    <script>
+    ExceptionHub.setup("8ff0f84d25456b049a9c1a83f8e62b56", 21, 'production');
+    </script>
+    <!-- Exception Hub end -->
+
+    <script type="text/javascript" src="/js/jquery-1.3.2.min.js"></script>
+    <!--<script type="text/javascript" src="/js/chili/jquery.chili-2.2.{{blog.min}}js"></script>-->
+    <script type="text/javascript" src="/js/consul.{{blog.min}}js"></script>
+    <script type="text/javascript">
+      // ChiliBook.recipeFolder = "/js/chili/";
+      consul.turnOn({{blog.js_debug}});
+      jQuery.noConflict();
+
+      var AG = {};
+      // Page Script
+    </script>
+
+    <!-- Include LABjs and request the rest of the script files-->
+    <script type="text/javascript" src="/js/LAB.min.js"></script>
+    <script type="text/javascript">
+      $LAB
+      .script("/js/jquery-ui-1.7.2.custom.min.js")
+      .script("/js/jquery.templates.{{blog.min}}js")
+      .script("/js/base.{{blog.min}}js")
+      .script("/js/ag.{{blog.min}}js")
+    </script>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">var _gaq =_gaq||[]; _gaq.push(['_setAccount','UA-251077-4']);_gaq.push(['_trackPageview']);(function(){var ga=document.createElement('script');ga.type='text/javascript';ga.async=true;ga.src=('https:'==document.location.protocol?'https://ssl':'http://www')+'.google-analytics.com/ga.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(ga);})();</script>
+  </body>
+</html>
